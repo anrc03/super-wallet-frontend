@@ -1,0 +1,92 @@
+
+/* Hero CSS */
+.section-bg {
+    background-color: rgba(173, 251, 224, 0.26934523809523814);
+  }
+  
+  .hero {
+    width: 100%;
+    background-size: cover;
+    position: relative;
+    min-height: 60vh;
+    padding: 60px 0 60px 0;
+  }
+  
+  .hero h2 {
+    font-size: 64px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #008aff;
+  }
+  
+  .hero p {
+    font-weight: 400;
+    font-size: 30px;
+    margin-bottom: 25px;
+  }
+  
+  .hero .btn-book-a-table {
+    font-weight: 500;
+    font-size: 20px;
+    display: inline-block;
+    padding: 12px 36px;
+    border-radius: 50px;
+    color: #fff;
+    background-color: #008aff;
+    text-decoration: none;
+  }
+  
+  .hero .btn-book-a-table:hover {
+    background-color: #1dc5e8;
+  }
+  
+  /* About CSS */
+  .section-header {
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+  
+  .about {
+    margin-bottom: 40px;
+  }
+  
+  .section-header h2 {
+    font-size: 40px;
+    font-weight: 600;
+    color: #008aff;
+  }
+  
+  .section-header span {
+    color: #008aff;
+  }
+  
+  .about .about-img {
+    min-height: 500px;
+    background-image: url(src/assets/images/about/About.jpg);
+  }
+  
+  .content p {
+    margin-top: -10px;
+  }
+  
+  .about .content ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .about .content ul li {
+    padding: 0 0 8px 30px;
+    position: relative;
+  }
+  
+  .about .content ul i {
+    position: absolute;
+    font-size: 20px;
+    left: 0;
+    top: -3px;
+  }
+  
+  .bi-check2-all {
+    color: #008aff;
+  }
