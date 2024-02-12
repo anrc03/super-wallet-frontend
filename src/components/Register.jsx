@@ -1,11 +1,14 @@
 import axios from 'axios';
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
+import { REGISTER_CUSTOMER } from '../constant/Endpoint';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css'
+import moment from 'moment';
 
 function Register() {
 
     const [formData, setFormData] = useState({
-        username: '',
         email: '',
         password: '',
         confirmPassword: '',
@@ -13,6 +16,8 @@ function Register() {
         lastName: '',
         birthDate: '',
         phoneNumber: '',
+        gender: '',
+        address: '',
     });
 
     const validatePassword = (password) => {
@@ -101,7 +106,16 @@ function Register() {
         }
 
         if (isValid) {
-            axios.post('http://localhost:8080/api/auth/register/customer', { username: formData.username, password: formData.password, firstName: formData.firstName, lastName: formData.lastName, address: formData.address, phoneNumber: formData.phoneNumber, email: formData.email })
+            axios.post(REGISTER_CUSTOMER, { 
+                firstName: formData.firstName, 
+                lastName: formData.lastName, 
+                phoneNumber: formData.phoneNumber, 
+                birthDate: moment(formData.birthDate).format("yyyy-MM-DD"),
+                gender: formData.gender,
+                address: formData.address, 
+                email: formData.email,
+                password: formData.password, 
+            })
                 .then(() => {
                     navigate('/login');
                 })
@@ -154,13 +168,6 @@ function Register() {
                                 <h4 className="mb-2" style={{ color: '#3a5a40', fontSize: 30, fontWeight: '600' }}>Create account</h4>
                                 <div className="row" style={{ color: '#3a5a40' }}>
                                     <div className="mb-2 col-md-12">
-                                        <label className="mb-2">Username<span className="text-danger"> *</span></label>
-                                        {
-                                            valid ? <></> : <span className="text-danger"> {errors.username}</span>
-                                        }
-                                        <input type="text" name="username" className="form-control" placeholder="Enter your username" onChange={(e) => setFormData({ ...formData, username: e.target.value })} />
-                                    </div>
-                                    <div className="mb-2 col-md-12">
                                         <label className="mb-2">Email address<span className="text-danger"> *</span></label>
                                         {
                                             valid ? <></> : <span className="text-danger"> {errors.email}</span>
@@ -210,11 +217,50 @@ function Register() {
                                         <input type="text" name="lastName" className="form-control" placeholder="Enter your last name" onChange={(e) => setFormData({ ...formData, lastName: e.target.value })} />
                                     </div>
                                     <div className="mb-2 col-md-12">
-                                        <label className="mb-2">Number phone<span className="text-danger"> *</span></label>
+                                        <label className="mb-2">Phone number<span className="text-danger"> *</span></label>
                                         {
                                             valid ? <></> : <span className="text-danger"> {errors.phoneNumber}</span>
                                         }
-                                        <input type="text" name="phoneNumber" className="form-control" placeholder="Enter your number phone" onChange={(e) => setFormData({ ...formData, phoneNumber: e.target.value })} />
+                                        <input type="text" name="phoneNumber" className="form-control" placeholder="Enter your phone number" onChange={(e) => setFormData({ ...formData, phoneNumber: e.target.value })} />
+                                    </div>
+
+                                    <div className="mb-2 col-md-12">
+                                        <label className="mb-2">Birthdate<span className="text-danger"> *</span></label>
+                                            <div>
+                                                <DatePicker
+                                                    showIcon
+                                                    selected={formData.birthDate}
+                                                    onChange={(date) => setFormData({ ...formData, birthDate: date})}
+                                                    dateFormat={"yyyy-MM-dd"}
+                                                    placeholderText='Enter your birthdate'
+                                                />
+                                            </div>
+                                    </div>
+                                    <div className="mb-2 col-md-12">
+                                        <label className="mb-2">Gender<span className="text-danger"> *</span></label>
+                                        <div>
+                                            <fieldset>
+                                            <input type='radio' id='male' value="MALE" name='gender' checked={formData.gender === "MALE"} 
+                                                style={{marginRight:5}}
+                                                onChange={(e) => setFormData({ ...formData, gender: e.target.value })}></input>
+                                            <label htmlFor='male' style={{marginRight:5}}>Male</label>
+
+                                            <input type='radio' id='female' value="FEMALE" name='gender' checked={formData.gender === "FEMALE"} 
+                                                style={{marginLeft:5}}
+                                                onChange={(e) => setFormData({ ...formData, gender: e.target.value })}
+                                                ></input>
+                                            <label htmlFor='female' style={{marginLeft:5}}>Female</label>
+                                            </fieldset>  
+                                        </div>
+                                        
+                                        
+                                    </div>
+                                    <div className="mb-2 col-md-12">
+                                        <label className="mb-2">Address<span className="text-danger"> *</span></label>
+                                        {
+                                            valid ? <></> : <span className="text-danger"> {errors.address}</span>
+                                        }
+                                        <input type="text" name="address" className="form-control" placeholder="Enter your address" onChange={(e) => setFormData({ ...formData, address: e.target.value })} />
                                     </div>
                                     <span className="mb-2">Already have an account? <Link to="/login" className="register-link">Log in</Link></span>
                                     <div className="col-md-12">

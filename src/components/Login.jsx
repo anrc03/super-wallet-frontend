@@ -1,12 +1,17 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { LOGIN_CUSTOMER } from '../constant/Endpoint';
+import { useDispatch } from 'react-redux';
+import { login } from './redux/UserSlice';
 
 function Login() {
     const [formData, setFormData] = useState({
         email: '',
         password: ''
     });
+
+    const dispatch = useDispatch();
 
     const [errors, setErrors] = useState({});
     const [valid, setValid] = useState(true);
@@ -36,15 +41,20 @@ function Login() {
         }
 
         if (isValid) {
-            axios.post('http://localhost:8080/api/auth/login', { email: formData.email, password: formData.password })
+            axios.post(LOGIN_CUSTOMER, { email: formData.email, password: formData.password })
                 .then((result) => {
                     const user = result.data.data;
-                    localStorage.setItem('token', result.data.data.token);
-                    localStorage.setItem('role', result.data.data.role);
-                    localStorage.setItem('email', formData.email);
-                    navigate('/');
+                    dispatch(login({
+                        firstName: user.firstName,
+                        lastName: user.lastName,
+                        email: user.email,
+                        token: user.token,
+                        role: user.role,
+                        loggedIn: true,
+                    }));
                 })
                 .catch((err) => {
+                    console.log(err)
                     isValid = false;
                     validationErrors.email = 'Email address not registered';
                     validationErrors.password = 'Incorrect password';

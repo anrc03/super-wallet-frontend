@@ -25,7 +25,7 @@ function Navbar() {
                     <div className="collapse navbar-collapse">
                         <ul className="navbar-nav ms-auto">
                             {
-                                token ? <></> : <li className="nav-item"><Link className="nav-link button-register" to="/register-admin"><button>Register</button></Link></li>
+                                user ? <></> : <li className="nav-item"><Link className="nav-link button-register" to="/register-admin"><button>Register</button></Link></li>
                             }
                             <li className="nav-item"><Link className="nav-link button-login" to="/login"><button onClick={logout}>{token ? "Logout" : "Login"}</button></Link></li>
                         </ul>

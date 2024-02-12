@@ -1,15 +1,20 @@
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import logo from "../assets/images/icon-1.png";
+import { useDispatch, useSelector } from "react-redux";
+import { logout, selectUser } from "./redux/UserSlice";
 
 export default function Navbar() {
   const token = localStorage.getItem("token");
+  const dispatch = useDispatch();
+  const user = useSelector(selectUser);
+  const navigate = useNavigate();
 
-  const logout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("username");
-    localStorage.removeItem("role");
+  const handleLogout = (e) => {
+    e.preventDefault();
+    dispatch(logout());
+    navigate("/login")
   };
 
   useEffect(() => {
@@ -69,7 +74,7 @@ export default function Navbar() {
             Contact
           </a>
 
-          {token ? (
+          {user ? (
             <></>
           ) : (
             <Link className="nav-item nav-link button-register" to="/register">
@@ -77,9 +82,9 @@ export default function Navbar() {
             </Link>
           )}
 
-          <Link className="nav-item nav-link button-login" to="/login">
-            <a onClick={logout}>{token ? "Logout" : "Login"}</a>
-          </Link>
+          <button className="nav-item nav-link button-login" onClick={user ? (e) => handleLogout(e) : (e) => navigate("/login")}>
+            {user ? "Logout" : "Login"}
+          </button>
         </div>
       </div>
     </nav>
