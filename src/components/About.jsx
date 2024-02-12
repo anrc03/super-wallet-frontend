@@ -1,6 +1,4 @@
 import React from "react";
-
-import aboutImage from "../assets/images/about.png";
 import { AnimationOnScroll } from "react-animation-on-scroll/dist/js";
 
 export default function About() {

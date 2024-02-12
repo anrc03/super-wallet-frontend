@@ -9,6 +9,7 @@ import Service from "./Service"
 import Faq from "./Faq"
 import Footer from "./Footer";
 import BackToTop from "./BackToTop"
+import Team from "./Team";
 
 function Home() {
   return (
@@ -21,6 +22,7 @@ function Home() {
       <WhyUs />
       <Service />
       <Faq />
+      <Team/>
       <Footer />
       <BackToTop />
     </div>

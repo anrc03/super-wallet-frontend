@@ -13,7 +13,6 @@ export default function Trans() {
 
   const todayTransaction = 120;
   const monthlyTransaction = 457;
-
   const totalTransaction = todayTransaction + monthlyTransaction;
 
   return (

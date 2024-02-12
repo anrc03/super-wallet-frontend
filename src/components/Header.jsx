@@ -1,7 +1,5 @@
 import React from "react";
 
-import heroImage from "../assets/images/hero-1.png";
-
 export default function Header() {
   return (
     <div className="container-fluid hero-header bg-cyan py-5 mb-5">
