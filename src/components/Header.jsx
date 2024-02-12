@@ -9,12 +9,15 @@ export default function Header() {
         <div className="row g-5 align-items-center">
           <div className="col-lg-6">
             <h1 className="display-4 fw-bold mb-3 animate__animated animate__slideInDown">
-              Make Better Life With Trusted CryptoCoin
+              Make Better All Currencies With Trusted Super Wallet
             </h1>
             <p className="animate__animated animate__slideInDown">
-              Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu
-              diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet
-              lorem sit clita duo justo magna dolore erat amet
+              Transform your currency exchanges into a superior experience with
+              our trusted Super Wallet app. Embrace the convenience of managing
+              all currencies effortlessly, ensuring a seamless and secure
+              money-changing journey. Choose a better financial path with our
+              reliable platform, where your transactions are elevated to new
+              heights.
             </p>
             <a
               href="/"
