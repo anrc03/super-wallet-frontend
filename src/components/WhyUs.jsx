@@ -28,7 +28,7 @@ export default function WhyUs() {
               delay={100}
               img={startIcon}
               title="Easy To Start"
-              desc="Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo"
+              desc="Our user-friendly interface and simple setup process make it easy for you to embark on a seamless journey of managing your currencies."
             />
           </div>
           <div className="col-lg-4 col-md-6">
@@ -37,7 +37,7 @@ export default function WhyUs() {
               delay={300}
               img={safeIcon}
               title="Safe & Secure"
-              desc="Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo"
+              desc="Trust in our commitment to providing a safe environment for your financial activities, offering you peace of mind as you confidently navigate the world of currency exchange."
             />
           </div>
           <div className="col-lg-4 col-md-6 wow">
@@ -46,7 +46,7 @@ export default function WhyUs() {
               delay={500}
               img={affordableIcon}
               title="Affordable Plans"
-              desc="Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo"
+              desc="Enjoy the convenience of affordable and transparent currency exchange options."
             />
           </div>
           <div className="col-lg-4 col-md-6">
@@ -55,7 +55,7 @@ export default function WhyUs() {
               delay={100}
               img={secureIcon}
               title="Secure Storage"
-              desc="Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo"
+              desc="We prioritize the confidentiality of your data, ensuring a trustworthy and protected environment for all your currency exchange needs."
             />
           </div>
           <div className="col-lg-4 col-md-6">
@@ -64,7 +64,7 @@ export default function WhyUs() {
               delay={300}
               img={protectedIcon}
               title="Protected by Insurance"
-              desc="Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo"
+              desc="With our commitment to security and reliability, your currency exchanges are convenient and protected by insurance for an extra level of confidence."
             />
           </div>
           <div className="col-lg-4 col-md-6">
@@ -73,7 +73,7 @@ export default function WhyUs() {
               delay={500}
               img={custServiceIcon}
               title="24/7 Support"
-              desc="Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo"
+              desc="Trust in our commitment to constant assistance, making your financial transactions convenient and worry-free."
             />
           </div>
         </div>
