@@ -1,18 +1,13 @@
-import logo from "../assets/images/icon-1.png";
-
 export default function Footer() {
   return (
-    <div
-      className="container-fluid bg-cyan footer mt-5 pt-5 wow fadeIn"
-      data-wow-delay="0.1s"
-    >
+    <div className="container-fluid bg-cyan footer mt-5 pt-5 wow fadeIn" data-wow-delay="0.1s">
       <div className="container py-5">
         <div className="row g-5">
           <div className="col-md-6">
             <h1 className="text-cyan mb-4">
               <img
                 className="img-fluid me-2"
-                src={logo}
+                src=''
                 alt=""
                 style={{ maxWidth: "45px" }}
               />
@@ -56,21 +51,6 @@ export default function Footer() {
             </p>
           </div>
           <div className="col-lg-3 col-md-6">
-            <h5 className="mb-4">Our Services</h5>
-            <a className="btn btn-link" href="">
-              Currency Wallet
-            </a>
-            <a className="btn btn-link" href="">
-              Currency Transaction
-            </a>
-            <a className="btn btn-link" href="">
-              Bitcoin Investment
-            </a>
-            <a className="btn btn-link" href="">
-              Token Sale
-            </a>
-          </div>
-          <div className="col-lg-3 col-md-6">
             <h5 className="mb-4">Quick Links</h5>
             <a className="btn btn-link" href="">
               About Us
@@ -89,7 +69,7 @@ export default function Footer() {
             <h5 className="mb-4">Follow Us</h5>
             <div className="d-flex">
               <a className="btn btn-square rounded-circle me-1" href="">
-                <i className="fab fa-twitter"></i>
+                <i class="bi bi-twitter-x"></i>
               </a>
               <a className="btn btn-square rounded-circle me-1" href="">
                 <i className="fab fa-facebook-f"></i>
