@@ -1,87 +1,134 @@
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 import logo from "../assets/images/icon-1.png";
 
 export default function Navbar() {
-  const token = localStorage.getItem("token");
+	const isActive = {
+		color: "#16d5ff",
+	};
 
-  const logout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("username");
-    localStorage.removeItem("role");
-  };
+	const token = localStorage.getItem("token");
 
-  useEffect(() => {
-    const toggleNavbar = () => {
-      const navbar = document.querySelector(".sticky-top");
-      if (window.scrollY > 300) {
-        navbar.classList.add("shadow-sm");
-        navbar.style.top = "0px";
-      } else {
-        navbar.classList.remove("shadow-sm");
-        navbar.style.top = "-100px";
-      }
-    };
+	const logout = () => {
+		localStorage.removeItem("token");
+		localStorage.removeItem("username");
+		localStorage.removeItem("role");
+	};
 
-    window.addEventListener("scroll", toggleNavbar);
+	useEffect(() => {
+		const toggleNavbar = () => {
+			const navbar = document.querySelector(".sticky-top");
+			if (window.scrollY > 300) {
+				navbar.classList.add("shadow-sm");
+				navbar.style.top = "0px";
+			} else {
+				navbar.classList.remove("shadow-sm");
+				navbar.style.top = "-100px";
+			}
+		};
 
-    return () => window.removeEventListener("scroll", toggleNavbar);
-  }, []);
+		window.addEventListener("scroll", toggleNavbar);
 
-  return (
-    <nav className="navbar navbar-expand-lg bg-white navbar-light sticky-top p-0 px-4 px-lg-5">
-      <a href="/" className="navbar-brand d-flex align-items-center">
-        <h2 className="m-0 text-cyan fw-bold">
-          <img
-            className="img-fluid me-2 fw"
-            src={logo}
-            alt=""
-            style={{ width: "45px" }}
-          />
-          Super Wallet
-        </h2>
-      </a>
-      <button
-        type="button"
-        className="navbar-toggler"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarCollapse"
-      >
-        <span className="navbar-toggler-icon"></span>
-      </button>
-      <div className="collapse navbar-collapse" id="navbarCollapse">
-        <div className="navbar-nav ms-auto py-4 py-lg-0">
-          <a href="/" className="nav-item nav-link active">
-            Home
-          </a>
-          <a href="about.html" className="nav-item nav-link">
-            About
-          </a>
-          <a href="service.html" className="nav-item nav-link">
-            Service
-          </a>
-          <a href="roadmap.html" className="nav-item nav-link">
-            Roadmap
-          </a>
+		return () => window.removeEventListener("scroll", toggleNavbar);
+	}, []);
 
-          <a href="contact.html" className="nav-item nav-link">
-            Contact
-          </a>
+	return (
+		<nav className="navbar navbar-expand-lg bg-white navbar-light sticky-top p-0 px-4 px-lg-5">
+			<a href="/" className="navbar-brand d-flex align-items-center">
+				<h2 className="m-0 text-cyan fw-bold">
+					<img
+						className="img-fluid me-2 fw"
+						src={logo}
+						alt=""
+						style={{ width: "45px" }}
+					/>
+					CryptoCoin
+				</h2>
+			</a>
+			<button
+				type="button"
+				className="navbar-toggler"
+				data-bs-toggle="collapse"
+				data-bs-target="#navbarCollapse"
+			>
+				<span className="navbar-toggler-icon"></span>
+			</button>
+			<div className="collapse navbar-collapse" id="navbarCollapse">
+				<div className="navbar-nav ms-auto py-4 py-lg-0">
+					<NavLink to="/" className="nav-item nav-link" activestyle={isActive}>
+						Home
+					</NavLink>
 
-          {token ? (
-            <></>
-          ) : (
-            <Link className="nav-item nav-link button-register" to="/register">
-              <a>Register</a>
-            </Link>
-          )}
+					<NavLink
+						to="/about"
+						className="nav-item nav-link"
+						activestyle={isActive}
+					>
+						About
+					</NavLink>
 
-          <Link className="nav-item nav-link button-login" to="/login">
-            <a onClick={logout}>{token ? "Logout" : "Login"}</a>
-          </Link>
-        </div>
-      </div>
-    </nav>
-  );
+					<NavLink
+						to="/services"
+						className="nav-item nav-link"
+						activestyle={isActive}
+					>
+						Services
+					</NavLink>
+
+					<NavLink
+						to="/contact"
+						className="nav-item nav-link"
+						activestyle={isActive}
+					>
+						Contact
+					</NavLink>
+
+					<NavLink
+						to="/currency-converter"
+						className="nav-item nav-link"
+						activestyle={isActive}
+					>
+						Currency Converter
+					</NavLink>
+
+					{token ? (
+						<></>
+					) : (
+						<Link className="nav-item nav-link button-register" to="/register">
+							Register
+						</Link>
+					)}
+
+					<Link
+						className="nav-item nav-link button-login"
+						to="/login"
+						onClick={logout}
+					>
+						{token ? "Logout" : "Login"}
+					</Link>
+				</div>
+				{/* <div className="h-100 d-lg-inline-flex align-items-center d-none">
+					<a
+						className="btn btn-square rounded-circle bg-light text-cyan me-2"
+						href=""
+					>
+						<i className="fab fa-facebook-f"></i>
+					</a>
+					<a
+						className="btn btn-square rounded-circle bg-light text-cyan me-2"
+						href=""
+					>
+						<i className="fab fa-twitter"></i>
+					</a>
+					<a
+						className="btn btn-square rounded-circle bg-light text-cyan me-0"
+						href=""
+					>
+						<i className="fab fa-linkedin-in"></i>
+					</a>
+				</div> */}
+			</div>
+		</nav>
+	);
 }

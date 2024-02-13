@@ -1,15 +1,16 @@
-@import url('./assets/styles/Login.css');
-@import url('./assets/styles/Register.css');
 /* @import url('./assets/styles/Navbar.css');
 @import url('./assets/styles/Footer.css');
 @import url('./assets/styles/Home.css'); */
-@import url('./assets/styles/style.css');
+@import url("./assets/styles/Login.css");
+@import url("./assets/styles/Register.css");
+@import url("./assets/styles/style.css");
+
 @import "animate.css";
 
 @import "bootstrap/dist/css/bootstrap.min.css";
 @import "bootstrap-icons/font/bootstrap-icons.css";
 
 body {
-  margin: 0;
-  padding: 0;
+	margin: 0;
+	padding: 0;
 }

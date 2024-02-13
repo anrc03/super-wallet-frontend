@@ -1,22 +1,27 @@
-import React from "react";
+import PageHeader from "../components/utils/PageHeader";
 
 import aboutImage from "../assets/images/about.png";
-import { AnimationOnScroll } from "react-animation-on-scroll/dist/js";
 
 export default function About() {
 	return (
-		<div className="container-xxl py-5">
-			<div className="container">
-				<div className="row g-5 align-items-center">
-					<div className="col-lg-6 ">
-						<AnimationOnScroll animateIn="animate__fadeInUp" delay={300}>
+		<>
+			<PageHeader title="About Us" />
+
+			<div className="container-xxl py-5">
+				<div className="container">
+					<div className="row g-5 align-items-center">
+						<div
+							className="col-lg-6 animate__animated animate__fadeInUp"
+							style={{ animationDelay: "0.1s" }}
+						>
 							<img className="img-fluid" src={aboutImage} alt="" />
-						</AnimationOnScroll>
-					</div>
-					<div className="col-lg-6">
-						<AnimationOnScroll animateIn="animate__fadeInUp" delay={500}>
+						</div>
+						<div
+							className="col-lg-6 animate__animated animate__fadeInUp"
+							style={{ animationDelay: "0.3s" }}
+						>
 							<div className="h-100">
-								<h1 className="fw-bold">About Us</h1>
+								<h1 className="display-6 fw-bold">About Us</h1>
 								<p className="text-cyan fs-5 mb-4">
 									The Most Trusted Cryptocurrency Platform
 								</p>
@@ -45,10 +50,10 @@ export default function About() {
 									Read More
 								</a>
 							</div>
-						</AnimationOnScroll>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
+		</>
 	);
 }
