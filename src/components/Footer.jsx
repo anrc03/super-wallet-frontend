@@ -1,3 +1,5 @@
+import logo from "../assets/images/icon-1.png";
+
 export default function Footer() {
   return (
     <div className="container-fluid bg-cyan footer mt-5 pt-5 wow fadeIn" data-wow-delay="0.1s">
@@ -7,7 +9,7 @@ export default function Footer() {
             <h1 className="text-cyan mb-4">
               <img
                 className="img-fluid me-2"
-                src=''
+                src={logo}
                 alt=""
                 style={{ maxWidth: "45px" }}
               />
@@ -69,7 +71,7 @@ export default function Footer() {
             <h5 className="mb-4">Follow Us</h5>
             <div className="d-flex">
               <a className="btn btn-square rounded-circle me-1" href="">
-                <i class="bi bi-twitter-x"></i>
+                <i className="bi bi-twitter-x"></i>
               </a>
               <a className="btn btn-square rounded-circle me-1" href="">
                 <i className="fab fa-facebook-f"></i>

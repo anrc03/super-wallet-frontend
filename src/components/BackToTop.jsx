@@ -31,7 +31,7 @@ export default function BackToTop() {
         className="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"
         onClick={scrollToTop}
       >
-        <i class="bi bi-arrow-up"></i>
+        <i className="bi bi-arrow-up"></i>
       </a>
     )
   );

@@ -63,10 +63,10 @@ function Login() {
 
         if (input.type === 'password') {
             input.type = 'text';
-            icon.innerHTML = '<i class="bi bi-eye-fill"></i>';
+            icon.innerHTML = '<i className="bi bi-eye-fill"></i>';
         } else {
             input.type = 'password';
-            icon.innerHTML = '<i class="bi bi-eye-slash-fill"></i>';
+            icon.innerHTML = '<i className="bi bi-eye-slash-fill"></i>';
         }
     };
 

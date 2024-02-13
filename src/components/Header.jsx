@@ -1,4 +1,5 @@
 import React from "react";
+import heroImage from "../assets/images/hero-1.png";
 
 export default function Header() {
   return (
