@@ -1,11 +1,21 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { LOGIN_CUSTOMER } from '../constant/Endpoint';
 import { useDispatch } from 'react-redux';
 import { login } from './redux/UserSlice';
+import LoadSpinner from './LoadSpinner';
 
 function Login() {
+    
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        setTimeout(() => {
+        setIsLoading(false);
+        }, 1000)
+    }, [])
+
     const [formData, setFormData] = useState({
         email: '',
         password: ''
@@ -15,7 +25,6 @@ function Login() {
 
     const [errors, setErrors] = useState({});
     const [valid, setValid] = useState(true);
-    const navigate = useNavigate();
 
     const validateEmail = (email) => {
         const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -79,6 +88,8 @@ function Login() {
             icon.innerHTML = '<i className="bi bi-eye-slash-fill"></i>';
         }
     };
+
+    if (isLoading) return <LoadSpinner />
 
     return (
         <div className="login-background">

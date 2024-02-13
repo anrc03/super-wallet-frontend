@@ -1,5 +1,4 @@
-import React from "react";
-import LoadSpinner from "./LoadSpinner"
+import React, { useEffect, useRef, useState } from "react";
 import Navbar from "./Navbar";
 import Header from "./Header";
 import About from "./About";
@@ -10,17 +9,31 @@ import Faq from "./Faq"
 import Footer from "./Footer";
 import BackToTop from "./BackToTop"
 import Team from "./Team";
+import LoadSpinner from "./LoadSpinner";
+import { useSelector } from "react-redux";
+import { selectUser } from "./redux/UserSlice";
 
 function Home() {
+
+  const [isLoading, setIsLoading] = useState(true);
+  const user = useSelector(selectUser);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1000)
+  }, [])
+
+  if (isLoading) return <LoadSpinner />
+
   return (
     <div>
-      <LoadSpinner />
-      <Navbar />
+      <Navbar/>
       <Header />
       <About />
       <Trans />
       <WhyUs />
-      <Service />
+      <Service/>
       <Faq />
       <Team/>
       <Footer />

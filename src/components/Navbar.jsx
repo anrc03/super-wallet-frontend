@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import logo from "../assets/images/icon-1.png";
@@ -6,9 +6,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { logout, selectUser } from "./redux/UserSlice";
 
 export default function Navbar() {
-  const token = localStorage.getItem("token");
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
+  const role = user.role;
   const navigate = useNavigate();
 
   const handleLogout = (e) => {
@@ -57,23 +57,25 @@ export default function Navbar() {
       </button>
       <div className="collapse navbar-collapse" id="navbarCollapse">
         <div className="navbar-nav ms-auto py-4 py-lg-0">
-          <a href="/" className="nav-item nav-link active">
-            Home
-          </a>
-          <a href="about.html" className="nav-item nav-link">
-            About
-          </a>
-          <a href="service.html" className="nav-item nav-link">
-            Service
-          </a>
-          <a href="roadmap.html" className="nav-item nav-link">
-            Roadmap
-          </a>
-
-          <a href="contact.html" className="nav-item nav-link">
-            Contact
-          </a>
-
+          {user.role === "ROLE_CUSTOMER" &&
+          <>
+            <a href="/" className="nav-item nav-link active">
+              Home
+            </a>
+            <Link className="nav-item nav-link" to="/about">
+              About
+            </Link>
+            <button className="nav-item nav-link">
+              Service
+            </button>
+            <a href="roadmap.html" className="nav-item nav-link">
+              Roadmap
+            </a>
+            <a href="contact.html" className="nav-item nav-link">
+              Contact
+            </a>
+          </>
+          }
           {user ? (
             <></>
           ) : (
