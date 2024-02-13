@@ -50,6 +50,20 @@ h6,
 	font-family: "Roboto", sans-serif;
 }
 
+.date-input {
+	width: 180%;
+    border-radius: 5px;
+	border: 0.5px solid #dee2e6;
+	padding-left: 35px !important;
+}
+
+.icon svg {
+	margin-top: 1px;
+    margin-left: 2px;
+    width: 20px;
+    height: 20px;
+}
+
 /*** Spinner ***/
 #spinner {
 	opacity: 0;
