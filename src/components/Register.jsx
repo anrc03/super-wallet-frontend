@@ -1,11 +1,14 @@
 import axios from 'axios';
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
+import { REGISTER_CUSTOMER } from '../constant/Endpoint';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css'
+import moment from 'moment';
 
 function Register() {
 
     const [formData, setFormData] = useState({
-        username: '',
         email: '',
         password: '',
         confirmPassword: '',
@@ -13,6 +16,8 @@ function Register() {
         lastName: '',
         birthDate: '',
         phoneNumber: '',
+        gender: '',
+        address: '',
     });
 
     const validatePassword = (password) => {
@@ -100,8 +105,45 @@ function Register() {
             validationErrors.phoneNumber = "Number phone must be numeric";
         }
 
+        if (!formData.birthDate || formData.birthDate === '') {
+            isValid = false;
+            validationErrors.birthDate = "Birth date must be filled";
+        } else {
+            const birthDate = new Date(formData.birthDate);
+            const currentDate = new Date();
+            let age = currentDate.getFullYear() - birthDate.getFullYear();
+            const monthDiff = currentDate.getMonth() - birthDate.getMonth();
+            if (monthDiff < 0 || (monthDiff === 0 && currentDate.getDate() < birthDate.getDate())) {
+                age--;
+            }
+    
+            if (age < 18) {
+                isValid = false;
+                validationErrors.birthDate = "You must be at least 18 years old to register";
+            }
+        }
+    
+        if (!formData.gender) {
+            isValid = false;
+            validationErrors.gender = "Gender must be selected";
+        }
+    
+        if (!formData.address) {
+            isValid = false;
+            validationErrors.address = "Address must be filled";
+        }
+
         if (isValid) {
-            axios.post('http://localhost:8080/api/auth/register/customer', { username: formData.username, password: formData.password, firstName: formData.firstName, lastName: formData.lastName, address: formData.address, phoneNumber: formData.phoneNumber, email: formData.email })
+            axios.post(REGISTER_CUSTOMER, { 
+                firstName: formData.firstName, 
+                lastName: formData.lastName, 
+                phoneNumber: formData.phoneNumber, 
+                birthDate: moment(formData.birthDate).format("yyyy-MM-DD"),
+                gender: formData.gender,
+                address: formData.address, 
+                email: formData.email,
+                password: formData.password, 
+            })
                 .then(() => {
                     navigate('/login');
                 })
@@ -154,13 +196,6 @@ function Register() {
                                 <h4 className="mb-2" style={{ color: '#3a5a40', fontSize: 30, fontWeight: '600' }}>Create account</h4>
                                 <div className="row" style={{ color: '#3a5a40' }}>
                                     <div className="mb-2 col-md-12">
-                                        <label className="mb-2">Username<span className="text-danger"> *</span></label>
-                                        {
-                                            valid ? <></> : <span className="text-danger"> {errors.username}</span>
-                                        }
-                                        <input type="text" name="username" className="form-control" placeholder="Enter your username" onChange={(e) => setFormData({ ...formData, username: e.target.value })} />
-                                    </div>
-                                    <div className="mb-2 col-md-12">
                                         <label className="mb-2">Email address<span className="text-danger"> *</span></label>
                                         {
                                             valid ? <></> : <span className="text-danger"> {errors.email}</span>
@@ -210,11 +245,80 @@ function Register() {
                                         <input type="text" name="lastName" className="form-control" placeholder="Enter your last name" onChange={(e) => setFormData({ ...formData, lastName: e.target.value })} />
                                     </div>
                                     <div className="mb-2 col-md-12">
-                                        <label className="mb-2">Number phone<span className="text-danger"> *</span></label>
+                                        <label className="mb-2">Phone number<span className="text-danger"> *</span></label>
                                         {
                                             valid ? <></> : <span className="text-danger"> {errors.phoneNumber}</span>
                                         }
-                                        <input type="text" name="phoneNumber" className="form-control" placeholder="Enter your number phone" onChange={(e) => setFormData({ ...formData, phoneNumber: e.target.value })} />
+                                        <input type="text" name="phoneNumber" className="form-control" placeholder="Enter your phone number" onChange={(e) => setFormData({ ...formData, phoneNumber: e.target.value })} />
+                                    </div>
+
+                                    <div className="mb-2 col-md-12">
+                                        <label className="mb-2">Birthdate<span className="text-danger"> *</span></label>
+                                        {
+                                            valid ? <></> : <span className="text-danger"> {errors.birthDate}</span>
+                                        }
+                                            <div className='icon'>
+                                                <DatePicker
+                                                className='date-input'
+                                                    showIcon
+                                                    icon={
+                                                        <svg
+                                                          xmlns="http://www.w3.org/2000/svg"
+                                                          width="1em"
+                                                          height="1em"
+                                                          viewBox="0 0 48 48"
+                                                        >
+                                                          <mask id="ipSApplication0">
+                                                            <g fill="none" stroke="#fff" strokeLinejoin="round" strokeWidth="4">
+                                                              <path strokeLinecap="round" d="M40.04 22v20h-32V22"></path>
+                                                              <path
+                                                                fill="#fff"
+                                                                d="M5.842 13.777C4.312 17.737 7.263 22 11.51 22c3.314 0 6.019-2.686 6.019-6a6 6 0 0 0 6 6h1.018a6 6 0 0 0 6-6c0 3.314 2.706 6 6.02 6c4.248 0 7.201-4.265 5.67-8.228L39.234 6H8.845l-3.003 7.777Z"
+                                                              ></path>
+                                                            </g>
+                                                          </mask>
+                                                          <path
+                                                            fill="currentColor"
+                                                            d="M0 0h48v48H0z"
+                                                            mask="url(#ipSApplication0)"
+                                                          ></path>
+                                                        </svg>
+                                                    }
+                                                    selected={formData.birthDate}
+                                                    onChange={(date) => setFormData({ ...formData, birthDate: date})}
+                                                    dateFormat={"yyyy-MM-dd"}
+                                                    placeholderText='Enter your birthdate'
+                                                />
+                                            </div>
+                                    </div>
+                                    <div className="mb-2 col-md-12">
+                                        <label className="mb-2">Gender<span className="text-danger"> *</span></label>
+                                        {
+                                            valid ? <></> : <span className="text-danger"> {errors.gender}</span>
+                                        }
+                                        <div>
+                                            <fieldset>
+                                            <input type='radio' id='male' value="MALE" name='gender' checked={formData.gender === "MALE"} 
+                                                style={{marginRight:5}}
+                                                onChange={(e) => setFormData({ ...formData, gender: e.target.value })}></input>
+                                            <label htmlFor='male' style={{marginRight:5}}>Male</label>
+
+                                            <input type='radio' id='female' value="FEMALE" name='gender' checked={formData.gender === "FEMALE"} 
+                                                style={{marginLeft:5}}
+                                                onChange={(e) => setFormData({ ...formData, gender: e.target.value })}
+                                                ></input>
+                                            <label htmlFor='female' style={{marginLeft:5}}>Female</label>
+                                            </fieldset>  
+                                        </div>
+                                        
+                                        
+                                    </div>
+                                    <div className="mb-2 col-md-12">
+                                        <label className="mb-2">Address<span className="text-danger"> *</span></label>
+                                        {
+                                            valid ? <></> : <span className="text-danger"> {errors.address}</span>
+                                        }
+                                        <input type="text" name="address" className="form-control" placeholder="Enter your address" onChange={(e) => setFormData({ ...formData, address: e.target.value })} />
                                     </div>
                                     <span className="mb-2">Already have an account? <Link to="/login" className="register-link">Log in</Link></span>
                                     <div className="col-md-12">
