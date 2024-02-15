@@ -18,16 +18,11 @@ function App() {
   
 
   useEffect(() => {
-    if(user && location.pathname == "/login") {
+    if(user && (location.pathname == "/login" || location.pathname == "/admin/login")) {
       navigate("/home")
     }  
   }, [user])
-
-  useEffect(() => {
-    if(user && location.pathname == "/admin/login") {
-      navigate("/admin/dashboard")
-    }  
-  }, [user])
+  
 
   useEffect(() => {
     if (user != null) setRole(user.role)
@@ -35,7 +30,7 @@ function App() {
 
   const ADMIN_PAGE = (    
     <>
-      <Route path='/admin/dashboard' element={<AdminDashboard />} />
+      <Route path='/home' element={<Home/>} />
     </>
   )
 
