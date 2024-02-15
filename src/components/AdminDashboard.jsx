@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { selectUser } from './redux/UserSlice'
-import Navbar from './Navbar';
 import { GET_ALL_CUSTOMER } from '../constant/Endpoint';
 import axios from 'axios';
 import Collapsible from 'react-collapsible';
+import Navbar from './navbar/Navbar';
 
 const AdminDashboard = () => {
 

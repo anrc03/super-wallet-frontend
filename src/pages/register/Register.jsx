@@ -5,7 +5,10 @@ import { REGISTER_CUSTOMER } from '../../constant/Endpoint';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css'
 import moment from 'moment';
-import LoadSpinner from './LoadSpinner';
+import LoadSpinner from '../../components/LoadSpinner';
+import { Helmet } from 'react-helmet';
+import PhoneInput from 'react-phone-input-2'
+import 'react-phone-input-2/lib/style.css'
 
 function Register() {
 
@@ -109,9 +112,6 @@ function Register() {
         if (formData.phoneNumber === "" || formData.phoneNumber === null) {
             isValid = false;
             validationErrors.phoneNumber = "Number phone must be filled";
-        } else if (isNaN(formData.phoneNumber)) {
-            isValid = false;
-            validationErrors.phoneNumber = "Number phone must be numeric";
         }
 
         if (!formData.birthDate || formData.birthDate === '') {
@@ -199,6 +199,9 @@ function Register() {
 
     return (
         <div className="register-background">
+            <Helmet>
+            <title>Super Wallet | Register</title>
+        </Helmet>
             <div className="container register-container">
                 <div className="col-md-6">
                     <form action="" className="border register-form">
@@ -260,7 +263,12 @@ function Register() {
                                         {
                                             valid ? <></> : <span className="text-danger"> {errors.phoneNumber}</span>
                                         }
-                                        <input type="text" name="phoneNumber" className="form-control" placeholder="Enter your phone number" onChange={(e) => setFormData({ ...formData, phoneNumber: e.target.value })} />
+                                        <PhoneInput
+                    className="phone-input"
+                    country={"id"}
+                    placeholder='Enter your phone number'
+                    onlyCountries={['id', 'us', 'cn', 'jp', 'sg', 'au', 'sa', 'kr', 'gb']}
+                    onChange={(e) => setFormData({ ...formData, phoneNumber: e })}/>
                                     </div>
 
                                     <div className="mb-2 col-md-12">

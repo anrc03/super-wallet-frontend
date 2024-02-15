@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { LOGIN_CUSTOMER } from '../constant/Endpoint';
 import { useDispatch } from 'react-redux';
-import { login } from './redux/UserSlice';
+import { LOGIN_CUSTOMER } from '../../constant/Endpoint';
+import { login } from '../../components/redux/UserSlice';
+import { Helmet } from 'react-helmet';
 
 function Login() {
     const [formData, setFormData] = useState({
@@ -15,7 +16,6 @@ function Login() {
 
     const [errors, setErrors] = useState({});
     const [valid, setValid] = useState(true);
-    const navigate = useNavigate();
 
     const validateEmail = (email) => {
         const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -82,12 +82,17 @@ function Login() {
 
     return (
         <div className="login-background">
+            <Helmet>
+            <title>Super Wallet | Login</title>
+        </Helmet>
             <div className="container login-container">
                 <div className="col-md-10">
                     <form className="border login-form">
                         <div className="row container-fluid justify-content-center">
                             <div className="col-md-5 d-flex">
-                                <img src="src/assets/images/login/" alt="Login Picture" className="img-fluid" />
+                                <Link to="/">
+                                <img src="src/assets/images/login/Login.png" alt="Login Picture" className="img-fluid" />
+                                </Link>
                             </div>
                             <div className="col-md-6 p-4">
                                 <h4 className="mb-2" style={{ color: '#3a5a40', fontSize: 30, fontWeight: '600' }}>Log in account</h4>
@@ -118,16 +123,16 @@ function Login() {
                                         <button type="submit" className="btn float-end login-button mt-2" onClick={handleSubmit}>Log in</button>
                                     </div>
                                     
-                                    <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
+                                    {/* <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
                                         <div style={{ flex: 1, height: 1, backgroundColor: '#606c38', marginRight: 10}}></div>
                                         <p style={{ fontSize: 16, fontWeight: '550', color: '#283618', marginTop: 15 }}>Or log in with</p>
                                         <div style={{ flex: 1, height: 1, backgroundColor: '#606c38', marginLeft: 10 }}></div>
-                                    </div>
+                                    </div> */}
                                 </div>
-                                    <div className="col-md-12" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: -10 }}>
+                                    {/* <div className="col-md-12" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: -10 }}>
                                         <button type="submit" className="btn sign-in-with"><img src="src/assets/images/login/Google.png" alt="Login From Google" style={{ width: 35, marginRight: 10 }}/>Google</button>
                                         <button type="submit" className="btn m-2 sign-in-with"><img src="src/assets/images/login/Facebook.png" alt="Login From Facebook" style={{ width: 35, marginRight: 10 }}/>Facebook</button>
-                                    </div>
+                                    </div> */}
                             </div>
                         </div>
                     </form>

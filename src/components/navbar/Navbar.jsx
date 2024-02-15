@@ -1,8 +1,7 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import logo from "../assets/images/icon-1.png";
 import { useDispatch, useSelector } from "react-redux";
-import { logout, selectUser } from "./redux/UserSlice";
+import { logout, selectUser } from "../redux/UserSlice";
 
 export default function Navbar() {
   const dispatch = useDispatch();
@@ -15,8 +14,8 @@ export default function Navbar() {
   }, [])
 
   const isActive = {
-		color: "#16d5ff",
-	};
+    color: "#16d5ff",
+  };
 
 
   const handleLogout = (e) => {
@@ -45,10 +44,10 @@ export default function Navbar() {
   return (
     <nav className="navbar navbar-expand-lg bg-white navbar-light sticky-top p-0 px-4 px-lg-5">
       <a href="/" className="navbar-brand d-flex align-items-center">
-        <h2 className="m-0 text-cyan fw-bold">
+        <h2 className="m-0 fw-bold">
           <img
             className="img-fluid me-2 fw"
-            src={logo}
+            src="../src/assets/images/icon-1.png"
             alt=""
             style={{ width: "45px" }}
           />
@@ -65,14 +64,22 @@ export default function Navbar() {
       </button>
       <div className="collapse navbar-collapse" id="navbarCollapse">
         <div className="navbar-nav ms-auto py-4 py-lg-0">
-        {role === "ROLE_CUSTOMER" &&
-          <>
-          <Link to="/" className="nav-item nav-link" activestyle={isActive}>Home</Link>
-          <Link to="/about" className="nav-item nav-link" activestyle={isActive}>About Us</Link>
-          <Link to="/service" className="nav-item nav-link" activestyle={isActive}>Service</Link>
-          <Link to="/faq" className="nav-item nav-link" activestyle={isActive}>FAQ</Link>
-          <p className="nav-line">|</p>
-          </>
+          {user ? role === "ROLE_CUSTOMER" &&
+            <>
+              <Link to="/" className="nav-item nav-link" activestyle={isActive}>Home</Link>
+              <Link to="/about" className="nav-item nav-link" activestyle={isActive}>About Us</Link>
+              <Link to="/service" className="nav-item nav-link" activestyle={isActive}>Service</Link>
+              <Link to="/faq" className="nav-item nav-link" activestyle={isActive}>FAQ</Link>
+              <p className="nav-line">|</p>
+            </>
+            :
+            <>
+              <Link to="/" className="nav-item nav-link" activestyle={isActive}>Home</Link>
+              <Link to="/about" className="nav-item nav-link" activestyle={isActive}>About Us</Link>
+              <Link to="/service" className="nav-item nav-link" activestyle={isActive}>Service</Link>
+              <Link to="/faq" className="nav-item nav-link" activestyle={isActive}>FAQ</Link>
+              <p className="nav-line">|</p>
+            </>
           }
 
           {user ? (

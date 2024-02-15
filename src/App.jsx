@@ -1,14 +1,13 @@
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom'
-import Home from './components/Home.jsx'
-import Login from './components/Login.jsx'
-import RegisterCustomer from './components/Register.jsx'
+import Login from './pages/login/Login.jsx'
+import Register from './pages/register/Register.jsx'
 import { useSelector } from 'react-redux'
 import { selectUser } from './components/redux/UserSlice.js'
 import { useEffect, useState } from 'react'
-import Home from './pages/home/Home.jsx'
 import About from './pages/about/About.jsx'
 import AdminDashboard from './components/AdminDashboard.jsx'
 import AdminLogin from './components/AdminLogin.jsx'
+import Home from './pages/home/Home.jsx'
 
 function App() {
 
@@ -52,7 +51,7 @@ function App() {
       <Route path='/home' element={<Home/>} />
       <Route path='/about' element={<About/>} />
       <Route path='/login' element={<Login />} />
-      <Route path='/register' element={<RegisterCustomer />} />
+      <Route path='/register' element={<Register />} />
       <Route path='/admin/login' element={<AdminLogin />} />
     </>
   )

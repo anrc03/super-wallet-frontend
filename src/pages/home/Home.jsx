@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import LoadSpinner from "../../components/LoadSpinner"
 import About from "../../components/home/About";
 import Trans from "../../components/Trans"
@@ -9,11 +9,28 @@ import Footer from "../../components/Footer";
 import BackToTop from "../../components/BackToTop"
 import Navbar from "../../components/navbar/Navbar";
 import Header from "../../components/home/Header";
+import { useSelector } from "react-redux";
+import { selectUser } from "../../components/redux/UserSlice";
+import { Helmet } from 'react-helmet';
 
 function Home() {
+
+  const [isLoading, setIsLoading] = useState(true);
+  const user = useSelector(selectUser);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1000)
+  }, [])
+
+  if (isLoading) return <LoadSpinner />
+
   return (
     <div>
-      <LoadSpinner />
+      <Helmet>
+            <title>Super Wallet</title>
+        </Helmet>
       <Navbar />
       <Header />
       <About />
