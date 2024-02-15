@@ -1,0 +1,12 @@
+.Collapsible__contentInner {
+    background-color: whitesmoke;
+}
+
+.Collapsible {
+    color: white;
+    font-weight: bold;
+}
+
+p {
+    color: black;
+}

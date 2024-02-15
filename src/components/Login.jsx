@@ -53,6 +53,7 @@ function Login() {
             axios.post(LOGIN_CUSTOMER, { email: formData.email, password: formData.password })
                 .then((result) => {
                     const user = result.data.data;
+                    axios.defaults.headers.common = {'Authorization': `Bearer ${user.token}`}
                     dispatch(login({
                         firstName: user.firstName,
                         lastName: user.lastName,

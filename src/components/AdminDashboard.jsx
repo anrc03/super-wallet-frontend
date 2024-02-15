@@ -4,7 +4,7 @@ import { selectUser } from './redux/UserSlice'
 import Navbar from './Navbar';
 import { GET_ALL_CUSTOMER } from '../constant/Endpoint';
 import axios from 'axios';
-import { AnimationOnScroll } from 'react-animation-on-scroll';
+import Collapsible from 'react-collapsible';
 
 const AdminDashboard = () => {
 
@@ -26,17 +26,26 @@ const AdminDashboard = () => {
     console.log(customerList)
 
     const displayCustomer = customerList.map((customer) => (
-        <div>
-            <p>{customer.firstName}</p>
+        <div className='col-md-4 container'>
+            <div style={{backgroundColor: 'green'}}>
+            <Collapsible trigger={customer.firstName}>
+                <p>id:{customer.id}</p>
+                <p>gender: {customer.gender}</p>
+                <p>birthdate: {customer.birthDate}</p>
+                <p>address: {customer.address}</p>
+                <p>email: {customer.userCredential.email}</p>
+            </Collapsible>
+            </div>
+            
         </div>
     ));
 
   return (
     <div>
         <Navbar />
-        <h4 style={{margin:50, textAlign: 'center'}}>Welcome, {user.firstName}</h4>
-        <h1 style={{margin:10, textAlign: 'center'}}>{customerList.length}</h1>
-        <p style={{textAlign: 'center'}}>{"Registered Users"}</p>
+        <p style={{margin:20, textAlign: 'center', fontSize:25, fontWeight: 'bold'}}>Welcome, <span style={{color: 'green'}}>{user.firstName}</span></p>
+        <p style={{marginBottom: -5, textAlign: 'center', fontWeight: 'bold', fontSize: 40}}>{customerList.length}</p>
+        <p style={{marginBottom:25, textAlign: 'center'}}>{"Registered Users"}</p>
         <div style={{textAlign: 'center'}}>{displayCustomer}</div>
     </div>
   )
