@@ -12,6 +12,8 @@ const AdminDashboard = () => {
     const [customerList, setCustomerList] = useState([])
     // const [isLoading, setIsLoading] = useState(false)
 
+    console.log(user)
+
     const getCustomerList = async() => {
         await axios
             .get(GET_ALL_CUSTOMER)
@@ -27,7 +29,6 @@ const AdminDashboard = () => {
 
     const displayCustomer = customerList.map((customer) => (
         <div className='col-md-4 container'>
-            <div style={{backgroundColor: 'green'}}>
             <Collapsible trigger={customer.firstName}>
                 <p>id:{customer.id}</p>
                 <p>gender: {customer.gender}</p>
@@ -35,7 +36,6 @@ const AdminDashboard = () => {
                 <p>address: {customer.address}</p>
                 <p>email: {customer.userCredential.email}</p>
             </Collapsible>
-            </div>
             
         </div>
     ));

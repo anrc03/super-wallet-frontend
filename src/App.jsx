@@ -7,6 +7,7 @@ import { selectUser } from './components/redux/UserSlice.js'
 import { useEffect, useState } from 'react'
 import About from './components/About.jsx'
 import AdminDashboard from './components/AdminDashboard.jsx'
+import AdminLogin from './components/AdminLogin.jsx'
 
 function App() {
 
@@ -14,6 +15,7 @@ function App() {
   const navigate = useNavigate();
   const location = useLocation();
   const [role, setRole] = useState(null);
+  
 
   useEffect(() => {
     if(user && location.pathname == "/login") {
@@ -22,8 +24,37 @@ function App() {
   }, [user])
 
   useEffect(() => {
+    if(user && location.pathname == "/admin/login") {
+      navigate("/admin/dashboard")
+    }  
+  }, [user])
+
+  useEffect(() => {
     if (user != null) setRole(user.role)
   })
+
+  const ADMIN_PAGE = (    
+    <>
+      <Route path='/admin/dashboard' element={<AdminDashboard />} />
+    </>
+  )
+
+  const CUSTOMER_PAGE = (
+    <>
+      <Route path='/home' element={<Home/>} />
+      <Route path='/about' element={<About/>} />
+    </>
+  )
+
+  const GENERAL_ACCESS = (
+    <>
+      <Route path='/home' element={<Home/>} />
+      <Route path='/about' element={<About/>} />
+      <Route path='/login' element={<Login />} />
+      <Route path='/register' element={<RegisterCustomer />} />
+      <Route path='/admin/login' element={<AdminLogin />} />
+    </>
+  )
 
   return (
     <div>
@@ -32,20 +63,15 @@ function App() {
         {user? 
           role === "ROLE_CUSTOMER"? 
             <>
-              <Route path='/home' element={<Home/>} />
-              <Route path='/about' element={<About/>} />
-              <Route path='/dashboard-admin' element={<AdminDashboard />} />
+              {CUSTOMER_PAGE}
             </>
             :
             <>
-              <Route path='/dashboard-admin' element={<AdminDashboard />} />
+              {ADMIN_PAGE}
             </>
         :
           <>
-            <Route path='/home' element={<Home/>} />
-            <Route path='/about' element={<About/>} />
-            <Route path='/login' element={<Login />} />
-            <Route path='/register' element={<RegisterCustomer />} />
+            {GENERAL_ACCESS}
           </>
         }      
       </Routes>

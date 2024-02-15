@@ -2,9 +2,13 @@
     background-color: whitesmoke;
 }
 
-.Collapsible {
+.Collapsible__trigger {
     color: white;
     font-weight: bold;
+}
+
+.Collapsible {
+    background-color: green;
 }
 
 p {

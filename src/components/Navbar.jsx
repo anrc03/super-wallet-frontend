@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import logo from "../assets/images/icon-1.png";
@@ -8,8 +8,12 @@ import { logout, selectUser } from "./redux/UserSlice";
 export default function Navbar() {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
-  const role = user.role;
   const navigate = useNavigate();
+  const [role, setRole] = useState(null);
+
+  useEffect(() => {
+    if (user) setRole(user.role)
+  }, [])
 
   const handleLogout = (e) => {
     e.preventDefault();
@@ -57,7 +61,7 @@ export default function Navbar() {
       </button>
       <div className="collapse navbar-collapse" id="navbarCollapse">
         <div className="navbar-nav ms-auto py-4 py-lg-0">
-          {user.role === "ROLE_CUSTOMER" &&
+          {role === "ROLE_CUSTOMER" &&
           <>
             <a href="/" className="nav-item nav-link active">
               Home
