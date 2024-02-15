@@ -26,11 +26,7 @@ export default function BackToTop() {
   };
   return (
     isVisible && (
-      <a
-        href=""
-        className="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"
-        onClick={scrollToTop}
-      >
+      <a className="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"onClick={scrollToTop}>
         <i className="bi bi-arrow-up"></i>
       </a>
     )

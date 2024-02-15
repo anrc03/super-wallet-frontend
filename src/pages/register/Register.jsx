@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
-import { REGISTER_CUSTOMER } from '../constant/Endpoint';
+import { REGISTER_CUSTOMER } from '../../constant/Endpoint';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css'
 import moment from 'moment';
@@ -166,10 +166,10 @@ function Register() {
 
         if (input.type === "password") {
             input.type = "text";
-            icon.innerHTML = '<i className="bi bi-eye-fill"></i>';
+            icon.innerHTML = '<i class="bi bi-eye-fill"></i>';
         } else {
             input.type = "password";
-            icon.innerHTML = '<i className="bi bi-eye-slash-fill"></i>';
+            icon.innerHTML = '<i class="bi bi-eye-slash-fill"></i>';
         }
     };
 
@@ -179,10 +179,10 @@ function Register() {
 
         if (input.type === "password") {
             input.type = "text";
-            icon.innerHTML = '<i className="bi bi-eye-fill"></i>';
+            icon.innerHTML = '<i class="bi bi-eye-fill"></i>';
         } else {
             input.type = "password";
-            icon.innerHTML = '<i className="bi bi-eye-slash-fill"></i>';
+            icon.innerHTML = '<i class="bi bi-eye-slash-fill"></i>';
         }
     };
 
@@ -192,7 +192,7 @@ function Register() {
                 <div className="col-md-6">
                     <form action="" className="border register-form">
                         <div className="row container-fluid justify-content-center">
-                            <div className='col-md-10 p-4'>
+                            <div className='col-md-10 p-2'>
                                 <h4 className="mb-2" style={{ color: '#3a5a40', fontSize: 30, fontWeight: '600' }}>Create account</h4>
                                 <div className="row" style={{ color: '#3a5a40' }}>
                                     <div className="mb-2 col-md-12">
@@ -253,7 +253,7 @@ function Register() {
                                     </div>
 
                                     <div className="mb-2 col-md-12">
-                                        <label className="mb-2">Birthdate<span className="text-danger"> *</span></label>
+                                        <label className="mb-2">Birth date<span className="text-danger"> *</span></label>
                                         {
                                             valid ? <></> : <span className="text-danger"> {errors.birthDate}</span>
                                         }
@@ -287,7 +287,7 @@ function Register() {
                                                     selected={formData.birthDate}
                                                     onChange={(date) => setFormData({ ...formData, birthDate: date})}
                                                     dateFormat={"yyyy-MM-dd"}
-                                                    placeholderText='Enter your birthdate'
+                                                    placeholderText='Enter your birth date'
                                                 />
                                             </div>
                                     </div>

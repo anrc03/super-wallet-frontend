@@ -6,7 +6,7 @@ export default function Footer() {
       <div className="container py-5">
         <div className="row g-5">
           <div className="col-md-6">
-            <h1 className="text-cyan mb-4">
+            <h1 className="text-green mb-4">
               <img
                 className="img-fluid me-2"
                 src={logo}
@@ -89,14 +89,8 @@ export default function Footer() {
       <div className="container-fluid copyright">
         <div className="container text-secondary">
           <div className="row">
-            <div className="col-md-6 text-center text-md-start mb-3 mb-md-0">
-              &copy; <a href="#">Your Site Name</a>, All Right Reserved.
-            </div>
-            <div className="col-md-6 text-center text-md-end">
-              Designed by <a href="https://htmlcodex.com">HTML Codex</a>{" "}
-              Distributed By
-              <a href="https://themewagon.com">ThemeWagon</a>
-            </div>
+            <div className="text-md-start mb-3 mb-md-0">&copy; <a href="#">Your Site Name</a>, All Right Reserved.</div>
+            
           </div>
         </div>
       </div>

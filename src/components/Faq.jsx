@@ -10,7 +10,7 @@ export default function Faq() {
         >
           <AnimationOnScroll animateIn="animate__fadeInUp" delay={100}>
             <h1 className="display-6 fw-bold">FAQs</h1>
-            <p className="text-cyan fs-5 mb-5">Frequently Asked Questions</p>
+            <p className="text-green fs-5 mb-5">Frequently Asked Questions</p>
           </AnimationOnScroll>
         </div>
         <div className="row justify-content-center">

@@ -11,14 +11,12 @@ import FeatureItem from "./utils/FeatureItem";
 
 export default function WhyUs() {
   return (
-    <div className="container-xxl py-5 features">
+    <div className="container-xxl py-4 features">
       <div className="container">
-        <div className="text-center mx-auto" style={{ maxWidth: "500px" }}>
+        <div className="text-center mx-auto">
           <AnimationOnScroll animateIn="animate__fadeInUp" delay={100}>
-            <h1 className="display-6 fw-bold">Why Us!</h1>
-            <p className="text-cyan fs-5 mb-5">
-              The Best In The crypto Industry
-            </p>
+            <h1 className="text-green display-6 fw-bold">Why Super Wallet?</h1>
+            <p className="fs-5 mb-5">Super Wallet has become an experienced and trusted digital wallet institution</p>
           </AnimationOnScroll>
         </div>
         <div className="row g-5">

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { LOGIN_CUSTOMER } from '../constant/Endpoint';
+import { LOGIN_CUSTOMER } from '../../constant/Endpoint';
 import { useDispatch } from 'react-redux';
-import { login } from './redux/UserSlice';
+import { login } from '../../components/redux/UserSlice';
 
 function Login() {
     const [formData, setFormData] = useState({
@@ -15,7 +15,6 @@ function Login() {
 
     const [errors, setErrors] = useState({});
     const [valid, setValid] = useState(true);
-    const navigate = useNavigate();
 
     const validateEmail = (email) => {
         const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -54,7 +53,6 @@ function Login() {
                     }));
                 })
                 .catch((err) => {
-                    console.log(err)
                     isValid = false;
                     validationErrors.email = 'Email address not registered';
                     validationErrors.password = 'Incorrect password';
@@ -73,10 +71,10 @@ function Login() {
 
         if (input.type === 'password') {
             input.type = 'text';
-            icon.innerHTML = '<i className="bi bi-eye-fill"></i>';
+            icon.innerHTML = '<i class="bi bi-eye-fill"></i>';
         } else {
             input.type = 'password';
-            icon.innerHTML = '<i className="bi bi-eye-slash-fill"></i>';
+            icon.innerHTML = '<i class="bi bi-eye-slash-fill"></i>';
         }
     };
 
@@ -86,8 +84,8 @@ function Login() {
                 <div className="col-md-10">
                     <form className="border login-form">
                         <div className="row container-fluid justify-content-center">
-                            <div className="col-md-5 d-flex">
-                                <img src="src/assets/images/login/" alt="Login Picture" className="img-fluid" />
+                            <div className="col-md-5 d-flex justify-content-center align-items-center">
+                                <img src="src/assets/images/login/Login.png" alt="Login Picture" className="img-fluid image-login" />
                             </div>
                             <div className="col-md-6 p-4">
                                 <h4 className="mb-2" style={{ color: '#3a5a40', fontSize: 30, fontWeight: '600' }}>Log in account</h4>

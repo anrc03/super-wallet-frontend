@@ -15,8 +15,8 @@ export default function Services() {
       <div className="container py-5">
         <div className="text-center mx-auto">
           <AnimationOnScroll animateIn="animate__fadeInUp" delay={100}>
-            <h1 className="display-6 fw-bold">Services</h1>
-            <p className="text-cyan fs-5 mb-5">
+            <h1 className="text-green display-6 fw-bold">Services</h1>
+            <p className="fs-5 mb-5">
               Buy, Sell And Exchange Cryptocurrency
             </p>
           </AnimationOnScroll>
