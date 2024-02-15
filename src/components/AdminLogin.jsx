@@ -1,11 +1,21 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { LOGIN_CUSTOMER } from '../constant/Endpoint';
 import { useDispatch } from 'react-redux';
 import { login } from './redux/UserSlice';
+import LoadSpinner from './LoadSpinner';
+import { LOGIN_ADMIN } from '../constant/Endpoint';
 
-function Login() {
+function AdminLogin() {
+    
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        setTimeout(() => {
+        setIsLoading(false);
+        }, 1000)
+    }, [])
+
     const [formData, setFormData] = useState({
         email: '',
         password: ''
@@ -15,7 +25,6 @@ function Login() {
 
     const [errors, setErrors] = useState({});
     const [valid, setValid] = useState(true);
-    const navigate = useNavigate();
 
     const validateEmail = (email) => {
         const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -41,9 +50,10 @@ function Login() {
         }
 
         if (isValid) {
-            axios.post(LOGIN_CUSTOMER, { email: formData.email, password: formData.password })
+            axios.post(LOGIN_ADMIN, { email: formData.email, password: formData.password })
                 .then((result) => {
                     const user = result.data.data;
+                    axios.defaults.headers.common = {'Authorization': `Bearer ${user.token}`}
                     dispatch(login({
                         firstName: user.firstName,
                         lastName: user.lastName,
@@ -80,6 +90,8 @@ function Login() {
         }
     };
 
+    if (isLoading) return <LoadSpinner />
+
     return (
         <div className="login-background">
             <div className="container login-container">
@@ -90,7 +102,7 @@ function Login() {
                                 <img src="src/assets/images/login/" alt="Login Picture" className="img-fluid" />
                             </div>
                             <div className="col-md-6 p-4">
-                                <h4 className="mb-2" style={{ color: '#3a5a40', fontSize: 30, fontWeight: '600' }}>Log in account</h4>
+                                <h4 className="mb-2" style={{ color: '#3a5a40', fontSize: 30, fontWeight: '600' }}>Admin Login</h4>
                                 <div className="row" style={{ color: '#3a5a40' }}>
                                     <div className="mb-2 col-md-12">
                                         <label className="mb-2">Email address<span className="text-danger"> *</span></label>
@@ -113,21 +125,10 @@ function Login() {
                                             <label className="form-check-label" htmlFor="exampleCheck">Remember me</label>
                                         </div>
                                     </div>
-                                    <span className="text-create">Don't have an account? <Link to="/register" className="login-link">Create account</Link></span>
                                     <div className="col-md-12">
                                         <button type="submit" className="btn float-end login-button mt-2" onClick={handleSubmit}>Log in</button>
                                     </div>
-                                    
-                                    <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
-                                        <div style={{ flex: 1, height: 1, backgroundColor: '#606c38', marginRight: 10}}></div>
-                                        <p style={{ fontSize: 16, fontWeight: '550', color: '#283618', marginTop: 15 }}>Or log in with</p>
-                                        <div style={{ flex: 1, height: 1, backgroundColor: '#606c38', marginLeft: 10 }}></div>
-                                    </div>
                                 </div>
-                                    <div className="col-md-12" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: -10 }}>
-                                        <button type="submit" className="btn sign-in-with"><img src="src/assets/images/login/Google.png" alt="Login From Google" style={{ width: 35, marginRight: 10 }}/>Google</button>
-                                        <button type="submit" className="btn m-2 sign-in-with"><img src="src/assets/images/login/Facebook.png" alt="Login From Facebook" style={{ width: 35, marginRight: 10 }}/>Facebook</button>
-                                    </div>
                             </div>
                         </div>
                     </form>
@@ -137,4 +138,4 @@ function Login() {
     );
 }
 
-export default Login;
+export default AdminLogin;

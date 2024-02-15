@@ -1,12 +1,21 @@
 import axios from 'axios';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { REGISTER_CUSTOMER } from '../../constant/Endpoint';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css'
 import moment from 'moment';
+import LoadSpinner from './LoadSpinner';
 
 function Register() {
+
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        setTimeout(() => {
+        setIsLoading(false);
+        }, 1000)
+    }, [])
 
     const [formData, setFormData] = useState({
         email: '',
@@ -185,6 +194,8 @@ function Register() {
             icon.innerHTML = '<i class="bi bi-eye-slash-fill"></i>';
         }
     };
+
+    if(isLoading) return <LoadSpinner/>
 
     return (
         <div className="register-background">
