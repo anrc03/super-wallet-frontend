@@ -96,7 +96,7 @@ function AdminLogin() {
                     <form className="border login-form">
                         <div className="row container-fluid justify-content-center">
                             <div className="col-md-5 d-flex">
-                                <img src="../assets/images/login/Login.png"  alt="Login Picture" className="img-fluid" />
+                                <img src="./../src/assets/images/login/Login.png"  alt="Login Picture" className="img-fluid" />
                             </div>
                             <div className="col-md-6 p-4">
                                 <h4 className="mb-2" style={{ color: '#3a5a40', fontSize: 30, fontWeight: '600' }}>Admin Login</h4>
