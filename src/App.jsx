@@ -44,7 +44,7 @@ function App() {
     <>
       <Route path='/home' element={<Home/>} />
       <Route path='/about' element={<About/>} />
-      <Route path='/exchange-rate' element={<CurrencyConverter />} />
+      <Route path="/currency-converter" element={<CurrencyConverter />} />
     </>
   )
 
@@ -55,7 +55,7 @@ function App() {
       <Route path='/login' element={<Login />} />
       <Route path='/register' element={<Register />} />
       <Route path='/admin/login' element={<AdminLogin />} />
-      <Route path='/exchange-rate' element={<CurrencyConverter />} />
+      <Route path="/currency-converter" element={<CurrencyConverter />} />
     </>
   )
 
@@ -83,4 +83,4 @@ function App() {
   )
 }
 
-export default App
+export default App;

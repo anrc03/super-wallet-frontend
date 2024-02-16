@@ -1,8 +1,7 @@
-import React from "react";
 import { useEffect, useState } from "react";
 
 export default function BackToTop() {
-  const [isVisible, setIsVisible] = useState(false);
+	const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const toggleVisibility = () => {
@@ -13,10 +12,10 @@ export default function BackToTop() {
       }
     };
 
-    window.addEventListener("scroll", toggleVisibility);
+		window.addEventListener("scroll", toggleVisibility);
 
-    return () => window.removeEventListener("scroll", toggleVisibility);
-  }, []);
+		return () => window.removeEventListener("scroll", toggleVisibility);
+	}, []);
 
   const scrollToTop = () => {
     window.scrollTo({
