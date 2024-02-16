@@ -1,5 +1,10 @@
 .header-about {
-  background-color: #6f9459;
+  background: linear-gradient(
+    90deg,
+    rgba(236, 243, 158, 1) 0%,
+    rgba(170, 213, 118, 1) 28%,
+    rgba(58, 90, 64, 1) 100%
+  );
   display: flex;
   justify-content: center;
   align-items: center;
@@ -9,5 +14,27 @@
 }
 
 .image-about {
-    margin-left: -50px;
+  margin-left: -50px;
+}
+
+.bg-about {
+  background-color: #a2cc72;
+}
+
+.about-info h1 {
+  margin-right: -45px;
+  margin-left: -130px;
+  font-size: 50px;
+  font-weight: 900 !important;
+  color: #3a5a40;
+}
+
+.about-info p {
+  margin-left: -15px;
+  margin-right: -115px;
+  color: #fff;
+  background-color: #75ac54;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: -5px;
 }

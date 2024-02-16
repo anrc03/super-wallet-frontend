@@ -2,10 +2,11 @@ import { useContext, useEffect, useState } from "react";
 import { Box, Container, Grid, Typography } from "@mui/material";
 import axios from "axios";
 import { CurrencyContext } from "../context/CurrencyProvider";
-import PageHeader from "../components/utils/PageHeader";
 import InputAmount from "../components/currency/InputAmount";
 import SelectCountry from "../components/currency/SelectCountry";
 import SwitchCurrency from "../components/currency/SwitchCurrency";
+import Navbar from "../components/navbar/Navbar";
+import { Helmet } from 'react-helmet';
 
 function CurrencyConverter() {
 	const {
@@ -40,7 +41,27 @@ function CurrencyConverter() {
 
 	return (
 		<>
-			<PageHeader title="Currency Converter" />
+			<Helmet>
+                <title>Super Wallet | Service</title>
+            </Helmet>
+            <Navbar />
+            <div className="container-fluid header-about">
+                <div className="container py-5">
+                    <div className="row g-5 align-items-center d-flex justify-content-center">
+                        <div className="col-md-8 text-center">
+                            <h1 className="mb-3 animated slideInDown">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Itaque, est.</h1>
+                        </div>
+                        {/* <div className="col-lg-6 animate__animated animate_fadeIn">
+                            <img
+                                className="img-fluid animate__animated animate__pulse animate__infinite"
+                                style={{ animationDuration: "3s" }}
+                                src=""
+                                alt=""
+                            />
+                        </div> */}
+                    </div>
+                </div>
+            </div>
 
 			<div className="container-xxl py-5">
 				<div className="container">

@@ -64,6 +64,7 @@ function Register() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        console.log(formData.phoneNumber);
         let isValid = true;
         let validationErrors = {};
 
@@ -268,7 +269,8 @@ function Register() {
                     country={"id"}
                     placeholder='Enter your phone number'
                     onlyCountries={['id', 'us', 'cn', 'jp', 'sg', 'au', 'sa', 'kr', 'gb']}
-                    onChange={(e) => setFormData({ ...formData, phoneNumber: e })}/>
+                    onChange={(e) => setFormData({ ...formData, phoneNumber: e })}
+                    />
                                     </div>
 
                                     <div className="mb-2 col-md-12">

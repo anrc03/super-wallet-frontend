@@ -43,19 +43,17 @@ export default function About() {
                 </div>
             </div>
 
-
-
+            <div className="bg-about mt-5">
             <div className="container py-5">
-                <div className="row align-items-center">
+                <div className="row align-items-center about-info">
                     <div className="col-lg-2 animate__animated animate__fadeInUp" style={{ animationDelay: "0.1s" }}>
                         <h1>About Us</h1>
                     </div>
                     <div className="col-lg-10 animate__animated animate__fadeInUp" style={{ animationDelay: "0.3s" }}>
-                        <div className="h-100">
-                            <p>We are a multi-currency wallet institution, capable of cross-border transactions with low admin fees, giving you the best experience. We are committed to providing security, reliability and ease of use. Security is our top priority. We have a high level of security system to protect your personal and financial information. Advanced data encryption ensures that every transaction you make with us remains confidential and secure. We are committed to providing security, reliability and ease of use. We are the first choice for all your money transaction needs.</p>
-                        </div>
+                        <p>We are a multi-currency wallet institution, capable of cross-border transactions with low admin fees, giving you the best experience. We are committed to providing security, reliability and ease of use. Security is our top priority. We have a high level of security system to protect your personal and financial information. Advanced data encryption ensures that every transaction you make with us remains confidential and secure. We are committed to providing security, reliability and ease of use. We are the first choice for all your money transaction needs.</p>    
                     </div>
                 </div>
+            </div>
             </div>
 
             <Team />

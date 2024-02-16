@@ -11,8 +11,8 @@ import ServiceItem from "./utils/ServiceItem";
 
 export default function Services() {
 	return (
-		<div className="container-xxl bg-cyan py-5 my-5">
-			<div className="container py-5">
+		<div className="container-xxl">
+			<div className="container py-3">
 				<div className="text-center mx-auto">
 					<AnimationOnScroll animateIn="animate__fadeInUp" delay={100}>
 						<h1 className="display-6 fw-bold">Services</h1>
