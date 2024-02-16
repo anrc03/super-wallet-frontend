@@ -84,6 +84,20 @@ export default function Navbar() {
             </>
           }
 
+          {role === 'ROLE_ADMIN' && 
+            <>
+              <Link className="nav-item nav-link button-register" to='#'>ADMIN</Link>
+              <p className="nav-line">|</p>
+            </>
+          }
+
+          {role === 'ROLE_SUPER_ADMIN' && 
+            <>
+              <Link className="nav-item nav-link button-register" to='#'>SUPER ADMIN</Link>
+              <p className="nav-line">|</p>
+            </>
+          }
+
           {user ? (
             <></>
           ) : (

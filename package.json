@@ -31,6 +31,7 @@
     "react-phone-number-input": "^3.3.9",
     "react-redux": "^9.1.0",
     "react-router-dom": "^6.21.3",
+    "sweetalert2": "^11.10.5",
     "swiper": "^11.0.6"
   },
   "devDependencies": {
