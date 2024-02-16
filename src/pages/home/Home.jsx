@@ -41,7 +41,7 @@ function Home() {
       <Navbar />
       {role === "ROLE_ADMIN" && <div><AdminDashboard /></div>}
       {role === "ROLE_SUPER_ADMIN" && <div><SuperAdminDashboard /></div>}
-      {role === "ROLE_CUSTOMER" && 
+      {(user === null || role === "ROLE_CUSTOMER") && 
       <div>
         <Header />
         <About />
