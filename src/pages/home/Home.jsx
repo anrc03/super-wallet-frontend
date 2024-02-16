@@ -3,7 +3,6 @@ import LoadSpinner from "../../components/LoadSpinner"
 import About from "../../components/home/About";
 import Trans from "../../components/Trans"
 import WhyUs from "../../components/WhyUs"
-import Service from "../../components/Service"
 import Faq from "../../components/Faq"
 import Footer from "../../components/Footer";
 import BackToTop from "../../components/BackToTop"
@@ -12,6 +11,7 @@ import Header from "../../components/home/Header";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../components/redux/UserSlice";
 import { Helmet } from 'react-helmet';
+import Services from "../../components/Services";
 
 function Home() {
 
@@ -30,13 +30,13 @@ function Home() {
     <div>
       <Helmet>
             <title>Super Wallet</title>
-        </Helmet>
+      </Helmet>
       <Navbar />
       <Header />
       <About />
       <Trans />
       <WhyUs />
-      <Service />
+      <Services/>
       <Faq />
       <Footer />
       <BackToTop />

@@ -1,13 +1,11 @@
 import { useContext, useEffect, useState } from "react";
 import { Box, Container, Grid, Typography } from "@mui/material";
 import axios from "axios";
-
+import { CurrencyContext } from "../context/CurrencyProvider";
 import PageHeader from "../components/utils/PageHeader";
 import InputAmount from "../components/currency/InputAmount";
 import SelectCountry from "../components/currency/SelectCountry";
 import SwitchCurrency from "../components/currency/SwitchCurrency";
-
-import { CurrencyContext } from "../context/CurrencyProvider";
 
 function CurrencyConverter() {
 	const {
