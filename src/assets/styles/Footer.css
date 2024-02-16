@@ -1,0 +1,68 @@
+.footer .btn.btn-link {
+  display: block;
+  margin-bottom: 5px;
+  padding: 0;
+  text-align: left;
+  color: #3a5a40;
+  font-weight: normal;
+  text-transform: capitalize;
+  transition: 0.3s;
+  text-decoration: none;
+}
+
+.footer .btn.btn-link::before {
+  position: relative;
+  content: "\f105";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  color: #3a5a40;
+  margin-right: 10px;
+}
+
+.footer .btn.btn-link:hover {
+  color: #a2cc72;
+  letter-spacing: 1px;
+  box-shadow: none;
+}
+
+.footer .btn.btn-square {
+  color: #3a5a40;
+  border: 1px solid #3a5a40;
+}
+
+.footer .btn.btn-square:hover {
+  color: #ffffff;
+  background: #a2cc72;
+  border: 1px solid #a2cc72;
+}
+
+.title-footer {
+  color: #3a5a40 !important;
+  font-weight: 600 !important;
+  font-size: 22px;
+}
+
+.copyright {
+  text-align: center;
+  padding: 20px;
+  background-color: #6f9459;
+  color: #fff;
+}
+
+.copyright a {
+  text-decoration: none;
+  color: #a2cc72;
+}
+
+.copyright a:hover {
+  color: #fff;
+}
+
+.footer span,
+.footer p {
+  color: #3a5a40;
+}
+
+.footer {
+  border-top: 0.5px solid #a2cc72;
+}

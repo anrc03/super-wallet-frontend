@@ -77,6 +77,7 @@ export default function Navbar() {
               <Link to="/" className="nav-item nav-link" activestyle={isActive}>Home</Link>
               <Link to="/about" className="nav-item nav-link" activestyle={isActive}>About Us</Link>
               <Link to="/service" className="nav-item nav-link" activestyle={isActive}>Service</Link>
+              <Link to="/exchange-rate" className="nav-item nav-link" activestyle={isActive}>Exchange Rate</Link>
               <Link to="/faq" className="nav-item nav-link" activestyle={isActive}>FAQ</Link>
               <p className="nav-line">|</p>
             </>

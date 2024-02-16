@@ -8,6 +8,7 @@ import About from './pages/about/About.jsx'
 import AdminDashboard from './components/AdminDashboard.jsx'
 import AdminLogin from './components/AdminLogin.jsx'
 import Home from './pages/home/Home.jsx'
+import CurrencyConverter from './pages/CurrencyConverter.jsx'
 
 function App() {
 
@@ -43,6 +44,7 @@ function App() {
     <>
       <Route path='/home' element={<Home/>} />
       <Route path='/about' element={<About/>} />
+      <Route path='/exchange-rate' element={<CurrencyConverter />} />
     </>
   )
 
@@ -53,6 +55,7 @@ function App() {
       <Route path='/login' element={<Login />} />
       <Route path='/register' element={<Register />} />
       <Route path='/admin/login' element={<AdminLogin />} />
+      <Route path='/exchange-rate' element={<CurrencyConverter />} />
     </>
   )
 

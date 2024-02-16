@@ -1,18 +1,29 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import BackToTop from "../../components/BackToTop";
 import Footer from "../../components/Footer";
 import Navbar from "../../components/navbar/Navbar";
 import Team from "../../components/Team";
 import { AnimationOnScroll } from "react-animation-on-scroll";
 import { Helmet } from 'react-helmet';
+import LoadSpinner from "../../components/LoadSpinner";
 
 export default function About() {
 
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        setTimeout(() => {
+            setIsLoading(false);
+        }, 500)
+    }, [])
+
+    if (isLoading) return <LoadSpinner />
+
     return (
         <>
-        <Helmet>
-            <title>About Super Wallet</title>
-        </Helmet>
+            <Helmet>
+                <title>Super Wallet | About Us</title>
+            </Helmet>
             <Navbar />
             <div className="container-fluid header-about">
                 <div className="container py-5">

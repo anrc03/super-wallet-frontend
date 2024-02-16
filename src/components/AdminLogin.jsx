@@ -83,10 +83,10 @@ function AdminLogin() {
 
         if (input.type === 'password') {
             input.type = 'text';
-            icon.innerHTML = '<i className="bi bi-eye-fill"></i>';
+            icon.innerHTML = '<i class="bi bi-eye-fill"></i>';
         } else {
             input.type = 'password';
-            icon.innerHTML = '<i className="bi bi-eye-slash-fill"></i>';
+            icon.innerHTML = '<i class="bi bi-eye-slash-fill"></i>';
         }
     };
 
@@ -99,7 +99,7 @@ function AdminLogin() {
                     <form className="border login-form">
                         <div className="row container-fluid justify-content-center">
                             <div className="col-md-5 d-flex">
-                                <img src="src/assets/images/login/" alt="Login Picture" className="img-fluid" />
+                                <img src="./../src/assets/images/login/Login.png" alt="Login Picture" className="img-fluid" />
                             </div>
                             <div className="col-md-6 p-4">
                                 <h4 className="mb-2" style={{ color: '#3a5a40', fontSize: 30, fontWeight: '600' }}>Admin Login</h4>

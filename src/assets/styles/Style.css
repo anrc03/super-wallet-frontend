@@ -32,7 +32,6 @@ body {
 
 .bg-green-light {
   background-color: #6f9459;
-  color: #fff;
 }
 
 .image-trans {
@@ -47,11 +46,14 @@ body {
 }
 
 .back-to-top {
+  background-color: #a2cc72;
+  color: #fff;
   position: fixed;
   display: none;
   right: 20px;
-  bottom: 20px;
+  bottom: 40px;
   z-index: 99;
+  border: 4px solid #fff;
 }
 
 h1,
@@ -120,10 +122,9 @@ h6,
   overflow: hidden;
 }
 
-.service-item a,
-.footer .copyright a {
+.service-item a {
   text-decoration: none;
-  color: var(--primary);
+  color: #3a5a40;
 }
 
 .service-item::after {
@@ -140,15 +141,21 @@ h6,
 }
 
 .service-item.bg-white::after {
-  border-color: transparent transparent var(--light) transparent;
-}
-
-.service-item.bg-light::after {
-  border-color: transparent transparent #ffffff transparent;
+  border-color: transparent transparent #a2cc72 transparent;
 }
 
 .service-item:hover::after {
   opacity: 0;
+}
+
+.btn-service {
+  background-color: #6f9459;
+  color: #fff !important;
+  padding: 15px !important;
+}
+
+.btn-service:hover {
+  background-color: #a2cc72;
 }
 
 /*** Roadmap ***/
@@ -365,60 +372,4 @@ h6,
 .accordion .accordion-body {
   padding: 15px 0 0 0;
   color: var(--secondary);
-}
-
-/*** Footer ***/
-.footer .btn.btn-link {
-  display: block;
-  margin-bottom: 5px;
-  padding: 0;
-  text-align: left;
-  color: var(--secondary);
-  font-weight: normal;
-  text-transform: capitalize;
-  transition: 0.3s;
-  text-decoration: none;
-}
-
-.footer .btn.btn-link::before {
-  position: relative;
-  content: "\f105";
-  font-family: "Font Awesome 5 Free";
-  font-weight: 900;
-  color: var(--secondary);
-  margin-right: 10px;
-}
-
-.footer .btn.btn-link:hover {
-  color: var(--primary);
-  letter-spacing: 1px;
-  box-shadow: none;
-}
-
-.footer .btn.btn-square {
-  color: var(--primary);
-  border: 1px solid var(--primary);
-}
-
-.footer .btn.btn-square:hover {
-  color: #ffffff;
-  background: var(--primary);
-}
-
-.footer span,
-.footer p {
-  color: var(--secondary);
-}
-
-.footer .copyright {
-  padding: 25px 0;
-  border-top: 1px solid rgba(17, 17, 17, 0.1);
-}
-
-.footer .copyright a {
-  color: var(--primary);
-}
-
-.footer .copyright a:hover {
-  color: var(--dark);
 }

@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { LOGIN_CUSTOMER } from '../../constant/Endpoint';
 import { login } from '../../components/redux/UserSlice';
 import { Helmet } from 'react-helmet';
+import LoadSpinner from '../../components/LoadSpinner';
 
 function Login() {
     const [formData, setFormData] = useState({
@@ -73,12 +74,22 @@ function Login() {
 
         if (input.type === 'password') {
             input.type = 'text';
-            icon.innerHTML = '<i className="bi bi-eye-fill"></i>';
+            icon.innerHTML = '<i class="bi bi-eye-fill"></i>';
         } else {
             input.type = 'password';
-            icon.innerHTML = '<i className="bi bi-eye-slash-fill"></i>';
+            icon.innerHTML = '<i class="bi bi-eye-slash-fill"></i>';
         }
     };
+
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        setTimeout(() => {
+            setIsLoading(false);
+        }, 500)
+    }, [])
+
+    if (isLoading) return <LoadSpinner />
 
     return (
         <div className="login-background">
