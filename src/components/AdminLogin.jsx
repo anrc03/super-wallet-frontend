@@ -52,7 +52,6 @@ function AdminLogin() {
             axios.post(LOGIN_ADMIN, { email: formData.email, password: formData.password })
                 .then((result) => {
                     const user = result.data.data;
-                    axios.defaults.headers.common = {'Authorization': `Bearer ${user.token}`}
                     dispatch(login({
                         email: formData.email,
                         token: user.token,

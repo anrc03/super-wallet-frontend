@@ -1,23 +1,31 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { selectUser } from './redux/UserSlice'
-import { GET_ALL_CUSTOMER, REGISTER_ADMIN } from '../constant/Endpoint';
+import { REGISTER_ADMIN } from '../constant/Endpoint';
 import axios from 'axios';
 import { Button, Modal } from 'react-bootstrap';
 import PhoneInput from 'react-phone-input-2';
 import Swal from 'sweetalert2';
+import CustomerList from './CustomerList';
+import AdminList from './AdminList';
 
 const SuperAdminDashboard = () => {
 
     const user = useSelector(selectUser);
-    const [customerList, setCustomerList] = useState([])
-    const [searchResult, setSearchResult] = useState(false)
-    const [isSearching, setIsSearching] = useState(false)
 
     const [showCustomer, setShowCustomer] = useState(false)
+    const [showAdmin, setShowAdmin] = useState(false);
     const [showForm, setShowForm] = useState(false);
 
-    const handleShowCustomer = () => setShowCustomer(!showCustomer)
+    const handleShowCustomer = () => {
+        setShowCustomer(!showCustomer)
+        setShowAdmin(false)
+    }
+ 
+    const handleShowAdmin = () => {
+        setShowAdmin(!showAdmin)
+        setShowCustomer(false)
+    }
     const handleCloseForm = () => setShowForm(false);
     const handleShowForm = () => setShowForm(true);
 
@@ -28,158 +36,6 @@ const SuperAdminDashboard = () => {
         phoneNumber: '',
         address: '',
     })
-
-    const getCustomerList = async() => {
-        await axios
-            .get(GET_ALL_CUSTOMER)
-            .then(res => setCustomerList(res.data.data))
-            .catch(err => console.error(err))
-    }
-
-    useEffect(() => {
-        getCustomerList()
-    }, [])
-
-    const displayEmptyCustomer = (
-        <div className="text-center">
-            <h2>No customer found</h2>
-        </div>
-    )
-
-    const displayCustomer = customerList.map((customer) => (
-            <tr key={customer.id}>
-                <td>{customer.id}</td>
-                <td>{customer.firstName + " " + customer.lastName}</td>
-                <td>{customer.phoneNumber}</td>
-                <td>{customer.birthDate}</td>
-                <td>{customer.gender}</td>
-                <td>{customer.address}</td>
-                <td>{customer.userCredential.email}</td>
-                <td><button onClick={() => {
-                        if (customer) {
-                            Swal.fire({
-                                title: "Are you sure?",
-                                text: `About to Delete: ${customer.firstName + " " + customer.lastName}`,
-                                icon: "warning",
-                                showCancelButton: true,
-                                confirmButtonColor: "#3085d6",
-                                cancelButtonColor: "#d33",
-                                confirmButtonText: "Yes, delete it!"
-                              }).then((result) => {
-                                if (result.isConfirmed) {
-                                    axios.delete(DELETE_CUSTOMER + customer.id)
-                                        .then(res => {
-                                            console.log(res.data.message)
-                                            Swal.fire({
-                                                title: "Deleted!",
-                                                text: res.data.message,
-                                                icon: "success"
-                                            })
-                                            getCustomerList();
-                                        })
-                                        .catch(err => {
-                                            console.log(err)
-                                            Swal.fire({
-                                                title: "Delete Failed",
-                                                text: err,
-                                                icon: "error"
-                                            })
-                                        })
-                                    }
-                                });                        
-                            }
-                        }}>
-                            <i className="bi bi-trash3"></i>
-                    </button>
-                </td>
-            </tr>
-    ));
-
-    const displaySearchResult = isSearching && searchResult.map((customer) => (
-            <tr key={customer.id}>
-                <td>{customer.id}</td>
-                <td>{customer.firstName + " " + customer.lastName}</td>
-                <td>{customer.phoneNumber}</td>
-                <td>{customer.birthDate}</td>
-                <td>{customer.gender}</td>
-                <td>{customer.address}</td>
-                <td>{customer.userCredential.email}</td>
-                <td><button onClick={() => {
-                        if (customer) {
-                            Swal.fire({
-                                title: "Are you sure?",
-                                text: `About to Delete: ${customer.firstName + " " + customer.lastName}`,
-                                icon: "warning",
-                                showCancelButton: true,
-                                confirmButtonColor: "#3085d6",
-                                cancelButtonColor: "#d33",
-                                confirmButtonText: "Yes, delete it!"
-                              }).then((result) => {
-                                if (result.isConfirmed) {
-                                    axios.delete(DELETE_CUSTOMER + customer.id)
-                                        .then(res => {
-                                            console.log(res.data.message)
-                                            Swal.fire({
-                                                title: "Deleted!",
-                                                text: res.data.message,
-                                                icon: "success"
-                                            })
-                                            getCustomerList();
-                                        })
-                                        .catch(err => {
-                                            console.log(err)
-                                            Swal.fire({
-                                                title: "Delete Failed",
-                                                text: err,
-                                                icon: "error"
-                                            })
-                                        })
-                                    }
-                                });                        
-                            }
-                        }}>
-                            <i className="bi bi-trash3"></i>
-                    </button>
-                </td>
-            </tr>
-    ));
-
-    const displayTable = (
-        <div className="container">
-            <div className="row">
-                <table className="table table-bordered">
-                    <thead className="thead-light">
-                        <tr>
-                            <th scope='col'>Id</th>
-                            <th scope='col'>Full name</th>
-                            <th scope='col'>Phone number</th>
-                            <th scope='col'>Birth Date</th>
-                            <th scope='col'>Gender</th>
-                            <th scope='col'>Address</th>
-                            <th scope='col'>Email</th>
-                            <th scope='col'>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {isSearching ? displaySearchResult : displayCustomer}
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    )
-
-    const handleSearch = (e) => {
-        setIsSearching(true)
-        const input = e.target.value.toLowerCase().trim()
-        const filteredCustomer = customerList.filter(customer => {
-            const searchFirstName = customer.firstName.toLowerCase();
-            const searchLastName = customer.lastName.toLowerCase()
-            const searchFullName = searchFirstName + " " + searchLastName
-            return searchFirstName.includes(input) || searchLastName.includes(input) || searchFullName.includes(input)
-        })
-        setSearchResult(filteredCustomer)
-        if (input === "") setIsSearching(false)
-    }
 
     const handleRegister = (e) => {
         e.preventDefault()
@@ -193,7 +49,7 @@ const SuperAdminDashboard = () => {
             }).then(() => {
                 Swal.fire({
                     icon: "success",
-                    title: "You're registered!",
+                    title: "Admin succesfully registered!",
                     showConfirmButton: false,
                     timer: 1500
                   });
@@ -222,20 +78,12 @@ const SuperAdminDashboard = () => {
         <p style={{marginTop:20, textAlign: 'center', fontSize:25, fontWeight: 'bold'}}>Welcome, <span style={{color: 'green'}}>{user.email.split("@")[0]}</span></p>
         <p style={{marginBottom: 20, textAlign: 'center', fontSize:17}}>What would you like to do today?</p>
         <div className='justify-content-center align-items-center d-flex m-3'>
+            <Button variant='success' style={{margin:5}} onClick={handleShowAdmin}>Show Admins</Button>
             <Button variant='success' style={{margin:5}} onClick={handleShowForm}>Register Admin</Button>
             <Button variant='success' style={{margin:5}} onClick={handleShowCustomer}>Show Customer</Button>
         </div>
-        {showCustomer? 
-        <>
-            <p style={{marginBottom: -5, textAlign: 'center', fontWeight: 'bold', fontSize: 40}}>{customerList.length}</p>
-            <p style={{marginBottom:25, textAlign: 'center'}}>{"Registered Users"}</p>
-            <div className='container justify-content-center align-items-center d-flex mb-4'>    
-                <input style={{textAlign:'center'}} type='text' placeholder='Search by name' onChange={handleSearch}/>  
-            </div>
-            <div style={{textAlign: 'center'}}>{isSearching ? displayTable : customerList.length == 0 ? displayEmptyCustomer : displayTable}</div>
-        </> 
-        : 
-        <></>}
+        {showCustomer? <CustomerList /> : <></>}
+        {showAdmin? <AdminList /> : <></>}
         <Modal
             show={showForm}
             onHide={handleCloseForm}
