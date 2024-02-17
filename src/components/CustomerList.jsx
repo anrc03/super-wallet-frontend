@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { GET_ALL_CUSTOMER, DELETE_CUSTOMER } from '../constant/Endpoint';
+import { BASE_CUSTOMER } from '../constant/Endpoint';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 
@@ -11,7 +11,7 @@ const CustomerList = () => {
 
     const getCustomerList = async() => {
         await axios
-            .get(GET_ALL_CUSTOMER)
+            .get(BASE_CUSTOMER)
             .then(res => setCustomerList(res.data.data))
             .catch(err => console.error(err))
     }
@@ -35,7 +35,11 @@ const CustomerList = () => {
                 <td>{customer.gender}</td>
                 <td>{customer.address}</td>
                 <td>{customer.userCredential.email}</td>
-                <td><button onClick={() => {
+                <td>
+                    <button type="button" className="btn btn-success m-1" onClick={() => {}}>
+                        <i class="bi bi-pencil-square"></i>
+                    </button>
+                    <button type="button" className="btn btn-success m-1" onClick={() => {
                         if (customer) {
                             Swal.fire({
                                 title: "Are you sure?",
@@ -47,7 +51,7 @@ const CustomerList = () => {
                                 confirmButtonText: "Yes, delete it!"
                               }).then((result) => {
                                 if (result.isConfirmed) {
-                                    axios.delete(DELETE_CUSTOMER + customer.id)
+                                    axios.delete(BASE_CUSTOMER + "/" + customer.id)
                                         .then(res => {
                                             console.log(res.data.message)
                                             Swal.fire({
@@ -84,7 +88,11 @@ const CustomerList = () => {
                 <td>{customer.gender}</td>
                 <td>{customer.address}</td>
                 <td>{customer.userCredential.email}</td>
-                <td><button onClick={() => {
+                <td>
+                    <button type="button" className="btn btn-success m-1" onClick={() => {}}>
+                        <i class="bi bi-pencil-square"></i>
+                    </button>
+                    <button type="button" className="btn btn-success m-1" onClick={() => {
                         if (customer) {
                             Swal.fire({
                                 title: "Are you sure?",
@@ -96,7 +104,7 @@ const CustomerList = () => {
                                 confirmButtonText: "Yes, delete it!"
                               }).then((result) => {
                                 if (result.isConfirmed) {
-                                    axios.delete(DELETE_CUSTOMER + customer.id)
+                                    axios.delete(BASE_CUSTOMER + "/" + customer.id)
                                         .then(res => {
                                             console.log(res.data.message)
                                             Swal.fire({

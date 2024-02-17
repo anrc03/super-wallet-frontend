@@ -21,7 +21,7 @@ const SuperAdminDashboard = () => {
         setShowCustomer(!showCustomer)
         setShowAdmin(false)
     }
- 
+
     const handleShowAdmin = () => {
         setShowAdmin(!showAdmin)
         setShowCustomer(false)
@@ -78,9 +78,9 @@ const SuperAdminDashboard = () => {
         <p style={{marginTop:20, textAlign: 'center', fontSize:25, fontWeight: 'bold'}}>Welcome, <span style={{color: 'green'}}>{user.email.split("@")[0]}</span></p>
         <p style={{marginBottom: 20, textAlign: 'center', fontSize:17}}>What would you like to do today?</p>
         <div className='justify-content-center align-items-center d-flex m-3'>
-            <Button variant='success' style={{margin:5}} onClick={handleShowAdmin}>Show Admins</Button>
+            <Button variant='success' style={{margin:5}} onClick={handleShowAdmin}>{!showAdmin ? "Show" : "Hide"} Admin</Button>
             <Button variant='success' style={{margin:5}} onClick={handleShowForm}>Register Admin</Button>
-            <Button variant='success' style={{margin:5}} onClick={handleShowCustomer}>Show Customer</Button>
+            <Button variant='success' style={{margin:5}} onClick={handleShowCustomer}>{!showCustomer ? "Show" : "Hide"} Customer</Button>
         </div>
         {showCustomer? <CustomerList /> : <></>}
         {showAdmin? <AdminList /> : <></>}
