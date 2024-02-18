@@ -12,8 +12,9 @@ import Header from "../../components/home/Header";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../components/redux/UserSlice";
 import { Helmet } from 'react-helmet';
+import Sidebar from "../../components/Sidebar";
+import Sidenav from "../../components/Sidenav";
 import AdminDashboard from "../../components/AdminDashboard";
-import SuperAdminDashboard from "../../components/SuperAdminDashboard";
 
 function Home() {
 
@@ -39,18 +40,17 @@ function Home() {
             <title>Super Wallet</title>
         </Helmet>
       <Navbar />
-      {role === "ROLE_ADMIN" && <div><AdminDashboard /></div>}
-      {role === "ROLE_SUPER_ADMIN" && <div><SuperAdminDashboard /></div>}
+      {role !== "ROLE_CUSTOMER" && <div><AdminDashboard /></div>}
       {(user === null || role === "ROLE_CUSTOMER") && 
-      <div>
-        <Header />
-        <About />
-        <Trans />
-        <WhyUs />
-        <Service />
-        <Faq />
-        <Footer />
-      </div>}
+        <div>
+          <Header />
+          <About />
+          <Trans />
+          <WhyUs />
+          <Service />
+          <Faq />
+          <Footer />
+        </div>}
       <BackToTop />
     </div>
   );

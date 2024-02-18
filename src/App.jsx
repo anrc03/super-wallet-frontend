@@ -5,9 +5,9 @@ import { useSelector } from 'react-redux'
 import { selectUser } from './components/redux/UserSlice.js'
 import { useEffect, useState } from 'react'
 import About from './pages/about/About.jsx'
-import AdminDashboard from './components/AdminDashboard.jsx'
 import AdminLogin from './components/AdminLogin.jsx'
 import Home from './pages/home/Home.jsx'
+import AdminDashboard from './components/AdminDashboard.jsx'
 
 function App() {
 
@@ -31,6 +31,7 @@ function App() {
   const ADMIN_PAGE = (    
     <>
       <Route path='/home' element={<Home/>} />
+      <Route path='/admin' element={<AdminDashboard/>} />
     </>
   )
 
