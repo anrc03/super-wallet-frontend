@@ -35,9 +35,54 @@ const AdminList = () => {
         getAdminList()
     }, [])
 
+    const handleDelete = (id, fullName) => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: `About to Delete: ${fullName}`,
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+          }).then((result) => {
+            if (result.isConfirmed) {
+                axios.delete(BASE_ADMIN + "/" + id)
+                    .then(res => {
+                        console.log(res.data.message)
+                        Swal.fire({
+                            title: "Deleted!",
+                            text: res.data.message,
+                            icon: "success"
+                        })
+                        getAdminList();
+                    })
+                    .catch(err => {
+                        console.log(err)
+                        Swal.fire({
+                            title: "Delete Failed",
+                            text: err,
+                            icon: "error"
+                        })
+                    })
+                }
+            });       
+    }
+
+    const handleClickEdit = (id, fullName, phoneNumber, email, address) => {
+        handleShowForm()
+        setFormData({
+            ...formData, 
+            id: id, 
+            fullName: fullName, 
+            phoneNumber: phoneNumber, 
+            email: email,
+            address: address,
+        })
+    }
+
     const handleUpdateAdmin = (e) => {
         e.preventDefault()
-        if (formData.id && formData.fullName && formData.email && formData.password && formData.phoneNumber && formData.address) {
+        if (formData.id && formData.fullName && formData.email && formData.phoneNumber && formData.address) {
             axios.put(BASE_ADMIN, {
                 id: formData.id,
                 fullName: formData.fullName,
@@ -88,53 +133,12 @@ const AdminList = () => {
             <td>{admin.email}</td>
             <td>
                 <button type="button" className="btn btn-success m-1" onClick={() => {
-                    handleShowForm()
-                    setFormData({
-                        ...formData, 
-                        id: admin.id, 
-                        fullName: admin.fullName, 
-                        phoneNumber: admin.phoneNumber, 
-                        email: admin.email,
-                        address: admin.address,
-                    })
+                    handleClickEdit(admin.id, admin.fullName, admin.phoneNumber, admin.email, admin.address)
                 }}>
                     <i className="bi bi-pencil-square"></i>
                 </button>
                 
-                <button type="button" className="btn btn-success m-1" onClick={() => {
-                    if (admin) {
-                        Swal.fire({
-                            title: "Are you sure?",
-                            text: `About to Delete: ${admin.fullName}`,
-                            icon: "warning",
-                            showCancelButton: true,
-                            confirmButtonColor: "#3085d6",
-                            cancelButtonColor: "#d33",
-                            confirmButtonText: "Yes, delete it!"
-                          }).then((result) => {
-                            if (result.isConfirmed) {
-                                axios.delete(BASE_ADMIN + "/" + admin.id)
-                                    .then(res => {
-                                        console.log(res.data.message)
-                                        Swal.fire({
-                                            title: "Deleted!",
-                                            text: res.data.message,
-                                            icon: "success"
-                                        })
-                                        getAdminList();
-                                    })
-                                    .catch(err => {
-                                        console.log(err)
-                                        Swal.fire({
-                                            title: "Delete Failed",
-                                            text: err,
-                                            icon: "error"
-                                        })
-                                    })
-                                }
-                            });                        
-                        }
-                    }}>
+                <button type="button" className="btn btn-success m-1" onClick={() => handleDelete(admin.id, admin.fullName)}>
                         <i className="bi bi-trash3"></i>
                 </button>
             </td>
@@ -150,53 +154,12 @@ const AdminList = () => {
             <td>{admin.email}</td>
             <td>
                 <button type="button" className="btn btn-success m-1" onClick={() => {
-                    handleShowForm()
-                    setFormData({
-                        ...formData, 
-                        id: admin.id, 
-                        fullName: admin.fullName, 
-                        phoneNumber: admin.phoneNumber, 
-                        email: admin.email,
-                        address: admin.address,
-                    })
+                    handleClickEdit(admin.id, admin.fullName, admin.phoneNumber, admin.email, admin.address)
                 }}>
                     <i className="bi bi-pencil-square"></i>
                 </button>
-
-                <button type="button" className="btn btn-success" onClick={() => {
-                    if (admin) {
-                        Swal.fire({
-                            title: "Are you sure?",
-                            text: `About to Delete: ${admin.fullName}`,
-                            icon: "warning",
-                            showCancelButton: true,
-                            confirmButtonColor: "#3085d6",
-                            cancelButtonColor: "#d33",
-                            confirmButtonText: "Yes, delete it!"
-                          }).then((result) => {
-                            if (result.isConfirmed) {
-                                axios.delete(BASE_ADMIN + "/" + admin.id)
-                                    .then(res => {
-                                        console.log(res.data.message)
-                                        Swal.fire({
-                                            title: "Deleted!",
-                                            text: res.data.message,
-                                            icon: "success"
-                                        })
-                                        getAdminList();
-                                    })
-                                    .catch(err => {
-                                        console.log(err)
-                                        Swal.fire({
-                                            title: "Delete Failed",
-                                            text: err,
-                                            icon: "error"
-                                        })
-                                    })
-                                }
-                            });                        
-                        }
-                    }}>
+                
+                <button type="button" className="btn btn-success m-1" onClick={() => handleDelete(admin.id, admin.fullName)}>
                         <i className="bi bi-trash3"></i>
                 </button>
             </td>

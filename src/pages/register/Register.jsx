@@ -277,11 +277,11 @@ function Register() {
                                             valid ? <></> : <span className="text-danger"> {errors.phoneNumber}</span>
                                         }
                                         <PhoneInput
-                    className="phone-input"
-                    country={"id"}
-                    placeholder='Enter your phone number'
-                    onlyCountries={['id', 'us', 'cn', 'jp', 'sg', 'au', 'sa', 'kr', 'gb']}
-                    onChange={(e) => setFormData({ ...formData, phoneNumber: e })}/>
+                                            className="phone-input"
+                                            country={"id"}
+                                            placeholder='Enter your phone number'
+                                            onlyCountries={['id', 'us', 'cn', 'jp', 'sg', 'au', 'sa', 'kr', 'gb']}
+                                            onChange={(e) => setFormData({ ...formData, phoneNumber: e })}/>
                                     </div>
 
                                     <div className="mb-2 col-md-12">

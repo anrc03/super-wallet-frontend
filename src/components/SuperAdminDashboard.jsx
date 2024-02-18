@@ -8,6 +8,7 @@ import PhoneInput from 'react-phone-input-2';
 import Swal from 'sweetalert2';
 import CustomerList from './CustomerList';
 import AdminList from './AdminList';
+import ExchangeRateList from './ExchangeRateList';
 
 const SuperAdminDashboard = () => {
 
@@ -84,6 +85,7 @@ const SuperAdminDashboard = () => {
         </div>
         {showCustomer? <CustomerList /> : <></>}
         {showAdmin? <AdminList /> : <></>}
+        <ExchangeRateList />
         <Modal
             show={showForm}
             onHide={handleCloseForm}
