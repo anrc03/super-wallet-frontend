@@ -13,6 +13,8 @@ import { useSelector } from "react-redux";
 import { selectUser } from "../../components/redux/UserSlice";
 import { Helmet } from "react-helmet";
 import Services from "../../components/Services";
+import Profile from "../profile/Profile";
+import EditProfile from "../profile/EditProfile";
 
 function Home() {
   const [isLoading, setIsLoading] = useState(true);
@@ -39,6 +41,8 @@ function Home() {
       <Services />
       <Faq />
       <Testimonial1 />
+      <Profile />
+      {/* <EditProfile /> */}
       <Footer />
       <BackToTop />
     </div>
