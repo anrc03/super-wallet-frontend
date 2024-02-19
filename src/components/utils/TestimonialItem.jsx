@@ -4,18 +4,18 @@ const TestimonialItem = ({ item }) => {
     const hasHalfStar = item.stars % 1 !== 0;
 
     const starArray = Array.from({ length: fullStars }, (_, index) => (
-      <i key={index} className="bi bi-star-fill text-cyan"></i>
+      <i key={index} className="bi bi-star-fill star-gold"></i>
     ));
 
     if (hasHalfStar) {
-      starArray.push(<i key="half" className="bi bi-star-half text-cyan"></i>);
+      starArray.push(<i key="half" className="bi bi-star-half star-gold"></i>);
     }
 
     const emptyStar = Math.max(5 - starArray.length, 0);
 
     starArray.push(
       ...Array.from({ length: emptyStar }, (_, index) => (
-        <i key={`empty-${index}`} className="bi bi-star text-cyan"></i>
+        <i key={`empty-${index}`} className="bi bi-star star-gold"></i>
       ))
     );
 

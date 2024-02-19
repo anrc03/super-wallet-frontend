@@ -3,10 +3,12 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 import "swiper/css";
 import "swiper/css/pagination";
+import "swiper/css/navigation";
 
-import { Pagination, Autoplay } from "swiper/modules";
+import { Pagination, Autoplay, Navigation } from "swiper/modules";
 
 import TestimonialItem from "./utils/TestimonialItem";
+import "../assets/styles/Testimonial.css";
 
 import testi1 from "../assets/images/team/Team-Alvin.png";
 import testi2 from "../assets/images/team/Team-Alwan.png";
@@ -69,8 +71,9 @@ const Testimonial = () => {
           pagination={{
             clickable: true,
           }}
+          navigation={true}
           loop={true}
-          modules={[Pagination, Autoplay]}
+          modules={[Pagination, Autoplay, Navigation]}
           breakpoints={{
             640: {
               slidesPerView: 1,
