@@ -1,9 +1,10 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { getBaseCurrencyUrl } from '../constant/Endpoint';
 import ReactDatePicker from 'react-datepicker';
 import moment from 'moment';
 import Swal from 'sweetalert2';
+import SmallLoadingSpinner from './SmallLoadingSpinner';
 
 const ExchangeRateList = () => {
 
@@ -33,6 +34,7 @@ const ExchangeRateList = () => {
                     showConfirmButton: false,
                     timer: 900
                 })
+                setIsLoading(false)
             })
     }
 
@@ -99,7 +101,7 @@ const ExchangeRateList = () => {
           <option value="MYR">MYR</option>
           <option value="GBP">GBP</option>
         </select>
-        <button onClick={handleClickRefresh}>Refresh</button>
+        
         <ReactDatePicker
           className="date-input"
           showIcon
@@ -137,8 +139,9 @@ const ExchangeRateList = () => {
           placeholderText="Enter your birth date"
         />
       </div>
+      <div className="justify-content-center align-items-center d-flex mb-4 mt-2"><button onClick={handleClickRefresh}>Refresh</button></div>
       <div style={{ textAlign: "center" }}>
-        {isLoading ? <h1>Loading...</h1> : rateList.length == 0 ? displayEmptyList : displayTable}
+        {isLoading ? <SmallLoadingSpinner/>: rateList.length == 0 ? displayEmptyList : displayTable}
       </div>
     </>
   );

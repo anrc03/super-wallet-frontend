@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import PuffLoader from "react-spinners/PuffLoader";
 
 export default function LoadSpinner() {
