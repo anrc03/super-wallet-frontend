@@ -4,6 +4,7 @@
 
 .mySwiper{
     width: 80%;
+    position: relative;
 }
 
 .swiper-slide{
@@ -51,4 +52,8 @@
     font-size: 1em;
     font-weight: 500;
     font-family: 'Courier New', Courier, monospace;
+}
+.mySwiper .swiper-pagination{
+margin-top: 15px;
+position: relative;
 }

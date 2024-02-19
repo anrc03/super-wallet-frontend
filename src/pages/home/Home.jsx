@@ -8,7 +8,7 @@ import Footer from "../../components/Footer";
 import BackToTop from "../../components/BackToTop";
 import Navbar from "../../components/navbar/Navbar";
 import Header from "../../components/home/Header";
-import Testimonial from "../../components/Testimonial";
+import Testimonial1 from "../../components/Testimonial1";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../components/redux/UserSlice";
 import { Helmet } from "react-helmet";
@@ -38,7 +38,7 @@ function Home() {
       <WhyUs />
       <Services />
       <Faq />
-      <Testimonial />
+      <Testimonial1 />
       <Footer />
       <BackToTop />
     </div>
