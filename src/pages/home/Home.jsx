@@ -10,6 +10,7 @@ import Header from "../../components/home/Header";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../components/redux/UserSlice";
 import { Helmet } from 'react-helmet';
+import ExchangeCurrency from "../../components/ExchangeCurrency";
 
 function Home() {
 
@@ -34,7 +35,7 @@ function Home() {
       <About />
       <Trans />
       <WhyUs />
-      {/* <Services/> */}
+      <ExchangeCurrency />
       <Footer />
       <BackToTop />
     </div>

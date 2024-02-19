@@ -14,7 +14,7 @@ function SwitchCurrency() {
 
 	return (
 		<Grid item xs={12} md="auto">
-			<Button variant="text" className="my-2" onClick={handleSwitch}>
+			<Button variant="text btn-currency" className="my-2" onClick={handleSwitch}>
 				<i className="bi bi-arrow-left-right fs-5"></i>
 			</Button>
 		</Grid>
