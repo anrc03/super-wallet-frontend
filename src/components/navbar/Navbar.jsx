@@ -21,7 +21,7 @@ export default function Navbar() {
   const handleLogout = (e) => {
     e.preventDefault();
     dispatch(logout());
-    navigate("/login")
+    navigate("/login");
   };
 
   useEffect(() => {
@@ -63,6 +63,20 @@ export default function Navbar() {
               <Link to="/about" className="nav-item nav-link" activestyle={isActive}>About Us</Link>
               <Link to="/currency-converter" className="nav-item nav-link" activestyle={isActive}>Exchange Rate</Link>
               <Link to="/faq" className="nav-item nav-link" activestyle={isActive}>FAQ</Link>
+              <p className="nav-line">|</p>
+            </>
+          }
+
+          {role === 'ROLE_ADMIN' && 
+            <>
+              <Link className="nav-item nav-link button-register" to='#'>ADMIN</Link>
+              <p className="nav-line">|</p>
+            </>
+          }
+
+          {role === 'ROLE_SUPER_ADMIN' && 
+            <>
+              <Link className="nav-item nav-link button-register" to='#'>SUPER ADMIN</Link>
               <p className="nav-line">|</p>
             </>
           }

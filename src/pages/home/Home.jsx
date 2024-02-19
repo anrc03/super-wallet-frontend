@@ -11,11 +11,17 @@ import { useSelector } from "react-redux";
 import { selectUser } from "../../components/redux/UserSlice";
 import { Helmet } from 'react-helmet';
 import ExchangeCurrency from "../../components/ExchangeCurrency";
+import AdminDashboard from "../../components/AdminDashboard";
 
 function Home() {
 
   const [isLoading, setIsLoading] = useState(true);
   const user = useSelector(selectUser);
+  const [role, setRole] = useState(null)
+
+  useEffect(() => {
+    if (user) setRole(user.role)
+  }, [])
 
   useEffect(() => {
     setTimeout(() => {
@@ -31,12 +37,16 @@ function Home() {
             <title>Super Wallet</title>
       </Helmet>
       <Navbar />
-      <Header />
-      <About />
-      <Trans />
-      <WhyUs />
-      <ExchangeCurrency />
-      <Footer />
+      {(user === null || role === "ROLE_CUSTOMER") && 
+        <div>
+          <Header />
+          <About />
+          <Trans />
+          <WhyUs />
+          <ExchangeCurrency />
+          <Footer />
+        </div>}
+      {(user != null && role !== "ROLE_CUSTOMER") && <div><AdminDashboard /></div>}
       <BackToTop />
     </div>
   );

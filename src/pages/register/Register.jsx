@@ -9,6 +9,7 @@ import LoadSpinner from '../../components/LoadSpinner';
 import { Helmet } from 'react-helmet';
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
+import Swal from 'sweetalert2';
 
 function Register() {
 
@@ -155,6 +156,12 @@ function Register() {
                 password: formData.password,
             })
                 .then(() => {
+                    Swal.fire({
+                        icon: "success",
+                        title: "You're registered!",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
                     navigate('/login');
                 })
                 .catch((err) => {
@@ -162,6 +169,12 @@ function Register() {
                     validationErrors.username = 'Username already exist';
                     setErrors(validationErrors);
                     setValid(isValid);
+                    Swal.fire({
+                        icon: "error",
+                        title: err.message,
+                        showConfirmButton: false,
+                        timer: 1000
+                    });
                 });
         } else {
             setErrors(validationErrors);
@@ -269,8 +282,7 @@ function Register() {
                                             country={"id"}
                                             placeholder='Enter your phone number'
                                             onlyCountries={['id', 'us', 'cn', 'jp', 'sg', 'au', 'sa', 'kr', 'gb']}
-                                            onChange={(e) => setFormData({ ...formData, phoneNumber: e })}
-                                        />
+                                            onChange={(e) => setFormData({ ...formData, phoneNumber: e })}/>
                                     </div>
 
                                     <div className="mb-2 col-md-12">
