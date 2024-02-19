@@ -130,7 +130,10 @@ const CustomerList = () => {
 
     const displayEmptyList = (
         <div className="text-center">
-            <h2>List is Empty</h2>
+            <div className="d-flex justify-content-center">
+                  <img style={{ width: '200px' }} src="./src/assets/images/Empty.png" alt="Empty Picture" />
+                </div>
+            <h2 className='empty-info'>List is Empty</h2>
         </div>
     )
 

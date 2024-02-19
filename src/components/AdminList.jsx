@@ -24,7 +24,7 @@ const AdminList = () => {
         address: '',
     })
 
-    const getAdminList = async() => {
+    const getAdminList = async () => {
         await axios
             .get(BASE_ADMIN)
             .then(res => setAdminList(res.data.data))
@@ -44,7 +44,7 @@ const AdminList = () => {
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
             confirmButtonText: "Yes, delete it!"
-          }).then((result) => {
+        }).then((result) => {
             if (result.isConfirmed) {
                 axios.delete(BASE_ADMIN + "/" + id)
                     .then(res => {
@@ -64,17 +64,17 @@ const AdminList = () => {
                             icon: "error"
                         })
                     })
-                }
-            });       
+            }
+        });
     }
 
     const handleClickEdit = (id, fullName, phoneNumber, email, address) => {
         handleShowForm()
         setFormData({
-            ...formData, 
-            id: id, 
-            fullName: fullName, 
-            phoneNumber: phoneNumber, 
+            ...formData,
+            id: id,
+            fullName: fullName,
+            phoneNumber: phoneNumber,
             email: email,
             address: address,
         })
@@ -96,7 +96,7 @@ const AdminList = () => {
                     title: "Admin succesfully updated!",
                     showConfirmButton: false,
                     timer: 1500
-                  });
+                });
                 handleCloseForm();
                 getAdminList();
             }).catch(err => {
@@ -107,7 +107,7 @@ const AdminList = () => {
                     showConfirmButton: false,
                     timer: 1000
                 });
-            }) 
+            })
         } else {
             Swal.fire({
                 icon: "error",
@@ -120,6 +120,9 @@ const AdminList = () => {
 
     const displayEmptyList = (
         <div className="text-center">
+            <div className="d-flex justify-content-center">
+                <img style={{ width: '200px' }} src="./src/assets/images/Empty.png" alt="Empty Picture" />
+            </div>
             <h2>List is Empty</h2>
         </div>
     )
@@ -137,9 +140,9 @@ const AdminList = () => {
                 }}>
                     <i className="bi bi-pencil-square"></i>
                 </button>
-                
-                <button type="button" className="btn btn-success m-1" onClick={() => handleDelete(admin.id, admin.fullName)}>
-                        <i className="bi bi-trash3"></i>
+
+                <button type="button" className="btn btn-red m-1" onClick={() => handleDelete(admin.id, admin.fullName)}>
+                    <i className="bi bi-trash3"></i>
                 </button>
             </td>
         </tr>
@@ -158,9 +161,9 @@ const AdminList = () => {
                 }}>
                     <i className="bi bi-pencil-square"></i>
                 </button>
-                
-                <button type="button" className="btn btn-success m-1" onClick={() => handleDelete(admin.id, admin.fullName)}>
-                        <i className="bi bi-trash3"></i>
+
+                <button type="button" className="btn btn-red m-1" onClick={() => handleDelete(admin.id, admin.fullName)}>
+                    <i className="bi bi-trash3"></i>
                 </button>
             </td>
         </tr>
@@ -169,7 +172,7 @@ const AdminList = () => {
     const displayAdminTable = (
         <div className="container">
             <div className="row">
-                <table className="table table-bordered">
+                <table className=" content-table">
                     <thead className="thead-light">
                         <tr>
                             <th scope='col'>Id</th>
@@ -198,71 +201,71 @@ const AdminList = () => {
         if (input === "") setIsSearchingAdmin(false)
     }
 
-  return (
+    return (
         <>
-            <p style={{marginBottom: -5, textAlign: 'center', fontWeight: 'bold', fontSize: 40}}>{adminList.length}</p>
-            <p style={{marginBottom:25, textAlign: 'center'}}>{"Registered Admin"}</p>
-            <div className='container justify-content-center align-items-center d-flex mb-4'>    
-                <input style={{textAlign:'center'}} type='text' placeholder='Search by name' onChange={handleAdminSearch}/>  
+            <p style={{ marginBottom: -5, textAlign: 'center', fontWeight: 'bold', fontSize: 40 }}>{adminList.length}</p>
+            <p style={{ marginBottom: 25, textAlign: 'center' }}>{"Registered Admin"}</p>
+            <div className='container justify-content-center align-items-center d-flex mb-4'>
+                <input style={{ textAlign: 'center' }} type='text' placeholder='Search by name' onChange={handleAdminSearch} />
             </div>
-            <div style={{textAlign: 'center'}}>{isSearchingAdmin ? displayAdminTable : adminList.length == 0 ? displayEmptyList : displayAdminTable}</div>
+            <div style={{ textAlign: 'center' }}>{isSearchingAdmin ? displayAdminTable : adminList.length == 0 ? displayEmptyList : displayAdminTable}</div>
             <Modal
-            show={showForm}
-            onHide={handleCloseForm}
-            backdrop="static"
-            keyboard={false}
+                show={showForm}
+                onHide={handleCloseForm}
+                backdrop="static"
+                keyboard={false}
+                centered
             >
-            <Modal.Header closeButton>
-            <Modal.Title>Update Admin</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-                <div>
-                    <div className='mb-2'>
-                        <label>Id</label>
-                        <input type='text' className='form-control' style={{backgroundColor:'#D3D3D3', fontWeight:'bold'}} value={formData.id} readOnly/>
+                <Modal.Header className='admin-close' closeButton>
+                    <Modal.Title>Update Admin</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <div className='modal-update'>
+                        <div className='mb-2'>
+                            <label className='mb-2'>Id</label>
+                            <input type='text' className='form-control' style={{ backgroundColor: '#95b79c', color: '#fff', fontWeight: 'bold' }} value={formData.id} readOnly />
+                        </div>
+                        <div className='mb-2'>
+                            <label className='mb-2'>Full name</label>
+                            <input type='text' className='form-control' value={formData.fullName} placeholder="Enter full name"
+                                onChange={(e) => setFormData({ ...formData, fullName: e.target.value })} />
+                        </div>
+                        <div className='mb-2'>
+                            <label className='mb-2'>Email</label>
+                            <input type='email' className='form-control' value={formData.email} placeholder="Enter email"
+                                onChange={(e) => setFormData({ ...formData, email: e.target.value })} />
+                        </div>
+                        <div className='mb-2'>
+                            <label className='mb-2'>Password</label>
+                            <input type="password" id="setPassword" name="password" className="form-control" placeholder="Enter new password"
+                                onChange={(e) => setFormData({ ...formData, password: e.target.value })} />
+                        </div>
+                        <div className='mb-2'>
+                            <label className='mb-2'>Phone Number</label>
+                            <PhoneInput
+                                className="phone-input"
+                                country={"id"}
+                                placeholder='Enter your phone number'
+                                value={formData.phoneNumber}
+                                onlyCountries={['id', 'us', 'cn', 'jp', 'sg', 'au', 'sa', 'kr', 'gb']}
+                                onChange={(e) => setFormData({ ...formData, phoneNumber: e })}
+                            />
+                        </div>
+                        <div className='mb-2'>
+                            <label className='mb-2'>Address</label>
+                            <input type="text" name="address" className="form-control" value={formData.address} placeholder="Enter address" onChange={(e) => setFormData({ ...formData, address: e.target.value })} />
+                        </div>
                     </div>
-                    <div className='mb-2'>
-                        <label>Fullname</label>
-                        <input type='text' className='form-control' value={formData.fullName} placeholder="Enter fullname"
-                                onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}/>
-                    </div>
-                    <div className='mb-2'>
-                        <label>Email</label>
-                        <input type='email' className='form-control' value={formData.email} placeholder="Enter email"
-                                onChange={(e) => setFormData({ ...formData, email: e.target.value })}/>
-                    </div>
-                    <div className='mb-2'>
-                        <label>Password</label>
-                        <input type="password" id="setPassword" name="password" className="form-control" placeholder="Enter new password" 
-                                onChange={(e) => setFormData({ ...formData, password: e.target.value })}/>                                                
-                    </div>
-                    <div className='mb-2'>
-                        <label>Phone Number</label>
-                        <PhoneInput
-                            className="phone-input"
-                            country={"id"}
-                            placeholder='Enter your phone number'
-                            value={formData.phoneNumber}
-                            onlyCountries={['id', 'us', 'cn', 'jp', 'sg', 'au', 'sa', 'kr', 'gb']}
-                            onChange={(e) => setFormData({ ...formData, phoneNumber: e })}
-                        />
-                    </div>
-                    <div className='mb-2'>
-                        <label>Address</label>
-                        <input type="text" name="address" className="form-control" value={formData.address} placeholder="Enter address" 
-                                onChange={(e) => setFormData({ ...formData, address: e.target.value })}/>
-                    </div>
-                </div>
-            </Modal.Body>
-            <Modal.Footer>
-            <Button variant="secondary" onClick={handleCloseForm}>
-                Cancel
-            </Button>
-            <Button variant="success" onClick={handleUpdateAdmin}>Update</Button>
-            </Modal.Footer>
-        </Modal>
-        </> 
-  )
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button className='btn-red' onClick={handleCloseForm}>
+                        Cancel
+                    </Button>
+                    <Button className='btn-admin' onClick={handleUpdateAdmin}>Update</Button>
+                </Modal.Footer>
+            </Modal>
+        </>
+    )
 }
 
 export default AdminList

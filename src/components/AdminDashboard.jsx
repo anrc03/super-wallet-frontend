@@ -83,18 +83,18 @@ const AdminDashboard = () => {
 
   return (
     <div>
-        <p style={{marginTop:20, textAlign: 'center', fontSize:25, fontWeight: 'bold'}}>Welcome, <span style={{color: 'green'}}>{user.email.split("@")[0]}</span></p>
-        <p style={{marginBottom: 20, textAlign: 'center', fontSize:17}}>What would you like to do today?</p>
-        <div className='justify-content-center align-items-center d-flex m-3'>
+        <p className='welcome-text'>Welcome, <span>{user.email.split("@")[0]}</span></p>
+        <p className='welcome-qna'>What would you like to do today?</p>
+        <div className='justify-content-center align-items-center d-flex mb-2'>
             {role === "ROLE_ADMIN" ? 
             <>
                 <Button variant='success' style={{margin:5}} onClick={handleShowCustomer}>{!showCustomer ? "Show" : "Hide"} Customer</Button>
             </>
             :
             <>
-                <Button variant='success' style={{margin:5}} onClick={handleShowAdmin}>{!showAdmin ? "Show" : "Hide"} Admin</Button>
-                <Button variant='success' style={{margin:5}} onClick={handleShowForm}>Register Admin</Button>
-                <Button variant='success' style={{margin:5}} onClick={handleShowCustomer}>{!showCustomer ? "Show" : "Hide"} Customer</Button>
+                <Button className='btn-admin' onClick={handleShowAdmin}>{!showAdmin ? "Show" : "Hide"} Admin</Button>
+                <Button className='btn-admin' onClick={handleShowForm}>Register Admin</Button>
+                <Button className='btn-admin' onClick={handleShowCustomer}>{!showCustomer ? "Show" : "Hide"} Customer</Button>
             </>
             }
             
