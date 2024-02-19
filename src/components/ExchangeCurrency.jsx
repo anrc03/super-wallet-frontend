@@ -10,7 +10,7 @@ import axios from 'axios';
 export default function ExchangeCurrency() {
     const {
         fromCurrency,
-        setFromCurrency,
+        setFromCurrency,    
         toCurrency,
         setToCurrency,
         firstAmount,

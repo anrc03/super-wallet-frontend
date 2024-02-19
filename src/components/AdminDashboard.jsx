@@ -8,8 +8,6 @@ import PhoneInput from 'react-phone-input-2';
 import Swal from 'sweetalert2';
 import CustomerList from './CustomerList';
 import AdminList from './AdminList';
-import ExchangeRateList from './ExchangeRateList';
-import Sidenav from './Sidenav';
 import TransactionHistoryList from './TransactionHistoryList';
 
 const AdminDashboard = () => {

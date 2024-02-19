@@ -5,9 +5,7 @@ import { useSelector } from 'react-redux'
 import { selectUser } from './components/redux/UserSlice.js'
 import { useEffect, useState } from 'react'
 import About from './pages/about/About.jsx'
-import Home from './pages/home/Home.jsx'
 import AdminDashboard from './components/AdminDashboard.jsx'
-import AdminLogin from './components/AdminLogin.jsx'
 import Home from './pages/home/Home.jsx'
 import CurrencyConverter from './pages/CurrencyConverter.jsx'
 import Faq from './pages/faq/Faq.jsx'
@@ -55,7 +53,6 @@ function App() {
       <Route path='/about' element={<About/>} />
       <Route path='/login' element={<Login />} />
       <Route path='/register' element={<Register />} />
-      <Route path='/admin/login' element={<AdminLogin />} />
       <Route path="/currency-converter" element={<CurrencyConverter />} />
       <Route path="/faq" element={<Faq />} />
     </>

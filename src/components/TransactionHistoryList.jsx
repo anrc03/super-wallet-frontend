@@ -13,7 +13,6 @@ const TransactionHistoryList = () => {
             .get(getTransactionByPage(page))
             .then(res => {
                 setTransactionCount(res.data.pagingResponse.totalItem)
-                console.log(res.data.data)
                 setTransactionList(res.data.data)
             })
             .catch(err => console.error(err.message))
@@ -21,7 +20,7 @@ const TransactionHistoryList = () => {
 
     useEffect(() => {
         getTransactionListbyPage(currentPage)
-    }, [])
+    }, [currentPage])
 
     const displayEmptyList = (
         <div className="text-center">
@@ -67,23 +66,17 @@ const TransactionHistoryList = () => {
     const handlePrevious = async () => {
         if (currentPage != 0) {
             setCurrentPage(currentPage - 1)
-            console.log(currentPage)
-            await getTransactionListbyPage(currentPage)
         }
     }
 
     const handleNext = async () => {
-        console.log(currentPage)
-        console.log(currentPage + 1)
         setCurrentPage(currentPage + 1)
-        console.log(currentPage)
-        await getTransactionListbyPage(currentPage)
     }
 
     const displayPagination = (
         <div className="justify-content-center align-items-center d-flex mt-2">
             <button onClick={handlePrevious}>Prev</button>
-            <div className='m-2'>{currentPage}</div>
+            <div className='m-2'>{currentPage + 1}</div>
             <button onClick={handleNext}>Next</button>
         </div>
     )
