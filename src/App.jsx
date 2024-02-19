@@ -11,6 +11,10 @@ import CurrencyConverter from './pages/CurrencyConverter.jsx'
 import Faq from './pages/faq/Faq.jsx'
 import ForgotPassword from './pages/forgotPassword/ForgotPassword.jsx'
 import Sidebar from './components/Sidebar.jsx'
+import AdminList from './components/AdminList.jsx'
+import CustomerList from './components/CustomerList.jsx'
+import ExchangeRateList from './components/ExchangeRateList.jsx'
+import TransactionHistoryList from './components/TransactionHistoryList.jsx'
 
 function App() {
 
@@ -22,7 +26,7 @@ function App() {
 
   useEffect(() => {
     if(user && (location.pathname == "/login")) {
-      navigate("/home")
+      role === "ROLE_CUSTOMER" ? navigate("/home") : navigate("/admin")
     }  
   }, [user])
   
@@ -34,7 +38,11 @@ function App() {
   const ADMIN_PAGE = (    
     <>
       <Route path='/home' element={<Home/>} />
-      <Route path='/admin' element={<AdminDashboard/>} />
+      <Route path='/admin' element={<Sidebar component={AdminDashboard}/>} />
+      <Route path="/admin/admins" element={<Sidebar component={AdminList}/>} />
+      <Route path="/admin/customers" element={<Sidebar component={CustomerList}/>} />
+      <Route path="/admin/currency" element={<Sidebar component={ExchangeRateList}/>} />
+      <Route path="/admin/transaction" element={<Sidebar component={TransactionHistoryList}/>} />
     </>
   )
 
@@ -63,7 +71,6 @@ function App() {
       <Routes>
         <Route index element={<div><Home /></div>} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path="/sidebar" element={<Sidebar />} />
         {user? 
           role === "ROLE_CUSTOMER"? 
             <>
