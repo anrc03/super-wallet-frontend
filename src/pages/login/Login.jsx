@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
-import { LOGIN_CUSTOMER } from '../../constant/Endpoint';
+import { LOGIN } from '../../constant/Endpoint';
 import { login } from '../../components/redux/UserSlice';
 import { Helmet } from 'react-helmet';
 
@@ -41,13 +41,13 @@ function Login() {
         }
 
         if (isValid) {
-            axios.post(LOGIN_CUSTOMER, { email: formData.email, password: formData.password })
+            axios.post(LOGIN, { email: formData.email, password: formData.password })
                 .then((result) => {
                     const user = result.data.data;
                     dispatch(login({
                         firstName: user.firstName,
                         lastName: user.lastName,
-                        email: user.email,
+                        email: formData.email,
                         token: user.token,
                         role: user.role,
                         loggedIn: true,

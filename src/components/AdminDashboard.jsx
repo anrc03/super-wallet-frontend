@@ -10,10 +10,13 @@ import CustomerList from './CustomerList';
 import AdminList from './AdminList';
 import ExchangeRateList from './ExchangeRateList';
 import Sidenav from './Sidenav';
+import TransactionHistoryList from './TransactionHistoryList';
 
 const AdminDashboard = () => {
 
     const user = useSelector(selectUser);
+
+    console.log(user)
 
     const [showCustomer, setShowCustomer] = useState(false)
     const [showAdmin, setShowAdmin] = useState(false);
@@ -100,7 +103,8 @@ const AdminDashboard = () => {
         </div>
         {showCustomer? <CustomerList /> : <></>}
         {showAdmin? <AdminList /> : <></>}
-        <ExchangeRateList />
+        {/* <ExchangeRateList /> */}
+        <TransactionHistoryList />
 
         <Modal
             show={showForm}

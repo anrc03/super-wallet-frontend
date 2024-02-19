@@ -192,7 +192,7 @@ const AdminList = () => {
         setIsSearchingAdmin(true)
         const input = e.target.value.toLowerCase().trim()
         const filteredAdmin = adminList.filter(admin => {
-            return admin.fullName.includes(input)
+            return admin.fullName.toLowerCase().trim().includes(input)
         })
         setSearchAdminResult(filteredAdmin)
         if (input === "") setIsSearchingAdmin(false)

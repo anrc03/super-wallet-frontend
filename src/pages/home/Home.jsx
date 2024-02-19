@@ -40,7 +40,6 @@ function Home() {
             <title>Super Wallet</title>
         </Helmet>
       <Navbar />
-      {role !== "ROLE_CUSTOMER" && <div><AdminDashboard /></div>}
       {(user === null || role === "ROLE_CUSTOMER") && 
         <div>
           <Header />
@@ -51,6 +50,7 @@ function Home() {
           <Faq />
           <Footer />
         </div>}
+      {(user != null && role !== "ROLE_CUSTOMER") && <div><AdminDashboard /></div>}
       <BackToTop />
     </div>
   );

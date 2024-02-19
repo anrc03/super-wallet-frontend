@@ -21,9 +21,7 @@ export default function Navbar() {
   const handleLogout = (e) => {
     e.preventDefault();
     dispatch(logout());
-    role === "ROLE_CUSTOMER" && navigate("/login");
-    role === ("ROLE_ADMIN") && navigate("/admin/login")
-    role === ("ROLE_SUPER_ADMIN") && navigate("/admin/login")
+    navigate("/login");
   };
 
   useEffect(() => {

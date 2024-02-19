@@ -5,7 +5,6 @@ import { useSelector } from 'react-redux'
 import { selectUser } from './components/redux/UserSlice.js'
 import { useEffect, useState } from 'react'
 import About from './pages/about/About.jsx'
-import AdminLogin from './components/AdminLogin.jsx'
 import Home from './pages/home/Home.jsx'
 import AdminDashboard from './components/AdminDashboard.jsx'
 
@@ -18,7 +17,7 @@ function App() {
   
 
   useEffect(() => {
-    if(user && (location.pathname == "/login" || location.pathname == "/admin/login")) {
+    if(user && (location.pathname == "/login")) {
       navigate("/home")
     }  
   }, [user])
@@ -48,7 +47,6 @@ function App() {
       <Route path='/about' element={<About/>} />
       <Route path='/login' element={<Login />} />
       <Route path='/register' element={<Register />} />
-      <Route path='/admin/login' element={<AdminLogin />} />
     </>
   )
 

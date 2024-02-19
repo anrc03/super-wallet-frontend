@@ -10,15 +10,20 @@ const ExchangeRateList = () => {
     const todaysDate = new Date()
     
     const [rateList, setRateList] = useState([]);
-    const [baseCurrency, setBaseCurrency] = useState("IDR")
+    const [baseCurrency, setBaseCurrency] = useState("")
     const [date, setDate] = useState(todaysDate.toISOString().split('T')[0]);
+    const [isLoading, setIsLoading] = useState(false)
 
+    console.log(baseCurrency)
+
+    
     const getRateList = async() => {
         await axios
             .post(getBaseCurrencyUrl(baseCurrency, date))
             .then(res => {
-                // console.log(res.data)
+                console.log(res.data)
                 setRateList(res.data.data)
+                setIsLoading(false)
             })
             .catch(err => {
                 Swal.fire({
@@ -31,10 +36,12 @@ const ExchangeRateList = () => {
             })
     }
 
-    useEffect(() => {
-        getRateList()
-    }, [baseCurrency, date])
-
+    const handleClickRefresh = async() => {
+      if (isLoading === false) {
+        setIsLoading(true)
+        await getRateList();
+      }
+    }
 
     const displayEmptyList = (
         <div className="text-center">
@@ -78,10 +85,10 @@ const ExchangeRateList = () => {
         <select
           name="Currency Rate"
           onChange={(e) => setBaseCurrency(e.target.value)}
+          disabled={isLoading}
         >
-          <option value="IDR" selected="selected">
-            IDR
-          </option>
+          <option value="">--Please choose an option--</option>
+          <option value="IDR">IDR</option>
           <option value="EUR">EUR</option>
           <option value="USD">USD</option>
           <option value="JPY">JPY</option>
@@ -92,6 +99,7 @@ const ExchangeRateList = () => {
           <option value="MYR">MYR</option>
           <option value="GBP">GBP</option>
         </select>
+        <button onClick={handleClickRefresh}>Refresh</button>
         <ReactDatePicker
           className="date-input"
           showIcon
@@ -130,7 +138,7 @@ const ExchangeRateList = () => {
         />
       </div>
       <div style={{ textAlign: "center" }}>
-        {rateList.length == 0 ? displayEmptyList : displayTable}
+        {isLoading ? <h1>Loading...</h1> : rateList.length == 0 ? displayEmptyList : displayTable}
       </div>
     </>
   );

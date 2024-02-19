@@ -1,21 +1,26 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { getBaseTransactionUrl } from '../constant/Endpoint';
+import { getTransactionByPage } from '../constant/Endpoint';
 
 const TransactionHistoryList = () => {
 
     const [transactionList, setTransactionList] = useState([]);
-    const [size, setSize] = useState(5);
+    const [currentPage, setCurrentPage] = useState(0)
+    const [transactionCount, setTransactionCount] = useState(0)
 
-    const getTransactionList = async() => {
+    const getTransactionListbyPage = async(page) => {
         await axios
-            .get(getBaseTransactionUrl(size))
-            .then(res => setTransactionList(res.data.data))
+            .get(getTransactionByPage(page))
+            .then(res => {
+                setTransactionCount(res.data.pagingResponse.totalItem)
+                console.log(res.data.data)
+                setTransactionList(res.data.data)
+            })
             .catch(err => console.error(err.message))
     }
 
     useEffect(() => {
-        getTransactionList()
+        getTransactionListbyPage(currentPage)
     }, [])
 
     const displayEmptyList = (
@@ -25,7 +30,7 @@ const TransactionHistoryList = () => {
     )
 
     const displayTransactions = transactionList.map((transaction) => (
-            <tr key={transaction.source.accountNumber + transaction.destination.accountNumber + transaction.totalAmount}>
+            <tr key={Math.random()}>
                 <td>{transaction.source.accountNumber}</td>
                 <td>{transaction.destination.accountNumber}</td>
                 <td>{transaction.totalAmount}</td>
@@ -59,10 +64,36 @@ const TransactionHistoryList = () => {
         </div>
     )
 
+    const handlePrevious = async () => {
+        if (currentPage != 0) {
+            setCurrentPage(currentPage - 1)
+            console.log(currentPage)
+            await getTransactionListbyPage(currentPage)
+        }
+    }
+
+    const handleNext = async () => {
+        console.log(currentPage)
+        console.log(currentPage + 1)
+        setCurrentPage(currentPage + 1)
+        console.log(currentPage)
+        await getTransactionListbyPage(currentPage)
+    }
+
+    const displayPagination = (
+        <div className="justify-content-center align-items-center d-flex mt-2">
+            <button onClick={handlePrevious}>Prev</button>
+            <div className='m-2'>{currentPage}</div>
+            <button onClick={handleNext}>Next</button>
+        </div>
+    )
+
   return (
     <div>
-        <p style={{marginBottom: -5, textAlign: 'center', fontWeight: 'bold', fontSize: 40}}>{transactionList.length}</p>
+        <p style={{marginBottom: -5, textAlign: 'center', fontWeight: 'bold', fontSize: 40}}>{transactionCount}</p>
         <p style={{marginBottom:25, textAlign: 'center'}}>{"Total Transaction"}</p>
+        <div style={{textAlign: 'center'}}>{transactionList.length === 0 ? displayEmptyList : displayTable}</div>
+        <div style={{textAlign: 'center'}}>{displayPagination }</div>
     </div>
   )
 }
