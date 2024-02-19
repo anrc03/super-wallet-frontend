@@ -16,7 +16,7 @@ function Register() {
 
     useEffect(() => {
         setTimeout(() => {
-        setIsLoading(false);
+            setIsLoading(false);
         }, 1000)
     }, [])
 
@@ -126,33 +126,33 @@ function Register() {
             if (monthDiff < 0 || (monthDiff === 0 && currentDate.getDate() < birthDate.getDate())) {
                 age--;
             }
-    
+
             if (age < 18) {
                 isValid = false;
                 validationErrors.birthDate = "You must be at least 18 years old to register";
             }
         }
-    
+
         if (!formData.gender) {
             isValid = false;
             validationErrors.gender = "Gender must be selected";
         }
-    
+
         if (!formData.address) {
             isValid = false;
             validationErrors.address = "Address must be filled";
         }
 
         if (isValid) {
-            axios.post(REGISTER_CUSTOMER, { 
-                firstName: formData.firstName, 
-                lastName: formData.lastName, 
-                phoneNumber: formData.phoneNumber, 
+            axios.post(REGISTER_CUSTOMER, {
+                firstName: formData.firstName,
+                lastName: formData.lastName,
+                phoneNumber: formData.phoneNumber,
                 birthDate: moment(formData.birthDate).format("yyyy-MM-DD"),
                 gender: formData.gender,
-                address: formData.address, 
+                address: formData.address,
                 email: formData.email,
-                password: formData.password, 
+                password: formData.password,
             })
                 .then(() => {
                     navigate('/login');
@@ -196,13 +196,13 @@ function Register() {
         }
     };
 
-    if(isLoading) return <LoadSpinner/>
+    if (isLoading) return <LoadSpinner />
 
     return (
         <div className="register-background">
             <Helmet>
-            <title>Super Wallet | Register</title>
-        </Helmet>
+                <title>Register | Super Wallet</title>
+            </Helmet>
             <div className="container register-container">
                 <div className="col-md-6">
                     <form action="" className="border register-form">
@@ -265,12 +265,12 @@ function Register() {
                                             valid ? <></> : <span className="text-danger"> {errors.phoneNumber}</span>
                                         }
                                         <PhoneInput
-                    className="phone-input"
-                    country={"id"}
-                    placeholder='Enter your phone number'
-                    onlyCountries={['id', 'us', 'cn', 'jp', 'sg', 'au', 'sa', 'kr', 'gb']}
-                    onChange={(e) => setFormData({ ...formData, phoneNumber: e })}
-                    />
+                                            className="phone-input"
+                                            country={"id"}
+                                            placeholder='Enter your phone number'
+                                            onlyCountries={['id', 'us', 'cn', 'jp', 'sg', 'au', 'sa', 'kr', 'gb']}
+                                            onChange={(e) => setFormData({ ...formData, phoneNumber: e })}
+                                        />
                                     </div>
 
                                     <div className="mb-2 col-md-12">
@@ -278,39 +278,39 @@ function Register() {
                                         {
                                             valid ? <></> : <span className="text-danger"> {errors.birthDate}</span>
                                         }
-                                            <div className='icon'>
-                                                <DatePicker
+                                        <div className='icon'>
+                                            <DatePicker
                                                 className='date-input'
-                                                    showIcon
-                                                    icon={
-                                                        <svg
-                                                          xmlns="http://www.w3.org/2000/svg"
-                                                          width="1em"
-                                                          height="1em"
-                                                          viewBox="0 0 48 48"
-                                                        >
-                                                          <mask id="ipSApplication0">
+                                                showIcon
+                                                icon={
+                                                    <svg
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        width="1em"
+                                                        height="1em"
+                                                        viewBox="0 0 48 48"
+                                                    >
+                                                        <mask id="ipSApplication0">
                                                             <g fill="none" stroke="#fff" strokeLinejoin="round" strokeWidth="4">
-                                                              <path strokeLinecap="round" d="M40.04 22v20h-32V22"></path>
-                                                              <path
-                                                                fill="#fff"
-                                                                d="M5.842 13.777C4.312 17.737 7.263 22 11.51 22c3.314 0 6.019-2.686 6.019-6a6 6 0 0 0 6 6h1.018a6 6 0 0 0 6-6c0 3.314 2.706 6 6.02 6c4.248 0 7.201-4.265 5.67-8.228L39.234 6H8.845l-3.003 7.777Z"
-                                                              ></path>
+                                                                <path strokeLinecap="round" d="M40.04 22v20h-32V22"></path>
+                                                                <path
+                                                                    fill="#fff"
+                                                                    d="M5.842 13.777C4.312 17.737 7.263 22 11.51 22c3.314 0 6.019-2.686 6.019-6a6 6 0 0 0 6 6h1.018a6 6 0 0 0 6-6c0 3.314 2.706 6 6.02 6c4.248 0 7.201-4.265 5.67-8.228L39.234 6H8.845l-3.003 7.777Z"
+                                                                ></path>
                                                             </g>
-                                                          </mask>
-                                                          <path
+                                                        </mask>
+                                                        <path
                                                             fill="currentColor"
                                                             d="M0 0h48v48H0z"
                                                             mask="url(#ipSApplication0)"
-                                                          ></path>
-                                                        </svg>
-                                                    }
-                                                    selected={formData.birthDate}
-                                                    onChange={(date) => setFormData({ ...formData, birthDate: date})}
-                                                    dateFormat={"yyyy-MM-dd"}
-                                                    placeholderText='Enter your birth date'
-                                                />
-                                            </div>
+                                                        ></path>
+                                                    </svg>
+                                                }
+                                                selected={formData.birthDate}
+                                                onChange={(date) => setFormData({ ...formData, birthDate: date })}
+                                                dateFormat={"yyyy-MM-dd"}
+                                                placeholderText='Enter your birth date'
+                                            />
+                                        </div>
                                     </div>
                                     <div className="mb-2 col-md-12">
                                         <label className="mb-2">Gender<span className="text-danger"> *</span></label>
@@ -319,20 +319,20 @@ function Register() {
                                         }
                                         <div>
                                             <fieldset>
-                                            <input type='radio' id='male' value="MALE" name='gender' checked={formData.gender === "MALE"} 
-                                                style={{marginRight:5}}
-                                                onChange={(e) => setFormData({ ...formData, gender: e.target.value })}></input>
-                                            <label htmlFor='male' style={{marginRight:5}}>Male</label>
+                                                <input type='radio' id='male' value="MALE" name='gender' checked={formData.gender === "MALE"}
+                                                    style={{ marginRight: 5 }}
+                                                    onChange={(e) => setFormData({ ...formData, gender: e.target.value })}></input>
+                                                <label htmlFor='male' style={{ marginRight: 5 }}>Male</label>
 
-                                            <input type='radio' id='female' value="FEMALE" name='gender' checked={formData.gender === "FEMALE"} 
-                                                style={{marginLeft:5}}
-                                                onChange={(e) => setFormData({ ...formData, gender: e.target.value })}
+                                                <input type='radio' id='female' value="FEMALE" name='gender' checked={formData.gender === "FEMALE"}
+                                                    style={{ marginLeft: 5 }}
+                                                    onChange={(e) => setFormData({ ...formData, gender: e.target.value })}
                                                 ></input>
-                                            <label htmlFor='female' style={{marginLeft:5}}>Female</label>
-                                            </fieldset>  
+                                                <label htmlFor='female' style={{ marginLeft: 5 }}>Female</label>
+                                            </fieldset>
                                         </div>
-                                        
-                                        
+
+
                                     </div>
                                     <div className="mb-2 col-md-12">
                                         <label className="mb-2">Address<span className="text-danger"> *</span></label>

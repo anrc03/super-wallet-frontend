@@ -94,7 +94,7 @@ function Login() {
     return (
         <div className="login-background">
             <Helmet>
-            <title>Super Wallet | Login</title>
+            <title>Login | Super Wallet</title>
         </Helmet>
             <div className="container login-container">
                 <div className="col-md-10">
@@ -124,7 +124,10 @@ function Login() {
                                                 </span>
                                             </div>
                                         </div>
-                                        <div className="form-check mt-2">
+                                        <div className="mt-2 mb-1">
+                                        <Link to="/forgot-password" className="forgot-link">Forgot Password?</Link>
+                                        </div>
+                                        <div className="form-check">
                                             <input type="checkbox" className="form-check-input" id="exampleCheck"/>
                                             <label className="form-check-label" htmlFor="exampleCheck">Remember me</label>
                                         </div>
@@ -133,17 +136,7 @@ function Login() {
                                     <div className="col-md-12">
                                         <button type="submit" className="btn float-end login-button mt-2" onClick={handleSubmit}>Log in</button>
                                     </div>
-                                    
-                                    {/* <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
-                                        <div style={{ flex: 1, height: 1, backgroundColor: '#606c38', marginRight: 10}}></div>
-                                        <p style={{ fontSize: 16, fontWeight: '550', color: '#283618', marginTop: 15 }}>Or log in with</p>
-                                        <div style={{ flex: 1, height: 1, backgroundColor: '#606c38', marginLeft: 10 }}></div>
-                                    </div> */}
                                 </div>
-                                    {/* <div className="col-md-12" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: -10 }}>
-                                        <button type="submit" className="btn sign-in-with"><img src="src/assets/images/login/Google.png" alt="Login From Google" style={{ width: 35, marginRight: 10 }}/>Google</button>
-                                        <button type="submit" className="btn m-2 sign-in-with"><img src="src/assets/images/login/Facebook.png" alt="Login From Facebook" style={{ width: 35, marginRight: 10 }}/>Facebook</button>
-                                    </div> */}
                             </div>
                         </div>
                     </form>

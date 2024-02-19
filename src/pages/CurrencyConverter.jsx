@@ -42,7 +42,7 @@ function CurrencyConverter() {
 	return (
 		<>
 			<Helmet>
-                <title>Super Wallet | Service</title>
+                <title>Exchange Rate | Super Wallet</title>
             </Helmet>
             <Navbar />
             <div className="container-fluid header-about">
@@ -94,7 +94,7 @@ function CurrencyConverter() {
 						{firstAmount ? (
 							<Box sx={{ textAlign: "left", marginTop: "1rem" }}>
 								<Typography>
-									{firstAmount} {fromCurrency} ={" "}
+									{firstAmount} {fromCurrency} = {" "}
 								</Typography>
 								<Typography
 									variant="h5"

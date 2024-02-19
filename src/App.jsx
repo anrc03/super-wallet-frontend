@@ -9,7 +9,9 @@ import AdminDashboard from './components/AdminDashboard.jsx'
 import AdminLogin from './components/AdminLogin.jsx'
 import Home from './pages/home/Home.jsx'
 import CurrencyConverter from './pages/CurrencyConverter.jsx'
-import Service from './pages/Service.jsx'
+import Faq from './pages/faq/Faq.jsx'
+import ForgotPassword from './pages/forgotPassword/ForgotPassword.jsx'
+import Sidebar from './components/Sidebar.jsx'
 
 function App() {
 
@@ -46,7 +48,7 @@ function App() {
       <Route path='/home' element={<Home/>} />
       <Route path='/about' element={<About/>} />
       <Route path="/currency-converter" element={<CurrencyConverter />} />
-      <Route path="/service" element={<Service />} />
+      <Route path="/faq" element={<Faq />} />
     </>
   )
 
@@ -57,9 +59,8 @@ function App() {
       <Route path='/login' element={<Login />} />
       <Route path='/register' element={<Register />} />
       <Route path='/admin/login' element={<AdminLogin />} />
-      <Route path="/service" element={<Service />} />
       <Route path="/currency-converter" element={<CurrencyConverter />} />
-
+      <Route path="/faq" element={<Faq />} />
     </>
   )
 
@@ -67,6 +68,8 @@ function App() {
     <div>
       <Routes>
         <Route index element={<div><Home /></div>} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/sidebar" element={<Sidebar />} />
         {user? 
           role === "ROLE_CUSTOMER"? 
             <>

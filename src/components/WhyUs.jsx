@@ -1,77 +1,82 @@
 import { AnimationOnScroll } from "react-animation-on-scroll/dist/js";
 
-import startIcon from "../assets/images/icon-7.png";
-import safeIcon from "../assets/images/icon-6.png";
-import affordableIcon from "../assets/images/icon-5.png";
-import secureIcon from "../assets/images/icon-4.png";
-import protectedIcon from "../assets/images/icon-3.png";
-import custServiceIcon from "../assets/images/icon-8.png";
-
 import FeatureItem from "./utils/FeatureItem";
 
 export default function WhyUs() {
   return (
-    <div className="container-xxl py-5 features">
+    <div className="container-xxl py-5">
       <div className="container py-4">
         <div className="text-center mx-auto">
           <AnimationOnScroll animateIn="animate__fadeInUp" delay={100}>
             <h1 className="text-green display-6 fw-bold">Why Super Wallet?</h1>
-            <p className="fs-5 mb-5">Super Wallet has become an experienced and trusted digital wallet institution</p>
+            <p className="text-green fs-5 mb-5">Super Wallet has become an experienced and trusted digital wallet institution</p>
           </AnimationOnScroll>
         </div>
-        <div className="row g-5">
+        <div className="row g-5 why-us">
           <div className="col-lg-4 col-md-6">
+            <AnimationOnScroll animateIn="animate__fadeInUp" delay={100}>
+              <img className='animate__fadeInUp' src='./../src/assets/images/why/Why-1.png' alt="" />
+            </AnimationOnScroll>
             <FeatureItem
               animate="animate__fadeInUp"
               delay={100}
-              img={startIcon}
-              title="Easy To Start"
-              desc="Our user-friendly interface and simple setup process make it easy for you to embark on a seamless journey of managing your currencies."
+              title="Simple User Interface"
+              desc="Super Wallet offers a user-friendly interface that makes managing your cross-border transactions easy. With an intuitive design and easy navigation, exchanging sending and receiving money will be as easy as ever."
             />
           </div>
           <div className="col-lg-4 col-md-6">
+            <AnimationOnScroll animateIn="animate__fadeInUp" delay={300}>
+              <img className='animate__fadeInUp' src='./../src/assets/images/why/Why-2.png' alt="" />
+            </AnimationOnScroll>
             <FeatureItem
               animate="animate__fadeInUp"
               delay={300}
-              img={safeIcon}
-              title="Safe & Secure"
-              desc="Trust in our commitment to providing a safe environment for your financial activities, offering you peace of mind as you confidently navigate the world of currency exchange."
+              title="Instant Transfer"
+              desc="Say goodbye to long waiting times. With Super Wallet, cross-border transactions are instant, allowing you to access your balance whenever you need it without delay."
             />
           </div>
           <div className="col-lg-4 col-md-6 wow">
+            <AnimationOnScroll animateIn="animate__fadeInUp" delay={500}>
+              <img className='animate__fadeInUp' src='./../src/assets/images/why/Why-3.png' alt="" />
+            </AnimationOnScroll>
             <FeatureItem
               animate="animate__fadeInUp"
               delay={500}
-              img={affordableIcon}
-              title="Affordable Plans"
-              desc="Enjoy the convenience of affordable and transparent currency exchange options."
+              title="24/7 Accessibility"
+              desc="Need to make transactions during certain hours? Does not matter! Super Wallet is available 24/7, ensuring you can make transactions anytime, anywhere, at your convenience."
             />
           </div>
           <div className="col-lg-4 col-md-6">
+            <AnimationOnScroll animateIn="animate__fadeInUp" delay={100}>
+              <img className='animate__fadeInUp' src='./../src/assets/images/why/Why-4.png' alt="" />
+            </AnimationOnScroll>
             <FeatureItem
               animate="animate__fadeInUp"
               delay={100}
-              img={secureIcon}
-              title="Secure Storage"
-              desc="We prioritize the confidentiality of your data, ensuring a trustworthy and protected environment for all your currency exchange needs."
+              title="Low Transaction Fees"
+              desc="Super Wallet trusts that your money will stay where it is. With our low fees, you can enjoy the benefits of cross-border transactions without spending a lot of money."
             />
           </div>
           <div className="col-lg-4 col-md-6">
+            <AnimationOnScroll animateIn="animate__fadeInUp" delay={300}>
+              <img className='animate__fadeInUp' src='./../src/assets/images/why/Why-5.png' alt="" />
+            </AnimationOnScroll>
             <FeatureItem
               animate="animate__fadeInUp"
               delay={300}
-              img={protectedIcon}
-              title="Protected by Insurance"
-              desc="With our commitment to security and reliability, your currency exchanges are convenient and protected by insurance for an extra level of confidence."
+              title="Easy Currency Conversion"
+              desc="Whether you're dealing with euros, dollars, yen or others, Super Wallet handles currency conversions smoothly. You don't need to worry about exchange rates or complicated calculations – we'll take care of it all for you."
             />
           </div>
           <div className="col-lg-4 col-md-6">
+            <AnimationOnScroll animateIn="animate__fadeInUp" delay={500}>
+              <img className='animate__fadeInUp' src='./../src/assets/images/why/Why-6.png' alt="" />
+            </AnimationOnScroll>
             <FeatureItem
               animate="animate__fadeInUp"
               delay={500}
-              img={custServiceIcon}
-              title="24/7 Support"
-              desc="Trust in our commitment to constant assistance, making your financial transactions convenient and worry-free."
+              title="Secure and Reliable"
+              desc="Your security is our priority. Super Wallet was created to protect your transactions and personal information and ensure your balance is always protected."
             />
           </div>
         </div>

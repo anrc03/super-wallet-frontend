@@ -1,0 +1,80 @@
+.header-faq {
+  background: #3a5a40;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 50vh;
+  color: #fff;
+  border-radius: 0 0 80px 80px;
+}
+
+.header-faq p {
+  color: #fff;
+}
+
+.page-number {
+  color: #3a5a40;
+}
+
+.active > .page-link,
+.page-link.active {
+  z-index: 3;
+  color: #fff;
+  background-color: #a2cc72;
+  border-color: #a2cc72;
+}
+
+.pagination {
+  --bs-pagination-color: #3a5a40;
+  --bs-pagination-focus-box-shadow: none;
+}
+
+.bg-faq {
+  background: #a2cc72;
+}
+
+.faq-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.faq-container h1 {
+    font-size: 30px;
+    color: #3a5a40;
+}
+
+.faq-container p {
+    color: #3a5a40;
+    font-size: 18px;
+    margin-top: -5px;
+}
+
+.faq-info {
+  padding: 40px;
+  padding-top: 80px;
+  padding-bottom: 80px;
+  background-color: #3a5a40;
+}
+
+.faq-info h1 {
+  text-align: center;
+  color: #fff;
+  font-weight: bold !important;
+  font-size: 35px;
+}
+
+.faq-info hr {
+  border: 2px solid #fff;
+  width: 100px;
+  margin-top: 0px;
+  border-radius: 10px;
+}
+
+.faq-info p {
+  font-size: 18px;
+  color: #fff;
+  font-weight: 550 !important;
+  margin-top: -5px;
+}

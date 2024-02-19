@@ -7,6 +7,17 @@
   height: 75px;
 }
 
+.navbar-brand img {
+  margin-right: 40px;
+  width: 55px;
+}
+
+.navbar-brand h2 {
+  color: #6f9459;
+  font-size: 40px;
+  font-weight: bold !important;
+}
+
 .nav-line {
   margin-top: 10px;
   font-size: 30px;
