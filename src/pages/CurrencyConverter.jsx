@@ -1,10 +1,3 @@
-import { useContext, useEffect, useState } from "react";
-import { Box, Container, Grid, Typography } from "@mui/material";
-import axios from "axios";
-import { CurrencyContext } from "../context/CurrencyProvider";
-import InputAmount from "../components/currency/InputAmount";
-import SelectCountry from "../components/currency/SelectCountry";
-import SwitchCurrency from "../components/currency/SwitchCurrency";
 import Navbar from "../components/navbar/Navbar";
 import { Helmet } from 'react-helmet';
 import Footer from "../components/Footer";

@@ -22,10 +22,12 @@ const SelectCountry = (props) => {
 
   const dataFilter = data.filter((item) => "currencies" in item);
   const dataCountries = dataFilter.map((item) => {
-    return `${item.flag} ${Object.keys(item.currencies)[0]} - ${
-      item.name.common
-    }`;
+    let currencyKey = Object.keys(item.currencies)[0];
+    let symbol = item.currencies[currencyKey].symbol;
+
+    return `${item.flag} ${currencyKey} - ${item.name.common} (${symbol})`;
   });
+
 
   return (
     <Grid item xs={12} md={3}>

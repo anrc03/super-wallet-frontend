@@ -21,10 +21,14 @@ export default function ExchangeCurrency() {
 
     const fromCurrencyCountryCode = fromCurrency.split(" ")[1];
     const toCurrencyCountryCode = toCurrency.split(" ")[1];
-    const formattedFirstAmount = new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: fromCurrencyCountryCode
-    }).format(firstAmount);
+
+    const getCurrencyWithoutSymbol = (currency) => {
+        return currency.split(" ").slice(0, -1).join(" ");
+    };
+
+    const getCurrencySymbol = (currency) => {
+        return currency.split(" ").pop().replace(/[()]/g, "");
+    };
 
     useEffect(() => {
         if (firstAmount) {
@@ -60,12 +64,15 @@ export default function ExchangeCurrency() {
 
                     {firstAmount ? (
                         <Box sx={{ textAlign: "left", marginTop: "1rem", display: 'flex', justifyContent: 'center' }}>
-                            <Typography variant="h5" sx={{ marginTop: "5px", fontWeight: "bold", color: ' #3a5a40' }}>
-                                {formattedFirstAmount} {fromCurrency} = {" "}
+                            <Typography variant="h5" sx={{ fontWeight: "bold" }}>
+                                {getCurrencySymbol(fromCurrency)}{" "}
+                                {Number(firstAmount).toLocaleString()}{" "}
+                                {getCurrencyWithoutSymbol(fromCurrency)} = {" "}
+                                {getCurrencySymbol(toCurrency)}{" "}
                                 {(resultCurrency * firstAmount).toLocaleString(undefined, {
                                     minimumFractionDigits: 3,
                                 })}{" "}
-                                {toCurrency}
+                                {getCurrencyWithoutSymbol(toCurrency)}
                             </Typography>
                         </Box>
                     ) : (

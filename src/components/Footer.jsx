@@ -32,11 +32,11 @@ export default function Footer() {
               <p><i className="fa fa-phone-alt me-3"></i>+62 895 024 811 95</p>
               <p><i className="fa fa-envelope me-3"></i>callsw@superwallet.com</p>
             </div>
-            <div className="col-lg-2 col-md-6">
+            <div className="col-lg-3 col-md-6">
               <h5 className="mb-3 title-footer">Quick Links</h5>
               <Link className="btn btn-link" to="/">Home</Link>
               <Link className="btn btn-link" to="/about">About Us</Link>
-              <Link className="btn btn-link" to="/service">Service</Link>
+              <Link className="btn btn-link" to="/service">Currency Converter</Link>
               <Link className="btn btn-link" to="/faq">FAQ</Link>
             </div>
           </div>
