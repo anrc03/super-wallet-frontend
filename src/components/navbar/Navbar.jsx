@@ -48,6 +48,7 @@ export default function Navbar() {
               <Link to="/about" className="nav-item nav-link" activestyle={isActive}>About Us</Link>
               <Link to="/currency-converter" className="nav-item nav-link" activestyle={isActive}>Currency Converter</Link>
               <Link to="/faq" className="nav-item nav-link" activestyle={isActive}>FAQ</Link>
+              <Link to="/transaction" className="nav-item nav-link" activestyle={isActive}>Transaction</Link>
               <p className="nav-line">|</p>
             </>
             :

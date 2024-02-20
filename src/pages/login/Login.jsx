@@ -6,6 +6,7 @@ import { LOGIN } from '../../constant/Endpoint';
 import { login } from '../../components/redux/UserSlice';
 import { Helmet } from 'react-helmet';
 import LoadSpinner from '../../components/LoadSpinner';
+import { jwtDecode } from 'jwt-decode';
 
 function Login() {
     const [formData, setFormData] = useState({
@@ -45,6 +46,8 @@ function Login() {
             axios.post(LOGIN, { email: formData.email, password: formData.password })
                 .then((result) => {
                     const user = result.data.data;
+                    let customerId;
+                    user.role === "ROLE_CUSTOMER" ? customerId = jwtDecode(user.token).customerId : customerId = null
                     dispatch(login({
                         firstName: user.firstName,
                         lastName: user.lastName,
@@ -52,6 +55,7 @@ function Login() {
                         token: user.token,
                         role: user.role,
                         loggedIn: true,
+                        customerId: customerId
                     }));
                 })
                 .catch((err) => {

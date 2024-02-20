@@ -14,6 +14,7 @@ import { Helmet } from 'react-helmet';
 import ExchangeCurrency from "../../components/ExchangeCurrency";
 import AdminDashboard from "../../components/AdminDashboard";
 import { AnimationOnScroll } from "react-animation-on-scroll/dist/js";
+import Transaction from "../../components/Transaction";
 
 function Home() {
   const [isLoading, setIsLoading] = useState(true);

@@ -17,3 +17,6 @@ export const getBaseCurrencyUrl = (baseCurrency, date) => API_BASE_URL + `/curre
 //transaction
 export const BASE_TRANSACTION =  API_BASE_URL +  "/transactions";
 export const getTransactionByPage = (page) => `${BASE_TRANSACTION}?page=${page}`
+
+//acount
+export const BASE_ACCOUNT = API_BASE_URL + "/account"

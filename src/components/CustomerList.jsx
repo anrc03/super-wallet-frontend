@@ -31,7 +31,7 @@ const CustomerList = () => {
         await axios
             .get(BASE_CUSTOMER)
             .then(res => setCustomerList(res.data.data))
-            .catch(err => console.error(err))
+            .catch(err => console.error(err.message))
     }
 
     useEffect(() => {
