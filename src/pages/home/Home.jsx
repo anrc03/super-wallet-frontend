@@ -7,7 +7,7 @@ import Footer from "../../components/Footer";
 import BackToTop from "../../components/BackToTop";
 import Navbar from "../../components/navbar/Navbar";
 import Header from "../../components/home/Header";
-import Testimonial1 from "../../components/Testimonial1";
+import Testimonial from "../../components/Testimonial";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../components/redux/UserSlice";
 import { Helmet } from 'react-helmet';
@@ -49,7 +49,7 @@ function Home() {
             <ExchangeCurrency />
             </AnimationOnScroll>
           </div>
-          <Testimonial1 />
+          <Testimonial />
           <Footer />
         </div>}
       {(user != null && role !== "ROLE_CUSTOMER") && <div><AdminDashboard /></div>}

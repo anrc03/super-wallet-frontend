@@ -1,187 +1,107 @@
-import React, { useRef, useState } from "react";
-import avatarTesti1 from "../assets/images/team/Team-Alvin.png";
-import avatarTesti2 from "../assets/images/team/Team-Alwan.png";
-import avatarTesti3 from "../assets/images/team/Team-Anrico.png";
-import avatarTesti4 from "../assets/images/team/Team-Baskara.jpg";
-import avatarTesti5 from "../assets/images/team/Team-Dimas.png";
-import avatarTesti6 from "../assets/images/team/Team-Mikhael.jpg";
-// Import Swiper React components
+import { AnimationOnScroll } from "react-animation-on-scroll";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-// Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 
+import { Pagination, Autoplay, Navigation } from "swiper/modules";
+
+import TestimonialItem from "./utils/TestimonialItem";
 import "../assets/styles/Testimonial.css";
 
-// import required modules
-import {
-  Autoplay,
-  Pagination,
-  Navigation,
-  EffectCoverflow,
-} from "swiper/modules";
+import testi1 from "../assets/images/team/Team-Alvin.png";
+import testi2 from "../assets/images/team/Team-Alwan.png";
+import testi3 from "../assets/images/team/Team-Anrico.png";
+import testi4 from "../assets/images/team/Team-Baskara.jpg";
 
-export default function App() {
+import React from 'react'
+
+export default function Testimonial() {
+  const data = [
+    {
+      comment:
+        "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quis nostrum cupiditate, eligendi repellendus saepe illum earum architecto dicta quisquam quasi porro officiis. Vero reiciendis",
+      image: testi1,
+      name: "John Abraham",
+      location: "New York, USA",
+      stars: 5,
+    },
+    {
+      comment:
+        "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quis nostrum cupiditate, eligendi repellendus saepe illum earum architecto dicta quisquam quasi porro officiis. Vero reiciendis",
+      image: testi2,
+      name: "John Abraham",
+      location: "New York, USA",
+      stars: 3.5,
+    },
+    {
+      comment:
+        "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quis nostrum cupiditate, eligendi repellendus saepe illum earum architecto dicta quisquam quasi porro officiis. Vero reiciendis",
+      image: testi3,
+      name: "John Abraham",
+      location: "New York, USA",
+      stars: 4,
+    },
+    {
+      comment:
+        "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quis nostrum cupiditate, eligendi repellendus saepe illum earum architecto dicta quisquam quasi porro officiis. Vero reiciendis",
+      image: testi4,
+      name: "John Abraham",
+      location: "New York, USA",
+      stars: 2,
+    },
+  ];
+
   return (
-    <>
-      <section>
-        <div className="main">
-          <div className="head-p">
-            <span style={{ paddingRight: "5px" }}>GET AN</span>
-            <span style={{ paddingRight: "5px" }}>Opinion</span>
-          </div>
-          <div className="head">Testimonials</div>
-          <Swiper
-            loop={true}
-            loopFillGroupWithBlank={true}
-            spaceBetween={30}
-            centeredSlides={true}
-            autoplay={{
-              delay: 2500,
-              disableOnInteraction: false,
-            }}
-            pagination={{
-              clickable: true,
-            }}
-            navigation={true}
-            modules={[Autoplay, Pagination, Navigation, EffectCoverflow]}
-            className="mySwiper"
-            effect={"coverflow"}
-            coverflowEffect={{
-              rotate: 10,
-              stretch: 50,
-              depth: 200,
-              modifier: 1,
-              slideShadows: true,
-            }}
-            breakpoints={{
-              640: {
-                slidesPerView: 1,
-                spaceBetween: 20,
-              },
-              758: {
-                slidesPerView: 2,
-                spaceBetween: 30,
-              },
-              1024: {
-                slidesPerView: 3,
-                spaceBetween: 150,
-              },
-            }}
-          >
-            <SwiperSlide className="swiper-slide">
-              <div style={{ paddingRight: 20, paddingLeft: 20 }}>
-                <div className="testimonials-profile-circle">
-                  <img
-                    src={avatarTesti1}
-                    alt="avatar-testi"
-                    className="avatar-testi"
-                  />
-                </div>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                  Explicabo fugiat esse magnam repellat sit labore nisi nostrum
-                  voluptate praesentium eveniet sequi dolore consequatur modi
-                  maiores neque, eos possimus tempora velit.
-                </p>
-                <h6 className="review-by">Alvin</h6>
-              </div>
-            </SwiperSlide>
-            <SwiperSlide>
-              <div style={{ paddingRight: 20, paddingLeft: 20 }}>
-                <div className="testimonials-profile-circle">
-                  <img
-                    src={avatarTesti2}
-                    alt="avatar-testi"
-                    className="avatar-testi"
-                  />
-                </div>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                  Explicabo fugiat esse magnam repellat sit labore nisi nostrum
-                  voluptate praesentium eveniet sequi dolore consequatur modi
-                  maiores neque, eos possimus tempora velit.
-                </p>
-                <h6 className="review-by">Alwan</h6>
-              </div>
-            </SwiperSlide>
-            <SwiperSlide>
-              <div style={{ paddingRight: 20, paddingLeft: 20 }}>
-                <div className="testimonials-profile-circle">
-                  <img
-                    src={avatarTesti3}
-                    alt="avatar-testi"
-                    className="avatar-testi"
-                  />
-                </div>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                  Explicabo fugiat esse magnam repellat sit labore nisi nostrum
-                  voluptate praesentium eveniet sequi dolore consequatur modi
-                  maiores neque, eos possimus tempora velit.
-                </p>
-                <h6 className="review-by">Anrico</h6>
-              </div>
-            </SwiperSlide>
-            <SwiperSlide>
-              <div style={{ paddingRight: 20, paddingLeft: 20 }}>
-                <div className="testimonials-profile-circle">
-                  <img
-                    src={avatarTesti4}
-                    alt="avatar-testi"
-                    className="avatar-testi"
-                  />
-                </div>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                  Explicabo fugiat esse magnam repellat sit labore nisi nostrum
-                  voluptate praesentium eveniet sequi dolore consequatur modi
-                  maiores neque, eos possimus tempora velit.
-                </p>
-                <h6 className="review-by">Baskara</h6>
-              </div>
-            </SwiperSlide>
-            <SwiperSlide>
-              <div style={{ paddingRight: 20, paddingLeft: 20 }}>
-                <div className="testimonials-profile-circle">
-                  <img
-                    src={avatarTesti5}
-                    alt="avatar-testi"
-                    className="avatar-testi"
-                  />
-                </div>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                  Explicabo fugiat esse magnam repellat sit labore nisi nostrum
-                  voluptate praesentium eveniet sequi dolore consequatur modi
-                  maiores neque, eos possimus tempora velit.
-                </p>
-                <h6 className="review-by">Dimas</h6>
-              </div>
-            </SwiperSlide>
-            <SwiperSlide>
-              <div style={{ paddingRight: 20, paddingLeft: 20 }}>
-                <div className="testimonials-profile-circle">
-                  <img
-                    src={avatarTesti6}
-                    alt="avatar-testi"
-                    className="avatar-testi"
-                  />
-                </div>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                  Explicabo fugiat esse magnam repellat sit labore nisi nostrum
-                  voluptate praesentium eveniet sequi dolore consequatur modi
-                  maiores neque, eos possimus tempora velit.
-                </p>
-                <h6 className="review-by">Mikhael</h6>
-              </div>
-            </SwiperSlide>
-          </Swiper>
+    <div className="container-xxl py-5 testimonial">
+      <div className="container">
+        <div className="text-center mx-auto" style={{ maxWidth: "500px" }}>
+          <AnimationOnScroll animateIn="animate__fadeInUp" delay={100}>
+            <h1 className="display-6 fw-bold text-green">Testimonials</h1>
+            <p className="text-green fs-5 mb-5">What they said about us?</p>
+          </AnimationOnScroll>
         </div>
-      </section>
-    </>
+        <Swiper
+          className="testimonial-carousel"
+          slidesPerView={1}
+          spaceBetween={30}
+          autoplay={{
+            delay: 2500,
+            disableOnInteraction: false,
+          }}
+          pagination={{
+            clickable: true,
+          }}
+          navigation={true}
+          loop={true}
+          modules={[Pagination, Autoplay, Navigation]}
+          breakpoints={{
+            640: {
+              slidesPerView: 1,
+              spaceBetween: 20,
+            },
+            768: {
+              slidesPerView: 2,
+              spaceBetween: 40,
+            },
+            1024: {
+              slidesPerView: 3,
+              spaceBetween: 40,
+            },
+          }}
+        >
+          {data?.length > 0
+            ? data.map((item, index) => {
+                return (
+                  <SwiperSlide className="swiper-slide">
+                    <TestimonialItem item={item} key={index} />
+                  </SwiperSlide>
+                );
+              })
+            : ""}
+        </Swiper>
+      </div>
+    </div>
   );
 }
