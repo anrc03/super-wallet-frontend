@@ -15,6 +15,7 @@ import AdminList from './components/AdminList.jsx'
 import CustomerList from './components/CustomerList.jsx'
 import ExchangeRateList from './components/ExchangeRateList.jsx'
 import TransactionHistoryList from './components/TransactionHistoryList.jsx'
+import PageNotFound from './components/PageNotFound.jsx'
 
 function App() {
 
@@ -49,7 +50,7 @@ function App() {
 
   const GENERAL_ACCESS = (
     <>
-      <Route path='/home' element={<Home/>} />
+      {/* <Route path='/home' element={<Home/>} /> */}
       <Route path='/about' element={<About/>} />
       <Route path='/login' element={<Login />} />
       <Route path='/register' element={<Register />} />
@@ -62,6 +63,7 @@ function App() {
     <div>
       <Routes>
         <Route index element={<div><Home /></div>} />
+        <Route path="*" element={<PageNotFound/>} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         {user? 
           user.role === "ROLE_CUSTOMER"? 

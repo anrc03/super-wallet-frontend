@@ -79,10 +79,10 @@ const TransactionHistoryList = () => {
     }
 
     const displayPagination = (
-        <div className="justify-content-center align-items-center d-flex mt-2">
-            <button onClick={handlePrevious} disabled={currentPage === 0}>Prev</button>
-            <div className='m-2'>{currentPage + 1}</div>
-            <button onClick={handleNext} disabled={currentPage === totalPage - 1}>Next</button>
+        <div className="justify-content-center align-items-center d-flex mt-4">
+            <button onClick={handlePrevious} disabled={currentPage === 0}><i className="bi bi-caret-left-fill"></i></button>
+            <div className='m-2' style={{fontSize:15}}>{currentPage + 1}</div>
+            <button onClick={handleNext} disabled={currentPage === totalPage - 1}><i className="bi bi-caret-right-fill"></i></button>
         </div>
     )
 
