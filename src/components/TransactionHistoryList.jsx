@@ -7,6 +7,7 @@ const TransactionHistoryList = () => {
     const [transactionList, setTransactionList] = useState([]);
     const [currentPage, setCurrentPage] = useState(0)
     const [transactionCount, setTransactionCount] = useState(0)
+    const [totalPage, setTotalPage] = useState(0)
 
     const getTransactionListbyPage = async(page) => {
         await axios
@@ -14,6 +15,7 @@ const TransactionHistoryList = () => {
             .then(res => {
                 setTransactionCount(res.data.pagingResponse.totalItem)
                 setTransactionList(res.data.data)
+                setTotalPage(res.data.pagingResponse.totalPage)
             })
             .catch(err => console.error(err.message))
     }
@@ -78,9 +80,9 @@ const TransactionHistoryList = () => {
 
     const displayPagination = (
         <div className="justify-content-center align-items-center d-flex mt-2">
-            <button onClick={handlePrevious}>Prev</button>
+            <button onClick={handlePrevious} disabled={currentPage === 0}>Prev</button>
             <div className='m-2'>{currentPage + 1}</div>
-            <button onClick={handleNext}>Next</button>
+            <button onClick={handleNext} disabled={currentPage === totalPage - 1}>Next</button>
         </div>
     )
 
