@@ -411,7 +411,7 @@ const Transaction = () => {
                 type="number"
                 name="address"
                 className="form-control"
-                placeholder="Enter withdraw amount"
+                placeholder="Enter deposit amount"
                 onChange={(e) =>
                   setFormData({ ...formData, amount: e.target.value })
                 }
