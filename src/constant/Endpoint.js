@@ -22,3 +22,6 @@ export const TRANSFER = API_BASE_URL + "/send"
 
 //account
 export const BASE_ACCOUNT = API_BASE_URL + "/account"
+
+//dummy-bank
+export const BASE_DUMMY_BANK = API_BASE_URL + "/dummy-bank"
