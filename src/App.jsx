@@ -6,10 +6,15 @@ import { selectUser } from './components/redux/UserSlice.js'
 import { useEffect, useState } from 'react'
 import About from './pages/about/About.jsx'
 import AdminDashboard from './components/AdminDashboard.jsx'
-import AdminLogin from './components/AdminLogin.jsx'
 import Home from './pages/home/Home.jsx'
 import CurrencyConverter from './pages/CurrencyConverter.jsx'
-import Service from './pages/Service.jsx'
+import Faq from './pages/faq/Faq.jsx'
+import ForgotPassword from './pages/forgotPassword/ForgotPassword.jsx'
+import Sidebar from './components/Sidebar.jsx'
+import AdminList from './components/AdminList.jsx'
+import CustomerList from './components/CustomerList.jsx'
+import ExchangeRateList from './components/ExchangeRateList.jsx'
+import TransactionHistoryList from './components/TransactionHistoryList.jsx'
 
 function App() {
 
@@ -20,16 +25,11 @@ function App() {
   
 
   useEffect(() => {
-    if(user && location.pathname == "/login") {
-      navigate("/home")
+    if(user && (location.pathname == "/login")) {
+      role === "ROLE_CUSTOMER" ? navigate("/home") : navigate("/admin")
     }  
   }, [user])
-
-  useEffect(() => {
-    if(user && location.pathname == "/admin/login") {
-      navigate("/admin/dashboard")
-    }  
-  }, [user])
+  
 
   useEffect(() => {
     if (user != null) setRole(user.role)
@@ -37,7 +37,11 @@ function App() {
 
   const ADMIN_PAGE = (    
     <>
-      <Route path='/admin/dashboard' element={<AdminDashboard />} />
+      <Route path='/admin' element={<Sidebar component={AdminDashboard}/>} />
+      <Route path="/admin/admins" element={<Sidebar component={AdminList}/>} />
+      <Route path="/admin/customers" element={<Sidebar component={CustomerList}/>} />
+      <Route path="/admin/currency" element={<Sidebar component={ExchangeRateList}/>} />
+      <Route path="/admin/transaction" element={<Sidebar component={TransactionHistoryList}/>} />
     </>
   )
 
@@ -46,7 +50,7 @@ function App() {
       <Route path='/home' element={<Home/>} />
       <Route path='/about' element={<About/>} />
       <Route path="/currency-converter" element={<CurrencyConverter />} />
-      <Route path="/service" element={<Service />} />
+      <Route path="/faq" element={<Faq />} />
     </>
   )
 
@@ -56,10 +60,8 @@ function App() {
       <Route path='/about' element={<About/>} />
       <Route path='/login' element={<Login />} />
       <Route path='/register' element={<Register />} />
-      <Route path='/admin/login' element={<AdminLogin />} />
-      <Route path="/service" element={<Service />} />
       <Route path="/currency-converter" element={<CurrencyConverter />} />
-
+      <Route path="/faq" element={<Faq />} />
     </>
   )
 
@@ -67,6 +69,7 @@ function App() {
     <div>
       <Routes>
         <Route index element={<div><Home /></div>} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
         {user? 
           role === "ROLE_CUSTOMER"? 
             <>

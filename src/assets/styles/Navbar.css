@@ -7,6 +7,17 @@
   height: 75px;
 }
 
+.navbar-brand img {
+  margin-right: 40px;
+  width: 55px;
+}
+
+.navbar-brand h2 {
+  color: #6f9459;
+  font-size: 40px;
+  font-weight: bold !important;
+}
+
 .nav-line {
   margin-top: 10px;
   font-size: 30px;
@@ -69,4 +80,25 @@
 .navbar .btn:hover {
   color: #ffffff !important;
   background: #a2cc72 !important;
+}
+
+.logout-button {
+  color: #fff;
+    background-color: #3a5a40;
+    padding: 5px;
+    border-radius: 20px;
+    width: 120px;
+}
+
+.logout-button i {
+  margin-right: 6px;
+}
+
+.logout-button:hover {
+  background-color: #a2cc72;
+}
+
+.avatar i {
+  margin-right: 6px;
+  color: #3a5a40;
 }

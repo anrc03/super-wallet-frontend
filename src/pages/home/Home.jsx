@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import LoadSpinner from "../../components/LoadSpinner";
 import About from "../../components/home/About";
-import Trans from "../../components/Trans";
-import WhyUs from "../../components/WhyUs";
-import Faq from "../../components/Faq";
+import Trans from "../../components/Trans"
+import WhyUs from "../../components/WhyUs"
 import Footer from "../../components/Footer";
 import BackToTop from "../../components/BackToTop";
 import Navbar from "../../components/navbar/Navbar";
@@ -11,7 +10,10 @@ import Header from "../../components/home/Header";
 import Testimonial1 from "../../components/Testimonial1";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../components/redux/UserSlice";
-import { Helmet } from "react-helmet";
+import { Helmet } from 'react-helmet';
+import ExchangeCurrency from "../../components/ExchangeCurrency";
+import AdminDashboard from "../../components/AdminDashboard";
+import { AnimationOnScroll } from "react-animation-on-scroll/dist/js";
 import Services from "../../components/Services";
 import Profile from "../profile/Profile";
 import EditProfile from "../profile/EditProfile";
@@ -19,6 +21,11 @@ import EditProfile from "../profile/EditProfile";
 function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const user = useSelector(selectUser);
+  const [role, setRole] = useState(null)
+
+  useEffect(() => {
+    if (user) setRole(user.role)
+  }, [])
 
   useEffect(() => {
     setTimeout(() => {
@@ -34,16 +41,21 @@ function Home() {
         <title>Super Wallet</title>
       </Helmet>
       <Navbar />
-      <Header />
-      <About />
-      <Trans />
-      <WhyUs />
-      <Services />
-      <Faq />
-      <Testimonial1 />
-      <Profile />
-      {/* <EditProfile /> */}
-      <Footer />
+      {(user === null || role === "ROLE_CUSTOMER") && 
+        <div>
+          <Header />
+          <About />
+          <Trans />
+          <WhyUs />
+          <div className="mb-5">
+          <AnimationOnScroll animateIn="animate__fadeInUp" delay={600}>
+            <ExchangeCurrency />
+            </AnimationOnScroll>
+          </div>
+          <Footer />
+        </div>}
+      {(user != null && role !== "ROLE_CUSTOMER") && <div><AdminDashboard /></div>}
+    //   <Testimonial1 />
       <BackToTop />
     </div>
   );

@@ -57,14 +57,10 @@
     color: #fff;
   }
   
-  .sign-in-with {
-    background-color: #3a5a40;
-    color: white;
-    font-weight: 550;
+  .forgot-link {
+    text-decoration: none;
   }
-  
-  .sign-in-with:hover {
-    background-color: #bfdb83;
-    color: white;
+
+  .forgot-link:hover {
+    color: #a2cc72;
   }
-  

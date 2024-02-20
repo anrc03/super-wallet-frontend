@@ -1,21 +1,7 @@
-:root {
-  --primary: #16d5ff;
-  --secondary: #999999;
-  --light: #f2f8fe;
-  --dark: #111111;
-}
-
 /* #c4e0b3 */
 
 body {
   font-family: "Open Sans", sans-serif;
-}
-
-.btn-primary {
-  --bs-btn-bg: var(--primary) !important;
-  --bs-btn-border-color: var(--primary) !important;
-  --bs-btn-hover-bg: var(--primary) !important;
-  --bs-btn-hover-border-color: var(--primary) !important;
 }
 
 .text-green {
@@ -37,24 +23,143 @@ body {
 }
 
 .bg-transaction {
+  background: #3a5a40;
+  color: #fff;
+}
+
+.bg-transaction p {
+  color: #fff;
+}
+
+.bg-transaction .col-lg-2 {
+  width: 19.666667%;
+  background-color: #6f9459;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-radius: 20px;
+  margin-block-start: auto;
+  margin-right: 20px;
+}
+
+.why-us img {
+  max-width: 240px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.why-us h5 {
+  font-size: 25px;
+  color: #3a5a40;
+  margin-bottom: 5px !important;
+}
+
+.team-title {
+}
+
+.contact h1 {
+  color: #6f9459;
+}
+
+.contact h5 {
+  font-size: 20px !important;
+  color: #6f9459;
+}
+
+.contact hr {
+  background: #3a5a40;
+}
+
+.contact iframe {
+  height: 450px;
+  margin-left: 20px;
+}
+
+/* Forgot */
+.forgot-pass-backround {
   background: linear-gradient(
     90deg,
     rgba(236, 243, 158, 1) 0%,
     rgba(170, 213, 118, 1) 28%,
     rgba(58, 90, 64, 1) 100%
   );
+}
+
+.forgot-pass-container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.forgot-pass-form {
+  background-color: #fff;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 40px 0px 40px 0px;
+}
+.forgot-pass-button {
+  background-color: #3a5a40;
+  min-width: 100%;
+  color: #fff;
+  font-weight: 550;
+  font-size: 20px;
+}
+
+.forgot-pass-button:hover {
+  background-color: #a2cc72;
   color: #fff;
 }
 
-.bg-transaction p {
-  color: #fff;
-  
+.forgot-password p {
+  font-size: 16px;
 }
 
-.image-trans {
+.forgot-password span {
+  font-weight: 580;
+}
+
+/* Vision and Mission */
+.bg-vision-mission {
+  background: #3a5a40;
+}
+
+.vision-container {
+  display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.vision-mission-info {
+  padding: 24px;
+  background-color: #a2cc72;
+  border-radius: 20px;
+}
+
+.vision-mission-info h1 {
+  text-align: center;
+  color: #3a5a40;
+  font-weight: bold !important;
+  font-size: 50px;
+}
+
+.vision-mission-info hr {
+  border: 2px solid #3a5a40;
   width: 100px;
-  height: 100px;
-  margin-top: -15px;
+  margin-top: 0px;
+  border-radius: 10px;
+}
+
+.vision-mission-info p, ol {
+  font-size: 18px;
+  color: #3a5a40;
+  font-weight: 550 !important;
+}
+
+.vision-mission-info .info-center {
+  display: flex;
+  justify-content: center;
 }
 
 .hero-header p,
@@ -76,6 +181,14 @@ body {
   background-color: #a2cc72;
   color: #fff;
   border: 4px solid #fff;
+}
+
+.btn-currency {
+  color: #6f9459;
+}
+
+.btn-currency:hover {
+  color: #a2cc72;
 }
 
 h1,
@@ -125,7 +238,9 @@ h6,
   height: 48px;
 }
 
-.btn-square, .btn-sm-square, .btn-lg-square {
+.btn-square,
+.btn-sm-square,
+.btn-lg-square {
   padding: 0;
   display: flex !important;
   align-items: center;
@@ -180,99 +295,6 @@ h6,
   background-color: #a2cc72;
 }
 
-/*** Roadmap ***/
-.roadmap-carousel {
-  position: relative;
-}
-
-.roadmap-carousel::before {
-  position: absolute;
-  content: "";
-  height: 0;
-  width: 100%;
-  top: 20px;
-  left: 0;
-  border-top: 2px dashed var(--secondary);
-}
-
-.roadmap-carousel .roadmap-item .roadmap-point {
-  position: absolute;
-  width: 30px;
-  height: 30px;
-  top: 6px;
-  left: 50%;
-  margin-left: -15px;
-  background: #ffffff;
-  border: 2px solid var(--primary);
-  transform: rotate(45deg);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.roadmap-carousel .roadmap-item .roadmap-point span {
-  display: block;
-  width: 18px;
-  height: 18px;
-  background: var(--primary);
-}
-
-.roadmap-carousel .roadmap-item {
-  position: relative;
-  padding-top: 150px;
-  text-align: center;
-}
-
-.roadmap-carousel .roadmap-item::before {
-  position: absolute;
-  content: "";
-  width: 0;
-  height: 115px;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  border-right: 2px dashed var(--secondary);
-}
-
-.roadmap-carousel .roadmap-item::after {
-  position: absolute;
-  content: "";
-  width: 14px;
-  height: 14px;
-  top: 111px;
-  left: 50%;
-  margin-left: -7px;
-  transform: rotate(45deg);
-  background: var(--primary);
-}
-
-.roadmap-carousel .owl-nav {
-  margin-top: 40px;
-  display: flex;
-  justify-content: center;
-}
-
-.roadmap-carousel .owl-nav .owl-prev,
-.roadmap-carousel .owl-nav .owl-next {
-  margin: 0 12px;
-  width: 50px;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50px;
-  font-size: 22px;
-  color: var(--light);
-  background: var(--primary);
-  transition: 0.5s;
-}
-
-.roadmap-carousel .owl-nav .owl-prev:hover,
-.roadmap-carousel .owl-nav .owl-next:hover {
-  color: var(--primary);
-  background: var(--dark);
-}
-
 /*** FAQs ***/
 .accordion .accordion-item {
   border: none;
@@ -280,15 +302,15 @@ h6,
 }
 
 .accordion .accordion-button {
-  background: var(--light);
-  color: var(--secondary);
-  border-radius: 2px;
-  font-weight: 600;
+  background: #f2f8fe;
+  color: #6f9459;
+  border-radius: 5px;
+  font-weight: 500;
 }
 
 .accordion .accordion-button:not(.collapsed) {
   color: #ffffff;
-  background: var(--primary);
+  background: #6f9459;
   box-shadow: none;
 }
 
@@ -298,5 +320,58 @@ h6,
 
 .accordion .accordion-body {
   padding: 15px 0 0 0;
-  color: var(--secondary);
+  color: #6f9459;
+}
+
+/* Sidebar */
+.sidebar {
+  color: #fff;
+  width: 100%;
+  height: 100vh;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+}
+
+.logo-icon img {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  margin-top: 15px;
+}
+
+.menu-bar {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 1rem;
+}
+
+.toggle {
+  margin-left: 15px;
+  margin-top: 15px;
+}
+
+.toggle svg {
+  font-size: 22px;
+}
+
+:where(.css-dev-only-do-not-override-1xg9z9n).ant-layout .ant-layout-sider {
+  background-color: #3a5a40;
+}
+
+:where(.css-dev-only-do-not-override-1xg9z9n).ant-menu-dark {
+  background-color: #3a5a40;
+}
+
+:where(.css-dev-only-do-not-override-1xg9z9n).ant-menu-dark .ant-menu-item-selected {
+  background-color: #a2cc72;
+  color: #3a5a40;
 }

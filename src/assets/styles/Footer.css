@@ -58,11 +58,14 @@
   color: #fff;
 }
 
-.footer span,
-.footer p {
+.footer span, .footer p {
   color: #3a5a40;
 }
 
 .footer {
   border-top: 0.5px solid #a2cc72;
+}
+
+.footer h1 {
+  font-weight: bold !important;
 }

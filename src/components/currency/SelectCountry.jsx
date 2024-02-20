@@ -11,7 +11,7 @@ const SelectCountry = (props) => {
   if (loaded) {
     return (
       <Grid item xs={12} md={3}>
-        <Skeleton variant="rounded" height={60} />
+        <Skeleton variant="rounded" height={60} />  
       </Grid>
     );
   }
@@ -28,10 +28,12 @@ const SelectCountry = (props) => {
     return `${item.flag} ${currencyKey} - ${item.name.common} (${symbol})`;
   });
 
+
   return (
     <Grid item xs={12} md={3}>
       <Autocomplete
         options={dataCountries}
+        disableClearable
         renderInput={(params) => <TextField {...params} label={label} />}
         value={value ?? ""}
         onChange={(event, newValue) => {
