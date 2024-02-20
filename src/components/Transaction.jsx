@@ -53,15 +53,15 @@ const Transaction = () => {
         getBankData()
     }, [])
 
-    const accountOption = accountNumberList.map((account) => (
+    const accountNumberOption = accountNumberList.map((account) => (
         <>
         <option value={[account.accountNumber, account.balance]}>{account.currency.code}</option>
         </>
     ))
 
-    const accountNumberOption = accountNumberList.map((account) => (
+    const accountIdOption = accountNumberList.map((account) => (
         <>
-        <option value={[account, account.balance]}>{account.currency.code}</option>
+        <option value={[account.id, account.balance]}>{account.currency.code}</option>
         </>
     ))
 
@@ -276,7 +276,7 @@ const Transaction = () => {
                 }}
             >
                 <option disabled>Please select an account</option>
-                {accountOption}
+                {accountIdOption}
                 </select>
             </div>
             <div className="mb-2">
@@ -333,7 +333,7 @@ const Transaction = () => {
                 }}
             >
                 <option disabled>Please select an account</option>
-                {accountOption}
+                {accountNumberOption}
                 </select>
             </div>
             <div className="mb-2">
@@ -402,7 +402,7 @@ const Transaction = () => {
                 }}
             >
                 <option disabled>Please select an account</option>
-                {accountOption}
+                {accountIdOption}
                 </select>
             </div>
             <div className="mb-2">
