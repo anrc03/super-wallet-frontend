@@ -1,43 +1,48 @@
 import React, { useEffect, useState } from "react";
-import LoadSpinner from "../../components/LoadSpinner"
+import LoadSpinner from "../../components/LoadSpinner";
 import About from "../../components/home/About";
-import Trans from "../../components/Trans"
-import WhyUs from "../../components/WhyUs"
-import Faq from "../../components/Faq"
+import Trans from "../../components/Trans";
+import WhyUs from "../../components/WhyUs";
+import Faq from "../../components/Faq";
 import Footer from "../../components/Footer";
-import BackToTop from "../../components/BackToTop"
+import BackToTop from "../../components/BackToTop";
 import Navbar from "../../components/navbar/Navbar";
 import Header from "../../components/home/Header";
+import Testimonial1 from "../../components/Testimonial1";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../components/redux/UserSlice";
-import { Helmet } from 'react-helmet';
+import { Helmet } from "react-helmet";
 import Services from "../../components/Services";
+import Profile from "../profile/Profile";
+import EditProfile from "../profile/EditProfile";
 
 function Home() {
-
   const [isLoading, setIsLoading] = useState(true);
   const user = useSelector(selectUser);
 
   useEffect(() => {
     setTimeout(() => {
       setIsLoading(false);
-    }, 1000)
-  }, [])
+    }, 1000);
+  }, []);
 
-  if (isLoading) return <LoadSpinner />
+  if (isLoading) return <LoadSpinner />;
 
   return (
     <div>
       <Helmet>
-            <title>Super Wallet</title>
+        <title>Super Wallet</title>
       </Helmet>
       <Navbar />
       <Header />
       <About />
       <Trans />
       <WhyUs />
-      <Services/>
+      <Services />
       <Faq />
+      <Testimonial1 />
+      <Profile />
+      {/* <EditProfile /> */}
       <Footer />
       <BackToTop />
     </div>
