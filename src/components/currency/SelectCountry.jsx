@@ -1,11 +1,12 @@
 import { Autocomplete, Grid, Skeleton, TextField } from "@mui/material";
 import useAxios from "../../hooks/useAxios";
+import { VITE_REST_COUNTRIES_API_URL } from "../../constant/CurrencyConverter";
 
 const SelectCountry = (props) => {
   const { value, setValue, label } = props;
 
   const [data, loaded, error] = useAxios(
-    import.meta.env.VITE_REST_COUNTRIES_API_URL
+    VITE_REST_COUNTRIES_API_URL
   );
 
   if (loaded) {

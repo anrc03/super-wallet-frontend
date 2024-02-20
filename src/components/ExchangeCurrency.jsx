@@ -6,6 +6,7 @@ import InputAmount from './currency/InputAmount';
 import SelectCountry from './currency/SelectCountry';
 import SwitchCurrency from './currency/SwitchCurrency';
 import axios from 'axios';
+import { VITE_CURRENCY_API_KEY, VITE_CURRENCY_API_URL } from '../constant/CurrencyConverter';
 
 export default function ExchangeCurrency() {
     const {
@@ -32,9 +33,9 @@ export default function ExchangeCurrency() {
 
     useEffect(() => {
         if (firstAmount) {
-            axios(import.meta.env.VITE_CURRENCY_API_URL, {
+            axios(VITE_CURRENCY_API_URL, {
                 params: {
-                    apikey: import.meta.env.VITE_CURRENCY_API_KEY,
+                    apikey: VITE_CURRENCY_API_KEY,
                     base_currency: fromCurrencyCountryCode,
                     currencies: toCurrencyCountryCode,
                 },
