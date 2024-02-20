@@ -52,7 +52,6 @@ function Home() {
           <Testimonial1 />
           <Footer />
         </div>}
-      {(user != null && role !== "ROLE_CUSTOMER") && <div><AdminDashboard /></div>}
       <BackToTop />
     </div>
   );

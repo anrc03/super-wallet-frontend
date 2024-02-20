@@ -21,19 +21,12 @@ function App() {
   const user = useSelector(selectUser);
   const navigate = useNavigate();
   const location = useLocation();
-  const [role, setRole] = useState(null);
   
-
   useEffect(() => {
     if(user && (location.pathname == "/login")) {
-      role === "ROLE_CUSTOMER" ? navigate("/home") : navigate("/admin")
+      user.role === "ROLE_CUSTOMER" ? navigate("/home") : navigate("/admin")
     }  
   }, [user])
-  
-
-  useEffect(() => {
-    if (user != null) setRole(user.role)
-  })
 
   const ADMIN_PAGE = (    
     <>
@@ -71,7 +64,7 @@ function App() {
         <Route index element={<div><Home /></div>} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         {user? 
-          role === "ROLE_CUSTOMER"? 
+          user.role === "ROLE_CUSTOMER"? 
             <>
               {CUSTOMER_PAGE}
             </>

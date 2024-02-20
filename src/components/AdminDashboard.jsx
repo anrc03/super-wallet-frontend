@@ -6,6 +6,7 @@ import axios from 'axios';
 import { Button, Modal } from 'react-bootstrap';
 import PhoneInput from 'react-phone-input-2';
 import Swal from 'sweetalert2';
+import LoadSpinner from './LoadSpinner';
 
 const AdminDashboard = () => {
 
@@ -13,6 +14,13 @@ const AdminDashboard = () => {
 
     const [showForm, setShowForm] = useState(false);
     const [role, setRole] = useState(null)
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 500);
+      }, []);
 
     useEffect(() => {
         if (user) setRole(user.role)
@@ -64,6 +72,8 @@ const AdminDashboard = () => {
             });
         }
     }
+
+    if (isLoading) return <LoadSpinner/>
 
   return (
     <div>
