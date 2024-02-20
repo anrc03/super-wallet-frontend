@@ -12,13 +12,8 @@ import 'react-phone-input-2/lib/style.css'
 import Swal from 'sweetalert2';
 
 function Register() {
-  const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 1000);
-  }, []);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         setTimeout(() => {
@@ -26,108 +21,100 @@ function Register() {
         }, 1000)
     }, [])
 
-  const validatePassword = (password) => {
-    if (password.length < 8) {
-      return "Password must at least 8 characters";
-    }
+    const [formData, setFormData] = useState({
+        email: '',
+        password: '',
+        confirmPassword: '',
+        firstName: '',
+        lastName: '',
+        birthDate: '',
+        phoneNumber: '',
+        gender: '',
+        address: '',
+    });
 
-    if (!/(?=.*[a-z])/.test(password)) {
-      return "Password must contain at least one lowercase letter";
-    }
+    const validatePassword = (password) => {
+        if (password.length < 8) {
+            return "Password must at least 8 characters";
+        }
 
-    if (!/(?=.*[A-Z])/.test(password)) {
-      return "Password must contain at least one uppercase letter";
-    }
+        if (!/(?=.*[a-z])/.test(password)) {
+            return "Password must contain at least one lowercase letter";
+        }
 
-    if (!/(?=.*\d)/.test(password)) {
-      return "Password must contain at least one digit";
-    }
+        if (!/(?=.*[A-Z])/.test(password)) {
+            return "Password must contain at least one uppercase letter";
+        }
 
-    return null;
-  };
+        if (!/(?=.*\d)/.test(password)) {
+            return "Password must contain at least one digit";
+        }
 
-  const [errors, setErrors] = useState({});
-  const [valid, setValid] = useState(true);
-  const navigate = useNavigate();
+        return null;
+    };
 
-  const validateEmail = (email) => {
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return regex.test(email);
-  };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    let isValid = true;
-    let validationErrors = {};
+    const [errors, setErrors] = useState({});
+    const [valid, setValid] = useState(true);
+    const navigate = useNavigate();
 
-    if (formData.username === "" || formData.username === null) {
-      isValid = false;
-      validationErrors.username = "Username must be filled";
-    }
+    const validateEmail = (email) => {
+        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return regex.test(email);
+    };
 
-    if (!formData.email || formData.email === "") {
-      isValid = false;
-      validationErrors.email = "Email address must be filled";
-    } else if (!validateEmail(formData.email)) {
-      isValid = false;
-      validationErrors.email = "Invalid email address";
-    }
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log(formData.phoneNumber);
+        let isValid = true;
+        let validationErrors = {};
 
-    if (formData.password === "" || formData.password === null) {
-      isValid = false;
-      validationErrors.password = "Password must be filled";
-    } else {
-      const passwordError = validatePassword(formData.password);
-      if (passwordError) {
-        isValid = false;
-        validationErrors.password = passwordError;
-      }
-    }
+        if (formData.username === "" || formData.username === null) {
+            isValid = false;
+            validationErrors.username = "Username must be filled";
+        }
 
-    if (formData.confirmPassword === "" || formData.confirmPassword === null) {
-      isValid = false;
-      validationErrors.confirmPassword = "Confirm password must be filled";
-    } else if (formData.password !== formData.confirmPassword) {
-      isValid = false;
-      validationErrors.confirmPassword = "Password doesn't match";
-    }
+        if (!formData.email || formData.email === '') {
+            isValid = false;
+            validationErrors.email = 'Email address must be filled';
+        } else if (!validateEmail(formData.email)) {
+            isValid = false;
+            validationErrors.email = 'Invalid email address';
+        }
 
-    if (formData.firstName === "" || formData.firstName === null) {
-      isValid = false;
-      validationErrors.firstName = "First Name must be filled";
-    }
+        if (formData.password === "" || formData.password === null) {
+            isValid = false;
+            validationErrors.password = "Password must be filled";
+        } else {
+            const passwordError = validatePassword(formData.password);
+            if (passwordError) {
+                isValid = false;
+                validationErrors.password = passwordError;
+            }
+        }
 
-    if (formData.lastName === "" || formData.lastName === null) {
-      isValid = false;
-      validationErrors.lastName = "Last Name must be filled";
-    }
+        if (formData.confirmPassword === "" || formData.confirmPassword === null) {
+            isValid = false;
+            validationErrors.confirmPassword = "Confirm password must be filled";
+        } else if (formData.password !== formData.confirmPassword) {
+            isValid = false;
+            validationErrors.confirmPassword = "Password doesn't match";
+        }
 
-    if (formData.phoneNumber === "" || formData.phoneNumber === null) {
-      isValid = false;
-      validationErrors.phoneNumber = "Number phone must be filled";
-    }
+        if (formData.firstName === "" || formData.firstName === null) {
+            isValid = false;
+            validationErrors.firstName = "First Name must be filled";
+        }
 
-    if (!formData.birthDate || formData.birthDate === "") {
-      isValid = false;
-      validationErrors.birthDate = "Birth date must be filled";
-    } else {
-      const birthDate = new Date(formData.birthDate);
-      const currentDate = new Date();
-      let age = currentDate.getFullYear() - birthDate.getFullYear();
-      const monthDiff = currentDate.getMonth() - birthDate.getMonth();
-      if (
-        monthDiff < 0 ||
-        (monthDiff === 0 && currentDate.getDate() < birthDate.getDate())
-      ) {
-        age--;
-      }
+        if (formData.lastName === "" || formData.lastName === null) {
+            isValid = false;
+            validationErrors.lastName = "Last Name must be filled";
+        }
 
-      if (age < 18) {
-        isValid = false;
-        validationErrors.birthDate =
-          "You must be at least 18 years old to register";
-      }
-    }
+        if (formData.phoneNumber === "" || formData.phoneNumber === null) {
+            isValid = false;
+            validationErrors.phoneNumber = "Number phone must be filled";
+        }
 
         if (!formData.birthDate || formData.birthDate === '') {
             isValid = false;
@@ -168,7 +155,8 @@ function Register() {
                 email: formData.email,
                 password: formData.password,
             })
-                .then(() => {
+                .then((res) => {
+                    console.log(res.data.data)
                     Swal.fire({
                         icon: "success",
                         title: "You're registered!",
@@ -194,58 +182,33 @@ function Register() {
             setValid(isValid);
         }
 
-    if (isValid) {
-      axios
-        .post(REGISTER_CUSTOMER, {
-          firstName: formData.firstName,
-          lastName: formData.lastName,
-          phoneNumber: formData.phoneNumber,
-          birthDate: moment(formData.birthDate).format("yyyy-MM-DD"),
-          gender: formData.gender,
-          address: formData.address,
-          email: formData.email,
-          password: formData.password,
-        })
-        .then(() => {
-          navigate("/login");
-        })
-        .catch((err) => {
-          isValid = false;
-          validationErrors.username = "Username already exist";
-          setErrors(validationErrors);
-          setValid(isValid);
-        });
-    } else {
-      setErrors(validationErrors);
-      setValid(isValid);
-    }
-  };
+    };
 
-  const handleShowPassword = () => {
-    let input = document.getElementById("setPassword");
-    let icon = document.getElementById("passwordToggleIcon");
+    const handleShowPassword = () => {
+        let input = document.getElementById("setPassword");
+        let icon = document.getElementById("passwordToggleIcon");
 
-    if (input.type === "password") {
-      input.type = "text";
-      icon.innerHTML = '<i class="bi bi-eye-fill"></i>';
-    } else {
-      input.type = "password";
-      icon.innerHTML = '<i class="bi bi-eye-slash-fill"></i>';
-    }
-  };
+        if (input.type === "password") {
+            input.type = "text";
+            icon.innerHTML = '<i class="bi bi-eye-fill"></i>';
+        } else {
+            input.type = "password";
+            icon.innerHTML = '<i class="bi bi-eye-slash-fill"></i>';
+        }
+    };
 
-  const handleShowConfirmPassword = () => {
-    let input = document.getElementById("setConfirmPassword");
-    let icon = document.getElementById("confirmPasswordToggleIcon");
+    const handleShowConfirmPassword = () => {
+        let input = document.getElementById("setConfirmPassword");
+        let icon = document.getElementById("confirmPasswordToggleIcon");
 
-    if (input.type === "password") {
-      input.type = "text";
-      icon.innerHTML = '<i class="bi bi-eye-fill"></i>';
-    } else {
-      input.type = "password";
-      icon.innerHTML = '<i class="bi bi-eye-slash-fill"></i>';
-    }
-  };
+        if (input.type === "password") {
+            input.type = "text";
+            icon.innerHTML = '<i class="bi bi-eye-fill"></i>';
+        } else {
+            input.type = "password";
+            icon.innerHTML = '<i class="bi bi-eye-slash-fill"></i>';
+        }
+    };
 
     if (isLoading) return <LoadSpinner />
 
@@ -400,9 +363,9 @@ function Register() {
                         </div>
                     </form>
                 </div>
-              </div>
             </div>
-  );
+        </div>
+    )
 }
 
-export default Register;
+export default Register
