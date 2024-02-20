@@ -253,48 +253,6 @@ h6,
   color: var(--secondary);
 }
 
-/*** Service ***/
-.service-item {
-  position: relative;
-  overflow: hidden;
-}
-
-.service-item a {
-  text-decoration: none;
-  color: #3a5a40;
-}
-
-.service-item::after {
-  position: absolute;
-  content: "";
-  width: 0;
-  height: 0;
-  top: -80px;
-  right: -80px;
-  border: 80px solid;
-  transform: rotate(45deg);
-  opacity: 1;
-  transition: 0.5s;
-}
-
-.service-item.bg-white::after {
-  border-color: transparent transparent #a2cc72 transparent;
-}
-
-.service-item:hover::after {
-  opacity: 0;
-}
-
-.btn-service {
-  background-color: #6f9459;
-  color: #fff !important;
-  padding: 15px !important;
-}
-
-.btn-service:hover {
-  background-color: #a2cc72;
-}
-
 /*** FAQs ***/
 .accordion .accordion-item {
   border: none;

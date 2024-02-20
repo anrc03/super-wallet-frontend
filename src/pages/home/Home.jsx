@@ -14,9 +14,6 @@ import { Helmet } from 'react-helmet';
 import ExchangeCurrency from "../../components/ExchangeCurrency";
 import AdminDashboard from "../../components/AdminDashboard";
 import { AnimationOnScroll } from "react-animation-on-scroll/dist/js";
-import Services from "../../components/Services";
-import Profile from "../profile/Profile";
-import EditProfile from "../profile/EditProfile";
 
 function Home() {
   const [isLoading, setIsLoading] = useState(true);
@@ -52,10 +49,10 @@ function Home() {
             <ExchangeCurrency />
             </AnimationOnScroll>
           </div>
+          <Testimonial1 />
           <Footer />
         </div>}
       {(user != null && role !== "ROLE_CUSTOMER") && <div><AdminDashboard /></div>}
-    //   <Testimonial1 />
       <BackToTop />
     </div>
   );

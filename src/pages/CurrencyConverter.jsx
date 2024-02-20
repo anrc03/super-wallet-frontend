@@ -2,8 +2,20 @@ import Navbar from "../components/navbar/Navbar";
 import { Helmet } from 'react-helmet';
 import Footer from "../components/Footer";
 import ExchangeCurrency from "../components/ExchangeCurrency";
+import { useEffect, useState } from "react";
+import LoadSpinner from "../components/LoadSpinner";
 
 function CurrencyConverter() {
+
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        setTimeout(() => {
+            setIsLoading(false);
+        }, 500)
+    }, [])
+
+    if (isLoading) return <LoadSpinner />
 
 	return (
 		<>
