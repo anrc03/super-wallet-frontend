@@ -120,10 +120,10 @@ const AdminList = () => {
 
     const displayEmptyList = (
         <div className="text-center">
-            <div className="d-flex justify-content-center">
-                <img style={{ width: '200px' }} src="./src/assets/images/Empty.png" alt="Empty Picture" />
+            <div className="d-flex justify-content-center empty">
+                <img src="./src/assets/images/Empty.png" alt="Empty Picture" />
             </div>
-            <h2>List is Empty</h2>
+            <p className='empty-info'>The admin list is empty</p>
         </div>
     )
 
@@ -135,7 +135,7 @@ const AdminList = () => {
             <td>{admin.phoneNumber}</td>
             <td>{admin.email}</td>
             <td>
-                <button type="button" className="btn btn-success m-1" onClick={() => {
+                <button type="button" className="btn btn-green m-1" onClick={() => {
                     handleClickEdit(admin.id, admin.fullName, admin.phoneNumber, admin.email, admin.address)
                 }}>
                     <i className="bi bi-pencil-square"></i>
@@ -156,7 +156,7 @@ const AdminList = () => {
             <td>{admin.phoneNumber}</td>
             <td>{admin.email}</td>
             <td>
-                <button type="button" className="btn btn-success m-1" onClick={() => {
+                <button type="button" className="btn btn-green m-1" onClick={() => {
                     handleClickEdit(admin.id, admin.fullName, admin.phoneNumber, admin.email, admin.address)
                 }}>
                     <i className="bi bi-pencil-square"></i>
@@ -171,9 +171,12 @@ const AdminList = () => {
 
     const displayAdminTable = (
         <div className="container">
-            <div className="row">
-                <table className=" content-table">
-                    <thead className="thead-light">
+        <div className="row">
+            {isSearchingAdmin && searchAdminResult.length === 0 ? (
+                <p style={{ textAlign: 'center' }}>No results found for your search</p>
+            ) : (
+                <table className="content-table">
+                    <thead>
                         <tr>
                             <th scope='col'>Id</th>
                             <th scope='col'>Role</th>
@@ -187,26 +190,33 @@ const AdminList = () => {
                         {isSearchingAdmin ? displaySearchAdminResult : displayAdminList}
                     </tbody>
                 </table>
-            </div>
+            )}
         </div>
+    </div>
     )
 
     const handleAdminSearch = (e) => {
-        setIsSearchingAdmin(true)
-        const input = e.target.value.toLowerCase().trim()
+        setIsSearchingAdmin(true);
+        const input = e.target.value.toLowerCase().trim();
         const filteredAdmin = adminList.filter(admin => {
-            return admin.fullName.toLowerCase().trim().includes(input)
-        })
-        setSearchAdminResult(filteredAdmin)
-        if (input === "") setIsSearchingAdmin(false)
+            return admin.fullName.toLowerCase().trim().includes(input) || admin.email.toLowerCase().trim().includes(input);
+        });
+        setSearchAdminResult(filteredAdmin);
+        if (input === "") setIsSearchingAdmin(false);
     }
+    
 
     return (
         <>
             <p style={{ marginBottom: -5, textAlign: 'center', fontWeight: 'bold', fontSize: 40 }}>{adminList.length}</p>
             <p style={{ marginBottom: 25, textAlign: 'center' }}>{"Registered Admin"}</p>
-            <div className='container justify-content-center align-items-center d-flex mb-4'>
-                <input style={{ textAlign: 'center' }} type='text' placeholder='Search by name' onChange={handleAdminSearch} />
+            <div className='container justify-content-center align-items-center d-flex mb-4 search-input input-group'>
+                <input type='text' placeholder='Search by full name' onChange={handleAdminSearch} />
+                <div className="input-group-append">
+                    <span className="input-group-text search-icon">
+                        <i class="bi bi-search"></i>
+                    </span>
+                </div>
             </div>
             <div style={{ textAlign: 'center' }}>{isSearchingAdmin ? displayAdminTable : adminList.length == 0 ? displayEmptyList : displayAdminTable}</div>
             <Modal

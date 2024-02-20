@@ -31,6 +31,7 @@ const SelectCountry = (props) => {
     <Grid item xs={12} md={3}>
       <Autocomplete
         options={dataCountries}
+        disableClearable
         renderInput={(params) => <TextField {...params} label={label} />}
         value={value ?? ""}
         onChange={(event, newValue) => {

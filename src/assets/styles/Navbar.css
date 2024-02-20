@@ -81,3 +81,24 @@
   color: #ffffff !important;
   background: #a2cc72 !important;
 }
+
+.logout-button {
+  color: #fff;
+    background-color: #3a5a40;
+    padding: 5px;
+    border-radius: 20px;
+    width: 120px;
+}
+
+.logout-button i {
+  margin-right: 6px;
+}
+
+.logout-button:hover {
+  background-color: #a2cc72;
+}
+
+.avatar i {
+  margin-right: 6px;
+  color: #3a5a40;
+}

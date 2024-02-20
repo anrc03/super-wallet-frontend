@@ -37,7 +37,6 @@ function App() {
 
   const ADMIN_PAGE = (    
     <>
-      <Route path='/home' element={<Home/>} />
       <Route path='/admin' element={<Sidebar component={AdminDashboard}/>} />
       <Route path="/admin/admins" element={<Sidebar component={AdminList}/>} />
       <Route path="/admin/customers" element={<Sidebar component={CustomerList}/>} />

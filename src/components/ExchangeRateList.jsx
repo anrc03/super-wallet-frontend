@@ -47,7 +47,10 @@ const ExchangeRateList = () => {
 
     const displayEmptyList = (
         <div className="text-center">
-            <h2>List is Empty</h2>
+          <div className="d-flex justify-content-center sorry">
+                  <img src="./../src/assets/images/Sorry.png" alt="Sorry Picture" />
+                </div>
+            <p className='sorry-info'>Please select a country and date to view currency history, then click refresh</p>
         </div>
     )
 
@@ -63,8 +66,8 @@ const ExchangeRateList = () => {
     const displayTable = (
         <div className="container">
             <div className="row">
-                <table className="table table-bordered">
-                    <thead className="thead-light">
+                <table className="content-table">
+                    <thead>
                         <tr>
                             <th scope='col'>Date</th>
                             <th scope='col'>Base Currency</th>
@@ -83,13 +86,13 @@ const ExchangeRateList = () => {
   return (
     <>
       {/* <p style={{marginBottom: -5, textAlign: 'center', fontWeight: 'bold', fontSize: 40}}>{baseCurrency}</p> */}
-      <div className="justify-content-center align-items-center d-flex mb-4 mt-2">
+      <div className="justify-content-center align-items-center d-flex mb-4 mt-2 exchange">
         <select
           name="Currency Rate"
+          className='form-select'
           onChange={(e) => setBaseCurrency(e.target.value)}
-          disabled={isLoading}
-        >
-          <option value="">--Please choose an option--</option>
+          disabled={isLoading}>
+          <option disabled selected>Please select a country</option>
           <option value="IDR">IDR</option>
           <option value="EUR">EUR</option>
           <option value="USD">USD</option>
@@ -103,7 +106,7 @@ const ExchangeRateList = () => {
         </select>
         
         <ReactDatePicker
-          className="date-input"
+          className="date-exchange"
           showIcon
           icon={
             <svg
@@ -111,6 +114,7 @@ const ExchangeRateList = () => {
               width="1em"
               height="1em"
               viewBox="0 0 48 48"
+              style={{ width: "20px", height: "20px", marginTop: "1px" }}
             >
               <mask id="ipSApplication0">
                 <g
@@ -139,7 +143,7 @@ const ExchangeRateList = () => {
           placeholderText="Enter your birth date"
         />
       </div>
-      <div className="justify-content-center align-items-center d-flex mb-4 mt-2"><button onClick={handleClickRefresh}>Refresh</button></div>
+      <div className="justify-content-center align-items-center d-flex mb-4"><button className="btn btn-green" onClick={handleClickRefresh}>Refresh</button></div>
       <div style={{ textAlign: "center" }}>
         {isLoading ? <SmallLoadingSpinner/>: rateList.length == 0 ? displayEmptyList : displayTable}
       </div>

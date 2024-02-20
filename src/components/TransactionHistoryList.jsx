@@ -24,7 +24,10 @@ const TransactionHistoryList = () => {
 
     const displayEmptyList = (
         <div className="text-center">
-            <h2>List is Empty</h2>
+            <div className="d-flex justify-content-center empty">
+                  <img src="./../src/assets/images/Empty.png" alt="Empty Picture" />
+                </div>
+            <p className='empty-info'>The transaction history list is empty</p>
         </div>
     )
 
@@ -43,8 +46,8 @@ const TransactionHistoryList = () => {
     const displayTable = (
         <div className="container">
             <div className="row">
-                <table className="table table-bordered">
-                    <thead className="thead-light">
+                <table className="content-table">
+                    <thead>
                         <tr>
                             <th scope='col'>Source</th>
                             <th scope='col'>Destination</th>

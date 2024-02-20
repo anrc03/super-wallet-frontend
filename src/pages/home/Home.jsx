@@ -12,6 +12,7 @@ import { selectUser } from "../../components/redux/UserSlice";
 import { Helmet } from 'react-helmet';
 import ExchangeCurrency from "../../components/ExchangeCurrency";
 import AdminDashboard from "../../components/AdminDashboard";
+import { AnimationOnScroll } from "react-animation-on-scroll/dist/js";
 
 function Home() {
 
@@ -43,7 +44,11 @@ function Home() {
           <About />
           <Trans />
           <WhyUs />
-          <ExchangeCurrency />
+          <div className="mb-5">
+          <AnimationOnScroll animateIn="animate__fadeInUp" delay={600}>
+            <ExchangeCurrency />
+            </AnimationOnScroll>
+          </div>
           <Footer />
         </div>}
       {(user != null && role !== "ROLE_CUSTOMER") && <div><AdminDashboard /></div>}

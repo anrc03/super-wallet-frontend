@@ -1,5 +1,5 @@
 import { Grid, InputAdornment, TextField } from "@mui/material";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { CurrencyContext } from "../../context/CurrencyProvider";
 
 function InputAmount() {
@@ -8,8 +8,15 @@ function InputAmount() {
 
   const fromCurrencyCountryCode = fromCurrency.split(" ")[1];
 
+  const handleChange = (e) => {
+    const inputValue = e.target.value;
+    if (inputValue.length <= 15) {
+      setFirstAmount(inputValue);
+    }
+  };
+
   return (
-    <Grid item xs={12} md>
+    <Grid item xs={12} md={3}>
       <TextField
         label="Amount"
         InputProps={{
@@ -21,7 +28,7 @@ function InputAmount() {
           ),
         }}
         value={firstAmount}
-        onChange={(e) => setFirstAmount(e.target.value)}
+        onChange={handleChange}
         fullWidth
       />
     </Grid>

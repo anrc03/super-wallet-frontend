@@ -130,10 +130,10 @@ const CustomerList = () => {
 
     const displayEmptyList = (
         <div className="text-center">
-            <div className="d-flex justify-content-center">
-                  <img style={{ width: '200px' }} src="./src/assets/images/Empty.png" alt="Empty Picture" />
+            <div className="d-flex justify-content-center empty">
+                  <img src="./../src/assets/images/Empty.png" alt="Empty Picture" />
                 </div>
-            <h2 className='empty-info'>List is Empty</h2>
+            <p className='empty-info'>The customer list is empty</p>
         </div>
     )
 
@@ -147,13 +147,13 @@ const CustomerList = () => {
                 <td>{customer.address}</td>
                 <td>{customer.userCredential.email}</td>
                 <td>
-                    <button type="button" className="btn btn-success m-1" onClick={() => {
+                    <button type="button" className="btn btn-green m-1" onClick={() => {
                         handleClickEdit(customer.id, customer.firstName, customer.lastName, customer.birthDate, 
                             customer.gender, customer.phoneNumber, customer.userCredential.email, customer.address)
                     }}>
                         <i className="bi bi-pencil-square"></i>
                     </button>
-                    <button type="button" className="btn btn-success m-1" onClick={() => handleDelete(customer.id, customer.firstName, customer.lastName)}>
+                    <button type="button" className="btn btn-red m-1" onClick={() => handleDelete(customer.id, customer.firstName, customer.lastName)}>
                             <i className="bi bi-trash3"></i>
                     </button>
                 </td>
@@ -170,13 +170,13 @@ const CustomerList = () => {
                 <td>{customer.address}</td>
                 <td>{customer.userCredential.email}</td>
                 <td>
-                    <button type="button" className="btn btn-success m-1" onClick={() => {
+                    <button type="button" className="btn btn-green m-1" onClick={() => {
                         handleClickEdit(customer.id, customer.firstName, customer.lastName, customer.birthDate, 
                             customer.gender, customer.phoneNumber, customer.userCredential.email, customer.address)
                     }}>
                         <i className="bi bi-pencil-square"></i>
                     </button>
-                    <button type="button" className="btn btn-success m-1" onClick={() => handleDelete(customer.id, customer.firstName, customer.lastName)}>
+                    <button type="button" className="btn btn-red m-1" onClick={() => handleDelete(customer.id, customer.firstName, customer.lastName)}>
                             <i className="bi bi-trash3"></i>
                     </button>
                 </td>
@@ -186,8 +186,8 @@ const CustomerList = () => {
     const displayTable = (
         <div className="container">
             <div className="row">
-                <table className="table table-bordered">
-                    <thead className="thead-light">
+                <table className="content-table">
+                    <thead>
                         <tr>
                             <th scope='col'>Id</th>
                             <th scope='col'>Full name</th>
@@ -224,8 +224,13 @@ const CustomerList = () => {
         <>
             <p style={{marginBottom: -5, textAlign: 'center', fontWeight: 'bold', fontSize: 40}}>{customerList.length}</p>
             <p style={{marginBottom:25, textAlign: 'center'}}>{"Registered Users"}</p>
-            <div className='container justify-content-center align-items-center d-flex mb-4'>    
-                <input style={{textAlign:'center'}} type='text' placeholder='Search by name' onChange={handleSearch}/>  
+            <div className='container justify-content-center align-items-center d-flex mb-4 search-input input-group'>
+                <input type='text' placeholder='Search by name' onChange={handleSearch} />
+                <div className="input-group-append">
+                    <span className="input-group-text search-icon">
+                        <i class="bi bi-search"></i>
+                    </span>
+                </div>
             </div>
             <div style={{textAlign: 'center'}}>{isSearching ? displayTable : customerList.length == 0 ? displayEmptyList : displayTable}</div>
             <Modal
@@ -235,7 +240,7 @@ const CustomerList = () => {
             keyboard={false}
             >
             <Modal.Header closeButton>
-                <Modal.Title>Update Admin</Modal.Title>
+                <Modal.Title>Update Customer</Modal.Title>
             </Modal.Header>
                     <Modal.Body>
                         <div>

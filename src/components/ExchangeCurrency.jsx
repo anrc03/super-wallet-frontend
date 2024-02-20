@@ -10,7 +10,7 @@ import axios from 'axios';
 export default function ExchangeCurrency() {
     const {
         fromCurrency,
-        setFromCurrency,    
+        setFromCurrency,
         toCurrency,
         setToCurrency,
         firstAmount,
@@ -43,29 +43,27 @@ export default function ExchangeCurrency() {
     }, [firstAmount, fromCurrency, toCurrency]);
 
     return (
-        <div className="container-xxl py-5">
+        <div className="container-xxl py-5 mb-3">
             <div className="container">
                 <div className="text-center mx-auto animate__animated animate__fadeInUp" style={{ maxWidth: "500px", animationDelay: "0.1s" }}>
                     <h1 className="display-6 fw-bold text-green">Currency Converter</h1>
-                    <p className="text-cyan fs-5 mb-5"> Convert any currency world wide</p>
+                    <p className="text-cyan fs-5 mb-4 text-green">Convert currencies to different countries</p>
                 </div>
 
-                <Container maxWidth="md">
-                    <Grid spacing={2} container>
+                <Container sx={{ maxWidth: "md" }}>
+                    <Grid spacing={2} container sx={{ display: 'flex', justifyContent: 'center' }}>
                         <InputAmount />
-                        <SelectCountry value={fromCurrency} setValue={setFromCurrency}label="From"/>
+                        <SelectCountry value={fromCurrency} setValue={setFromCurrency} label="From" />
                         <SwitchCurrency />
-                        <SelectCountry value={toCurrency} setValue={setToCurrency} label="To"/>
+                        <SelectCountry value={toCurrency} setValue={setToCurrency} label="To" />
                     </Grid>
 
                     {firstAmount ? (
-                        <Box sx={{ textAlign: "left", marginTop: "1rem" }}>
-                            <Typography>
+                        <Box sx={{ textAlign: "left", marginTop: "1rem", display: 'flex', justifyContent: 'center' }}>
+                            <Typography variant="h5" sx={{ marginTop: "5px", fontWeight: "bold", color: ' #3a5a40' }}>
                                 {formattedFirstAmount} {fromCurrency} = {" "}
-                            </Typography>
-                            <Typography variant="h5" sx={{ marginTop: "5px", fontWeight: "bold" }}>
                                 {(resultCurrency * firstAmount).toLocaleString(undefined, {
-                                    minimumFractionDigits: 5,
+                                    minimumFractionDigits: 3,
                                 })}{" "}
                                 {toCurrency}
                             </Typography>
