@@ -19,6 +19,7 @@ import PageNotFound from "./components/PageNotFound.jsx";
 import Transaction from "./components/Transaction.jsx";
 import Profile from "./pages/profile/Profile.jsx";
 import EditProfile from "./pages/profile/EditProfile.jsx";
+import EditPassword from "./pages/profile/EditPassword.jsx";
 
 function App() {
   const user = useSelector(selectUser);
@@ -74,7 +75,8 @@ function App() {
       <Route path="/transaction" element={<Transaction />} />
       <Route path="/faq" element={<Faq />} />
       <Route path="/profile" element={<Profile />} />
-      <Route path="/profile/edit" element={<EditProfile />} />
+      <Route path="/profile/edit/:id" element={<EditProfile />} />
+      <Route path="/profile/edit-password/:id" element={<EditPassword />} />
     </>
   );
 
@@ -88,7 +90,6 @@ function App() {
       <Route path="/faq" element={<Faq />} />
     </>
   );
-  
 
   return (
     <div>
@@ -115,7 +116,6 @@ function App() {
       </Routes>
     </div>
   );
-  
 }
 
 export default App;

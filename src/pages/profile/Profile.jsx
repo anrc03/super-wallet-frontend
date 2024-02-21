@@ -3,11 +3,13 @@ import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { BASE_CUSTOMER } from "../../constant/Endpoint";
 import { jwtDecode } from "jwt-decode";
-import { useDispatch } from "react-redux";
+
 import { selectUser } from "../../components/redux/UserSlice";
+import { useSelector } from "react-redux";
 
 function Profile() {
-  const user = useDispatch(selectUser);
+  const user = useSelector(selectUser);
+  console.log(user.customerId);
 
   const navigate = useNavigate();
   const [profile, setProfile] = useState({
@@ -22,21 +24,12 @@ function Profile() {
     },
   });
 
-  const userArrayString = localStorage.getItem("user");
-  const userArray = JSON.parse(userArrayString);
-  console.log(userArrayString);
-
-  // Extract the token from the user array
-  const token = userArray.token;
-  // Now you can use the token as needed
-  console.log("Token:", token);
-  const decoded = jwtDecode(token);
-  // console.log(decoded.customerId);
+  const customerId = user.customerId;
+  console.log(customerId);
 
   useEffect(() => {
-    const customerId = decoded.customerId;
     console.log("ini id customer : " + customerId);
-    console.log("Token:", token);
+
     // if (userArrayString) {
     try {
       const fetchData = async () => {
@@ -48,12 +41,7 @@ function Profile() {
         }
       };
 
-      if (token) {
-        fetchData();
-      } else {
-        console.error("Token not found in local storage");
-        // Handle the case where the token is not present, redirect the user, etc.
-      }
+      fetchData();
     } catch (error) {
       console.error("Error parsing user array", error.message);
       // Handle parsing errors
@@ -63,7 +51,11 @@ function Profile() {
   console.log("ini customer id param : " + user.customerId);
 
   const ToEditProfile = () => {
-    navigate("/editProfile");
+    navigate(`/profile/edit/${customerId}`);
+  };
+
+  const ToEditPassword = () => {
+    navigate(`/profile/edit-password/${customerId}`);
   };
 
   console.log("INI DARA PROFILE", profile);
@@ -84,10 +76,14 @@ function Profile() {
             <div className="card mb-4">
               <div className="card-body text-center">
                 <img
-                  src="src/assets/images/Profile.png"
+                  src={profile.images || "src/assets/images/Profile.png"}
                   alt="avatar"
                   className="rounded-circle img-fluid mt-1"
-                  style={{ width: "150px", backgroundColor: "bisque" }}
+                  style={{
+                    width: "200px",
+                    height: "200px",
+                    backgroundColor: "bisque",
+                  }}
                 />{" "}
                 <div>
                   <div className="d-flex justify-content-center">
@@ -112,6 +108,15 @@ function Profile() {
                       onClick={() => ToEditProfile()}
                     >
                       Edit Profile
+                    </button>
+                  </div>
+                  <div className="d-flex justify-content-center mb-2">
+                    <button
+                      type="button"
+                      className="btn btn-primary"
+                      onClick={() => ToEditPassword()}
+                    >
+                      Edit Password
                     </button>
                   </div>
                 </div>

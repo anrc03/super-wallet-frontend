@@ -25,3 +25,6 @@ export const BASE_ACCOUNT = API_BASE_URL + "/account"
 
 //dummy-bank
 export const BASE_DUMMY_BANK = API_BASE_URL + "/dummy-bank"
+
+//change password
+export const CHANGE_PASSWORD = API_BASE_URL + '/auth/change-password'
