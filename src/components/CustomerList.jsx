@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { BASE_CUSTOMER } from '../constant/Endpoint';
+import { BASE_CUSTOMER, CHANGE_PASSWORD, updateCustomer } from '../constant/Endpoint';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { Button, Modal } from 'react-bootstrap';
@@ -27,18 +27,22 @@ const CustomerList = () => {
         password: '',
         phoneNumber: '',
         address: '',
+        bankData: null,
+        images: null,
     })
 
     const getCustomerList = async () => {
         await axios
             .get(BASE_CUSTOMER)
             .then(res => setCustomerList(res.data.data))
-            .catch(err => console.error(err))
+            .catch(err => console.error(err.message))
     }
 
     useEffect(() => {
         getCustomerList()
     }, [])
+
+    console.log(customerList)
 
     const handleDelete = (id, firstName, lastName) => {
         Swal.fire({
@@ -90,19 +94,10 @@ const CustomerList = () => {
 
     const handleUpdate = (e) => {
         e.preventDefault()
-        if (formData.id && formData.firstName && formData.lastName && formData.birthDate && formData.gender
-            && formData.email && formData.phoneNumber && formData.address) {
-            axios.put(BASE_CUSTOMER, {
-                id: formData.id,
-                firstName: formData.firstName,
-                lastName: formData.lastName,
-                birthDate: formData.birthDate,
-                gender: formData.gender,
-                email: formData.email,
-                password: formData.password,
-                phoneNumber: formData.phoneNumber,
-                address: formData.address,
-            }).then(() => {
+        if (formData.id && formData.firstName && formData.lastName && formData.birthDate && formData.gender 
+                && formData.email && formData.phoneNumber && formData.address) {
+            axios.put(updateCustomer(formData.id, formData.firstName, formData.lastName, formData.phoneNumber, formData.birthDate, formData.gender, formData.address))
+            .then(() => {
                 Swal.fire({
                     icon: "success",
                     title: "Customer succesfully updated!",
@@ -140,49 +135,51 @@ const CustomerList = () => {
     )
 
     const displayCustomer = customerList.map((customer) => (
-        <tr key={customer.id}>
-            <td>{customer.id}</td>
-            <td>{customer.firstName + " " + customer.lastName}</td>
-            <td>{customer.phoneNumber}</td>
-            <td>{customer.birthDate}</td>
-            <td>{customer.gender}</td>
-            <td>{customer.address}</td>
-            <td>{customer.userCredential.email}</td>
-            <td>
-                <button type="button" className="btn btn-green m-1" onClick={() => {
-                    handleClickEdit(customer.id, customer.firstName, customer.lastName, customer.birthDate,
-                        customer.gender, customer.phoneNumber, customer.userCredential.email, customer.address)
-                }}>
-                    <i className="bi bi-pencil-square"></i>
-                </button>
-                <button type="button" className="btn btn-red m-1" onClick={() => handleDelete(customer.id, customer.firstName, customer.lastName)}>
-                    <i className="bi bi-trash3"></i>
-                </button>
-            </td>
-        </tr>
+            <tr key={customer.id}>
+                <td>{customer.id}</td>
+                <td>{customer.firstName + " " + customer.lastName}</td>
+                <td>{customer.phoneNumber}</td>
+                <td>{customer.birthDate}</td>
+                <td>{customer.gender}</td>
+                <td>{customer.address}</td>
+                <td>{customer.userCredential.email}</td>
+                <td>
+                    <button type="button" className="btn btn-green m-1" onClick={() => {
+                        setFormData({...formData, bankData: customer.bankData, images: customer.images})
+                        handleClickEdit(customer.id, customer.firstName, customer.lastName, customer.birthDate, 
+                            customer.gender, customer.phoneNumber, customer.userCredential.email, customer.address)
+                    }}>
+                        <i className="bi bi-pencil-square"></i>
+                    </button>
+                    <button type="button" className="btn btn-red m-1" onClick={() => handleDelete(customer.id, customer.firstName, customer.lastName)}>
+                            <i className="bi bi-trash3"></i>
+                    </button>
+                </td>
+            </tr>
     ));
 
     const displaySearchResult = isSearching && searchResult.map((customer) => (
-        <tr key={customer.id}>
-            <td>{customer.id}</td>
-            <td>{customer.firstName + " " + customer.lastName}</td>
-            <td>{customer.phoneNumber}</td>
-            <td>{customer.birthDate}</td>
-            <td>{customer.gender}</td>
-            <td>{customer.address}</td>
-            <td>{customer.userCredential.email}</td>
-            <td>
-                <button type="button" className="btn btn-green m-1" onClick={() => {
-                    handleClickEdit(customer.id, customer.firstName, customer.lastName, customer.birthDate,
-                        customer.gender, customer.phoneNumber, customer.userCredential.email, customer.address)
-                }}>
-                    <i className="bi bi-pencil-square"></i>
-                </button>
-                <button type="button" className="btn btn-red m-1" onClick={() => handleDelete(customer.id, customer.firstName, customer.lastName)}>
-                    <i className="bi bi-trash3"></i>
-                </button>
-            </td>
-        </tr>
+            <tr key={customer.id}>
+                <td>{customer.id}</td>
+                <td>{customer.firstName + " " + customer.lastName}</td>
+                <td>{customer.phoneNumber}</td>
+                <td>{customer.birthDate}</td>
+                <td>{customer.gender}</td>
+                <td>{customer.address}</td>
+                <td>{customer.userCredential.email}</td>
+                <td>
+                    <button type="button" className="btn btn-green m-1" onClick={() => {
+                        setFormData({...formData, bankData: customer.bankData, images: customer.images})
+                        handleClickEdit(customer.id, customer.firstName, customer.lastName, customer.birthDate, 
+                            customer.gender, customer.phoneNumber, customer.userCredential.email, customer.address)
+                    }}>
+                        <i className="bi bi-pencil-square"></i>
+                    </button>
+                    <button type="button" className="btn btn-red m-1" onClick={() => handleDelete(customer.id, customer.firstName, customer.lastName)}>
+                            <i className="bi bi-trash3"></i>
+                    </button>
+                </td>
+            </tr>
     ));
 
     const displayTable = (
@@ -309,8 +306,8 @@ const CustomerList = () => {
                         </div>
                         <div className='mb-2'>
                             <label className='mb-2'>Email</label>
-                            <input type='email' className='form-control' value={formData.email} placeholder="Enter email"
-                                onChange={(e) => setFormData({ ...formData, email: e.target.value })} />
+                            <input type='email' className='form-control' value={formData.email} placeholder="Enter email" style={{backgroundColor:'#D3D3D3', fontWeight:'bold'}}
+                                onChange={(e) => setFormData({ ...formData, email: e.target.value })} readOnly/>
                         </div>
                         <div className='mb-2'>
                             <label className='mb-2'>Password</label>

@@ -13,7 +13,6 @@ import { selectUser } from "../../components/redux/UserSlice";
 import { Helmet } from 'react-helmet';
 import ExchangeCurrency from "../../components/ExchangeCurrency";
 import { AnimationOnScroll } from "react-animation-on-scroll/dist/js";
-import Testimonial from "../../components/Testimonial";
 
 function Home() {
   const [isLoading, setIsLoading] = useState(true);

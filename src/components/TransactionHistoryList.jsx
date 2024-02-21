@@ -20,6 +20,8 @@ const TransactionHistoryList = () => {
             .catch(err => console.error(err.message))
     }
 
+    console.log(totalPage)
+
     useEffect(() => {
         getTransactionListbyPage(currentPage)
     }, [currentPage])
@@ -79,10 +81,10 @@ const TransactionHistoryList = () => {
     }
 
     const displayPagination = (
-        <div className="justify-content-center align-items-center d-flex mt-2">
-            <button onClick={handlePrevious} disabled={currentPage === 0}>Prev</button>
-            <div className='m-2'>{currentPage + 1}</div>
-            <button onClick={handleNext} disabled={currentPage === totalPage - 1}>Next</button>
+        <div className="justify-content-center align-items-center d-flex mt-4">
+            <button onClick={handlePrevious} disabled={currentPage === 0}><i className="bi bi-caret-left-fill"></i></button>
+            <div className='m-2' style={{fontSize:15}}>{currentPage + 1}</div>
+            <button onClick={handleNext} disabled={currentPage === totalPage - 1}><i className="bi bi-caret-right-fill"></i></button>
         </div>
     )
 
@@ -91,7 +93,7 @@ const TransactionHistoryList = () => {
         <p style={{ marginBottom: -5, textAlign: 'center', fontWeight: 'bold', fontSize: 40, marginTop: 4 }}>{transactionCount}</p>
         <p style={{ marginBottom: 15, textAlign: 'center', fontSize: 20, color: '#6f9459' }}>Total Transaction</p>
         <div style={{textAlign: 'center'}}>{transactionList.length === 0 ? displayEmptyList : displayTable}</div>
-        <div style={{textAlign: 'center'}}>{transactionList > 0 && displayPagination }</div>
+        <div style={{textAlign: 'center'}}>{totalPage > 1 && displayPagination }</div>
     </div>
   )
 }

@@ -15,6 +15,8 @@ import AdminList from './components/AdminList.jsx'
 import CustomerList from './components/CustomerList.jsx'
 import ExchangeRateList from './components/ExchangeRateList.jsx'
 import TransactionHistoryList from './components/TransactionHistoryList.jsx'
+import PageNotFound from './components/PageNotFound.jsx'
+import Transaction from './components/Transaction.jsx'
 import Profile from './pages/profile/Profile.jsx'
 
 function App() {
@@ -45,6 +47,7 @@ function App() {
       <Route path='/home' element={<Home/>} />
       <Route path='/about' element={<About/>} />
       <Route path="/currency-converter" element={<CurrencyConverter />} />
+      <Route path="/transaction" element={<Transaction />} />
       <Route path="/faq" element={<Faq />} />
       <Route path="/profile" element={<Profile />} />
     </>
@@ -65,6 +68,7 @@ function App() {
     <div>
       <Routes>
         <Route index element={<div><Home /></div>} />
+        <Route path="*" element={<PageNotFound/>} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         {user? 
           user.role === "ROLE_CUSTOMER"? 

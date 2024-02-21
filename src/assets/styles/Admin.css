@@ -76,6 +76,11 @@
   color: #6f9459;
 }
 
+.error-404 img {
+  width: 600px;
+  margin-top: -40px;
+}
+
 /* Table */
 .content-table {
   border-collapse: collapse;

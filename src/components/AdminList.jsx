@@ -248,14 +248,14 @@ const AdminList = () => {
                         </div>
                         <div className='mb-2'>
                             <label className='mb-2'>Email</label>
-                            <input type='email' className='form-control' value={formData.email} placeholder="Enter email"
+                            <input type='email' className='form-control' value={formData.email} placeholder="Enter email" style={{ backgroundColor: '#95b79c', color: '#fff', fontWeight: 'bold' }} readOnly
                                 onChange={(e) => setFormData({ ...formData, email: e.target.value })} />
                         </div>
-                        <div className='mb-2'>
+                        {/* <div className='mb-2'>
                             <label className='mb-2'>Password</label>
                             <input type="password" id="setPassword" name="password" className="form-control" placeholder="Enter new password"
                                 onChange={(e) => setFormData({ ...formData, password: e.target.value })} />
-                        </div>
+                        </div> */}
                         <div className='mb-2'>
                             <label className='mb-2'>Phone Number</label>
                             <PhoneInput

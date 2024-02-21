@@ -1,11 +1,11 @@
-    import React, { useEffect, useState } from 'react';
-    import { Link, useNavigate } from 'react-router-dom';
-    import axios from 'axios';
-    import { useDispatch } from 'react-redux';
-    import { LOGIN } from '../../constant/Endpoint';
-    import { login } from '../../components/redux/UserSlice';
-    import { Helmet } from 'react-helmet';
-    import LoadSpinner from '../../components/LoadSpinner';
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { LOGIN } from '../../constant/Endpoint';
+import { login } from '../../components/redux/UserSlice';
+import { Helmet } from 'react-helmet';
+import LoadSpinner from '../../components/LoadSpinner';
 import { jwtDecode } from 'jwt-decode';
 
     function Login() {
@@ -42,34 +42,35 @@ import { jwtDecode } from 'jwt-decode';
                 validationErrors.password = 'Password is required';
             }
 
-            if (isValid) {
-                axios.post(LOGIN, { email: formData.email, password: formData.password })
-                    .then((result) => {
-                        const user = result.data.data;
-                        let customerId;
+        if (isValid) {
+            axios.post(LOGIN, { email: formData.email, password: formData.password })
+                .then((result) => {
+                    const user = result.data.data;
+                    let customerId;
                     user.role === "ROLE_CUSTOMER" ? customerId = jwtDecode(user.token).customerId : customerId = null
-                        dispatch(login({
-                            firstName: user.firstName,
-                            lastName: user.lastName,
-                            email: formData.email,
-                            token: user.token,
-                            role: user.role,
-                            loggedIn: true,
-                            customerId: customerId,
-                        }));
-                    })
-                    .catch((err) => {
-                        isValid = false;
-                        validationErrors.email = 'Either email not register or password incorrect';
-                        validationErrors.password = 'Either email not register or password incorrect';
-                        setErrors(validationErrors);
-                        setValid(isValid);
-                    });
-            } else {
-                setErrors(validationErrors);
-                setValid(isValid);
-            }
-        };
+                    dispatch(login({
+                        firstName: user.firstName,
+                        lastName: user.lastName,
+                        email: formData.email,
+                        token: user.token,
+                        role: user.role,
+                        loggedIn: true,
+                        customerId: customerId
+                    }));
+                })
+                .catch((err) => {
+                    console.log(err)
+                    isValid = false;
+                    validationErrors.email = 'Either email not register or password incorrect';
+                    validationErrors.password = 'Either email not register or password incorrect';
+                    setErrors(validationErrors);
+                    setValid(isValid);
+                });
+        } else {
+            setErrors(validationErrors);
+            setValid(isValid);
+        }
+    };
 
         const handleShowPassword = () => {
             const input = document.getElementById('setPassword');
