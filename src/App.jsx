@@ -17,6 +17,7 @@ import ExchangeRateList from './components/ExchangeRateList.jsx'
 import TransactionHistoryList from './components/TransactionHistoryList.jsx'
 import PageNotFound from './components/PageNotFound.jsx'
 import Transaction from './components/Transaction.jsx'
+import CustomerDashboard from './components/CustomerDashboard.jsx'
 
 function App() {
 
@@ -47,6 +48,7 @@ function App() {
       <Route path="/currency-converter" element={<CurrencyConverter />} />
       <Route path="/transaction" element={<Transaction />} />
       <Route path="/faq" element={<Faq />} />
+      <Route path="/customer/dashboard" element={<CustomerDashboard />} />
     </>
   )
 

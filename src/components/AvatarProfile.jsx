@@ -8,7 +8,7 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 
 import { useDispatch } from "react-redux";
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { logout } from './redux/UserSlice';
 
 export default function AvatarProfile() {
@@ -60,7 +60,11 @@ export default function AvatarProfile() {
                       <Typography className="avatar" textAlign="center"><i className="bi bi-person-fill"></i> Profile</Typography>
                     </MenuItem>
                     <MenuItem onClick={handleCloseUserMenu}>
-                      <Typography className="avatar" textAlign="center"><i className="bi bi-house-fill"></i> Dashboard</Typography>
+                      <Typography className="avatar" textAlign="center">
+                        <Link to="/customer/dashboard" className='nav-item nav-link'>
+                        <i className="bi bi-house-fill"></i> Dashboard
+                        </Link>
+                      </Typography>
                     </MenuItem>
                     <MenuItem onClick={handleLogout}>
                       <Typography className='logout-button' textAlign="center"><i className="bi bi-box-arrow-in-left"></i> Logout</Typography>

@@ -43,9 +43,6 @@ const Transaction = () => {
       expDate: '',
     })
 
-    // console.log(formData)
-
-
     const getAccountList = async() => {
         await axios
             .get(BASE_ACCOUNT)
@@ -87,7 +84,6 @@ const Transaction = () => {
       <option value={[account.id, account.balance]}>{account.currency.code}</option>
       </>
   ))
-
 
 
     const handleWithdrawal = () => {

@@ -27,6 +27,7 @@ export const BASE_TRANSACTION =  API_BASE_URL +  "/transactions";
 export const getTransactionByPage = (page) => `${BASE_TRANSACTION}?page=${page}`
 export const WITHDRAW = BASE_TRANSACTION + "/withdrawal"
 export const TRANSFER = BASE_TRANSACTION + "/send"
+export const GET_TRANSACTION_CUSTOMER = BASE_TRANSACTION + "/customer"
 
 //account
 export const BASE_ACCOUNT = API_BASE_URL + "/account"
