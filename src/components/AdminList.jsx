@@ -11,6 +11,7 @@ const AdminList = () => {
     const [searchAdminResult, setSearchAdminResult] = useState(null)
     const [isSearchingAdmin, setIsSearchingAdmin] = useState(false)
     const [showForm, setShowForm] = useState(false);
+    const [searchInput, setSearchInput] = useState("");
 
     const handleCloseForm = () => setShowForm(false);
     const handleShowForm = () => setShowForm(true);
@@ -38,7 +39,7 @@ const AdminList = () => {
     const handleDelete = (id, fullName) => {
         Swal.fire({
             title: "Are you sure?",
-            text: `About to Delete: ${fullName}`,
+            text: `About to delete : ${fullName}`,
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
@@ -173,7 +174,12 @@ const AdminList = () => {
         <div className="container">
         <div className="row">
             {isSearchingAdmin && searchAdminResult.length === 0 ? (
-                <p style={{ textAlign: 'center' }}>No results found for your search</p>
+                <>
+                <div className="image-search d-flex justify-content-center">
+                <img style={{ width: '200px' }} src="./../src/assets/images/Search.png" alt="Search Picture" />
+              </div>
+                <p style={{ textAlign: 'center', fontSize: '20px', color: '#6f9459', marginTop: '5px' }}>Sorry, your search "{searchInput}" was not found</p>
+                </>
             ) : (
                 <table className="content-table">
                     <thead>
@@ -198,6 +204,7 @@ const AdminList = () => {
     const handleAdminSearch = (e) => {
         setIsSearchingAdmin(true);
         const input = e.target.value.toLowerCase().trim();
+        setSearchInput(input);
         const filteredAdmin = adminList.filter(admin => {
             return admin.fullName.toLowerCase().trim().includes(input) || admin.email.toLowerCase().trim().includes(input);
         });
@@ -205,11 +212,10 @@ const AdminList = () => {
         if (input === "") setIsSearchingAdmin(false);
     }
     
-
     return (
         <>
-            <p style={{ marginBottom: -5, textAlign: 'center', fontWeight: 'bold', fontSize: 40 }}>{adminList.length}</p>
-            <p style={{ marginBottom: 25, textAlign: 'center' }}>{"Registered Admin"}</p>
+            <p style={{ marginBottom: -5, textAlign: 'center', fontWeight: 'bold', fontSize: 40, marginTop: 4 }}>{adminList.length}</p>
+            <p style={{ marginBottom: 15, textAlign: 'center', fontSize: 20, color: '#6f9459' }}>Registered Admin</p>
             <div className='container justify-content-center align-items-center d-flex mb-4 search-input input-group'>
                 <input type='text' placeholder='Search by full name' onChange={handleAdminSearch} />
                 <div className="input-group-append">

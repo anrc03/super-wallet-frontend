@@ -36,6 +36,7 @@
 .btn-green {
   background-color: #3a5a40;
   color: #fff;
+  border: 0;
 }
 
 .btn-green:hover {
@@ -148,6 +149,32 @@
   height: 40px;
 }
 
+.date-customer {
+	width: 208%;
+  padding: 8px !important;
+  border-radius: 5px;
+  border: 0.5px solid #dee2e6;
+  padding-left: 35px !important;
+}
+
+.date-customer svg {
+  width: 40px;
+  height: 40px;
+}
+
 .menu-bar i {
   font-size: 18px !important;
+}
+
+/* Admin Dashboard */
+.admin-dash {
+  background-color: #6f9459;
+  padding: 10px;
+  border-radius: 0 0 20px 20px;
+}
+
+.admin-dash h2 {
+  color: #fff;
+  margin-left: 10px;
+  font-size: 30px;
 }

@@ -55,6 +55,7 @@ export default function ExchangeCurrency() {
                     <p className="text-cyan fs-5 mb-4 text-green">Convert currencies to different countries</p>
                 </div>
 
+                <div className="animate__animated animate__fadeInUp" style={{ animationDelay: "0.5s" }}>
                 <Container sx={{ maxWidth: "md" }}>
                     <Grid spacing={2} container sx={{ display: 'flex', justifyContent: 'center' }}>
                         <InputAmount />
@@ -80,6 +81,7 @@ export default function ExchangeCurrency() {
                         ""
                     )}
                 </Container>
+                </div>
             </div>
         </div>
     )

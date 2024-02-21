@@ -3,7 +3,6 @@ import { Menu } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout, selectUser } from './redux/UserSlice';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 export default function MenuList() {
 

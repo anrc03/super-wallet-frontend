@@ -16,7 +16,7 @@ const { Header, Sider } = Layout;
             <MenuList/>
         </Sider>
         <Layout>
-          <Header style={{ padding: 0, backgroundColor: '#a2cc72' }}>
+          <Header style={{ padding: 0, backgroundColor: '#a2cc72', display: 'flex', alignItems: 'center' }}>
             <Button type='text' className='toggle' onClick={() => setcollapsed(!collapsed)} icon={collapsed ? <MenuFoldOutlined /> : <MenuUnfoldOutlined />}/>
           </Header>
           <Component/>

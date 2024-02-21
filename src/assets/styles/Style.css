@@ -314,7 +314,6 @@ h6,
 
 .toggle {
   margin-left: 15px;
-  margin-top: 15px;
 }
 
 .toggle svg {
@@ -332,4 +331,14 @@ h6,
 :where(.css-dev-only-do-not-override-1xg9z9n).ant-menu-dark .ant-menu-item-selected {
   background-color: #a2cc72;
   color: #3a5a40;
+}
+
+/* Currency */
+.bg-currency {
+  background: #3a5a40;
+  color: #fff;
+}
+
+.bg-currency h1, .bg-currency p, .bg-currency label, .bg-currency input {
+  color: #fff !important;
 }

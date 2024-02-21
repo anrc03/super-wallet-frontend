@@ -7,13 +7,12 @@ import Footer from "../../components/Footer";
 import BackToTop from "../../components/BackToTop";
 import Navbar from "../../components/navbar/Navbar";
 import Header from "../../components/home/Header";
-import Testimonial1 from "../../components/Testimonial1";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../components/redux/UserSlice";
 import { Helmet } from 'react-helmet';
 import ExchangeCurrency from "../../components/ExchangeCurrency";
-import AdminDashboard from "../../components/AdminDashboard";
 import { AnimationOnScroll } from "react-animation-on-scroll/dist/js";
+import Testimonial from "../../components/Testimonial";
 
 function Home() {
   const [isLoading, setIsLoading] = useState(true);
@@ -37,19 +36,19 @@ function Home() {
       <Helmet>
         <title>Super Wallet</title>
       </Helmet>
-      <Navbar />
       {(user === null || role === "ROLE_CUSTOMER") && 
         <div>
+          <Navbar />
           <Header />
           <About />
           <Trans />
           <WhyUs />
-          <div className="mb-5">
-          <AnimationOnScroll animateIn="animate__fadeInUp" delay={600}>
+          <div className="bg-currency">
+          <AnimationOnScroll animateIn="animate__fadeInUp" delay={500}>
             <ExchangeCurrency />
             </AnimationOnScroll>
           </div>
-          <Testimonial1 />
+          <Testimonial />
           <Footer />
         </div>}
       <BackToTop />

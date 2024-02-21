@@ -103,10 +103,10 @@ export default function About() {
                             <h4>Jl. H. Dahlan No.75, RT.008/RW.004,<br />Ragunan, Ps. Minggu, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta</h4>
                             <hr className="w-100" />
                             <h5 className="mb-2">Call us :</h5>
-                            <h4>+62 896 123 456 78</h4>
+                            <h4>+62 895 024 811 95</h4>
                             <hr className="w-100" />
                             <h5 className="mb-2">Email us :</h5>
-                            <h4>info@superwallet.com</h4>
+                            <h4>call.superwallet@gmail.com</h4>
                         </AnimationOnScroll >
                     </div>
                     <div className="col-lg-7">

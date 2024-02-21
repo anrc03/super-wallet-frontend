@@ -15,6 +15,7 @@ import AdminList from './components/AdminList.jsx'
 import CustomerList from './components/CustomerList.jsx'
 import ExchangeRateList from './components/ExchangeRateList.jsx'
 import TransactionHistoryList from './components/TransactionHistoryList.jsx'
+import Profile from './pages/profile/Profile.jsx'
 
 function App() {
 
@@ -35,6 +36,7 @@ function App() {
       <Route path="/admin/customers" element={<Sidebar component={CustomerList}/>} />
       <Route path="/admin/currency" element={<Sidebar component={ExchangeRateList}/>} />
       <Route path="/admin/transaction" element={<Sidebar component={TransactionHistoryList}/>} />
+      <Route path="/profile" element={<Profile />} />
     </>
   )
 
@@ -44,6 +46,7 @@ function App() {
       <Route path='/about' element={<About/>} />
       <Route path="/currency-converter" element={<CurrencyConverter />} />
       <Route path="/faq" element={<Faq />} />
+      <Route path="/profile" element={<Profile />} />
     </>
   )
 

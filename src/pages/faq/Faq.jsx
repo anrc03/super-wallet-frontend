@@ -44,7 +44,7 @@ export default function Faq() {
             <div className="pb-5">
                 <AnimationOnScroll animateIn="animate__fadeInUp" delay={100}>
                     <div className="bg-faq animate__animated animate__fadeInUp mb-4" style={{ animationDelay: "0.8s" }}>
-                        <div className="row">
+                        <div className="row" style={{ width: '100%' }}>
                             <div className="col-md-5 faq-container">
                                 <AnimationOnScroll animateIn="animate__fadeInUp" delay={100}>
                                     <h1>Haven't found the answer yet?</h1>

@@ -78,7 +78,7 @@ const AdminDashboard = () => {
   return (
     <div>
         <p style={{marginTop:20, textAlign: 'center', fontSize:25, fontWeight: 'bold'}}>Welcome, <span style={{color: 'green'}}>{user.email.split("@")[0]}</span></p>
-        <p style={{marginBottom: 50, textAlign: 'center', fontSize:17}}>What would you like to do today?</p>
+        <p style={{marginBottom: 20, textAlign: 'center', fontSize:17}}>What would you like to do today?</p>
         {
             role === "ROLE_SUPER_ADMIN" && 
             <div className='justify-content-center align-items-center d-flex m-3'>
@@ -91,29 +91,30 @@ const AdminDashboard = () => {
             onHide={handleCloseForm}
             backdrop="static"
             keyboard={false}
+            centered
         >
-            <Modal.Header closeButton>
+            <Modal.Header className='admin-close' closeButton>
             <Modal.Title>Register Admin</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <div>
+                <div className='modal-update'>
                     <div className='mb-2'>
-                        <label>Fullname</label>
+                        <label className='mb-2'>Fullname</label>
                         <input type='text' className='form-control' placeholder="Enter fullname"
                                 onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}/>
                     </div>
                     <div className='mb-2'>
-                        <label>Email</label>
+                        <label className='mb-2'>Email</label>
                         <input type='email' className='form-control' placeholder="Enter email"
                                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}/>
                     </div>
                     <div className='mb-2'>
-                        <label>Password</label>
+                        <label className='mb-2'>Password</label>
                         <input type="password" id="setPassword" name="password" className="form-control" placeholder="Enter password" 
                                 onChange={(e) => setFormData({ ...formData, password: e.target.value })}/>                                                
                     </div>
                     <div className='mb-2'>
-                        <label>Phone Number</label>
+                        <label className='mb-2'>Phone Number</label>
                         <PhoneInput
                             className="phone-input"
                             country={"id"}
@@ -123,17 +124,17 @@ const AdminDashboard = () => {
                         />
                     </div>
                     <div className='mb-2'>
-                        <label>Address</label>
+                        <label className='mb-2'>Address</label>
                         <input type="text" name="address" className="form-control" placeholder="Enter address" 
                                 onChange={(e) => setFormData({ ...formData, address: e.target.value })}/>
                     </div>
                 </div>
             </Modal.Body>
             <Modal.Footer>
-            <Button variant="secondary" onClick={handleCloseForm}>
+            <Button className='btn-red' onClick={handleCloseForm}>
                 Cancel
             </Button>
-            <Button variant="success" onClick={handleRegister}>Register</Button>
+            <Button className='btn-admin' onClick={handleRegister}>Register</Button>
             </Modal.Footer>
         </Modal>
     </div>

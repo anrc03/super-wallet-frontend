@@ -85,8 +85,7 @@ const ExchangeRateList = () => {
 
   return (
     <>
-      {/* <p style={{marginBottom: -5, textAlign: 'center', fontWeight: 'bold', fontSize: 40}}>{baseCurrency}</p> */}
-      <div className="justify-content-center align-items-center d-flex mb-4 mt-2 exchange">
+      <div className="justify-content-center align-items-center d-flex mb-4 mt-4 exchange">
         <select
           name="Currency Rate"
           className='form-select'

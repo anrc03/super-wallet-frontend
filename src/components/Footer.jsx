@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
+import { AnimationOnScroll } from "react-animation-on-scroll";
 
 export default function Footer() {
   return (
     <div>
+        <AnimationOnScroll animateIn="animate__fadeInUp" delay={100}>
       <div className="container-fluid footer pt-3 fadeIn" data-wow-delay="0.1s">
         <div className="container py-3">
           <div className="row g-5 d-flex justify-content-center">
@@ -30,7 +32,7 @@ export default function Footer() {
               <h5 className="mb-3 title-footer">Contact us</h5>
               <p><i className="fa fa-map-marker-alt me-3"></i>Jl. H. Dahlan No.75, RT.008/RW.004,<br />Ragunan, Ps. Minggu, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta</p>
               <p><i className="fa fa-phone-alt me-3"></i>+62 895 024 811 95</p>
-              <p><i className="fa fa-envelope me-3"></i>callsw@superwallet.com</p>
+              <p><i className="fa fa-envelope me-3"></i>call.superwallet@gmail.com</p>
             </div>
             <div className="col-lg-3 col-md-6">
               <h5 className="mb-3 title-footer">Quick Links</h5>
@@ -48,6 +50,7 @@ export default function Footer() {
           &copy; 2024 <Link to='/'><strong><span>Super Wallet</span></strong></Link> | All Rights Reserved
         </div>
       </div>
+      </AnimationOnScroll>
     </div>
   );
 }
