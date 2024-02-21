@@ -14,7 +14,6 @@ import axios from 'axios';
 import { BASE_CUSTOMER } from '../constant/Endpoint';
 
 export default function AvatarProfile() {
-
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -36,19 +35,19 @@ export default function AvatarProfile() {
     getCustomerData()
   }, [])
 
-    const handleLogout = (e) => {
-        e.preventDefault();
-        dispatch(logout());
-        navigate("/login");
-      };
-    
-      const handleOpenUserMenu = (event) => {
-        setAnchorElUser(event.currentTarget);
-      };
-    
-      const handleCloseUserMenu = () => {
-        setAnchorElUser(null);
-      };
+  const handleLogout = (e) => {
+    e.preventDefault();
+    dispatch(logout());
+    navigate("/login");
+  };
+
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget);
+  };
+
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
 
   return (
     <>
@@ -90,5 +89,5 @@ export default function AvatarProfile() {
               </Menu>
             </Box>
     </>
-  )
+  );
 }

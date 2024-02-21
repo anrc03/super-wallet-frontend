@@ -1,348 +1,569 @@
-import React from "react";
+// import React, { useEffect, useState } from "react";
+// import { DatePicker } from "antd";
+// import axios from "axios";
+// import { useNavigate, useParams } from "react-router-dom";
+// import { useDispatch, useSelector } from "react-redux";
+// import { selectUser } from "../../components/redux/UserSlice";
+// import { BASE_CUSTOMER } from "../../constant/Endpoint";
+
+// function EditProfile() {
+//   const [formData, setFormData] = useState({
+//     firstName: "",
+//     lastName: "",
+//     phoneNumber: "",
+//     birthDate: "",
+//     gender: "",
+//     userCredential: {
+//       email: "",
+//     },
+//     password: "",
+//     address: "",
+//     image: "",
+//   });
+
+//   const user = useSelector(selectUser);
+//   console.log(user.customerId);
+
+//   const customerId = user.customerId;
+
+//   console.log("ini id : " + user.customerId);
+
+//   // const [valid, setValid] = useState("");
+
+//   const [errors, setErrors] = useState({
+//     firstName: "",
+//     lastName: "",
+//     phoneNumber: "",
+//     address: "",
+//     email: "",
+//   });
+
+//   const navigate = useNavigate();
+
+//   useEffect(() => {
+//     axios
+//       .get(`${BASE_CUSTOMER}/${customerId}`)
+//       .then((response) => {
+//         const userData = response.data.data;
+//         setFormData(userData);
+//       })
+//       .catch((error) => {
+//         console.error("Error fetching user data:", error);
+//       });
+//   }, [customerId]);
+
+//   const handleFirstNameChange = (e) => {
+//     setFormData({ ...formData, firstName: e.target.value });
+//   };
+
+//   const handleLastNameChange = (e) => {
+//     setFormData({ ...formData, lastName: e.target.value });
+//   };
+
+//   const handlePhoneNumberChange = (e) => {
+//     setFormData({ ...formData, phoneNumber: e.target.value });
+//   };
+
+//   const handleAddressChange = (e) => {
+//     setFormData({ ...formData, address: e.target.value });
+//   };
+
+//   const handleEmailChange = (e) => {
+//     setFormData({
+//       ...formData,
+//       userCredential: {
+//         ...formData.userCredential,
+//         email: e.target.value,
+//       },
+//     });
+//   };
+
+//   // setFormData({ ...formData, [customerId]: value });
+
+//   console.log(formData, "ini form data");
+
+//   // const handleSubmit = async (e) => {
+//   //   e.preventDefault();
+//   //   const isFormValid = validateForm();
+
+//   //   if (isFormValid) {
+//   //     try {
+//   //       const response = await axios.put(`${BASE_CUSTOMER}`, {
+//   //         id: customerId,
+//   //         firstName: formData.firstName,
+//   //         lastName: formData.lastName,
+//   //         phoneNumber: formData.phoneNumber,
+//   //         address: formData.address,
+//   //         email: formData.userCredential.email,
+//   //         image: formData.image,
+//   //       });
+
+//   //       // Check if the update was successful
+//   //       if (response.status === 200) {
+//   //         console.log("sukses ubah");
+//   //         navigate("/profile");
+//   //       } else {
+//   //         // Handle unsuccessful response (e.g., display an error message)
+//   //         console.error("Update failed:", response.data);
+//   //         let validationErrors = {};
+//   //         validationErrors.general = "Update failed. Please try again.";
+//   //         setErrors(validationErrors);
+//   //       }
+//   //     } catch (error) {
+//   //       // Handle Axios or validation error
+//   //       console.error("Error during update:", error);
+
+//   //       // Customize the error handling based on your needs
+//   //       let validationErrors = {};
+//   //       validationErrors.general = "Update failed. Please try again.";
+//   //       setErrors(validationErrors);
+//   //     }
+//   //   }
+//   // };
+
+//   // const handleSubmit = async (e) => {
+//   //   e.preventDefault();
+
+//   //   try {
+//   //     const response = await axios.put(`${BASE_CUSTOMER}`, {
+//   //       id: customerId,
+//   //       firstName: formData.firstName,
+//   //       lastName: formData.lastName,
+//   //       phoneNumber: formData.phoneNumber,
+//   //       address: formData.address,
+//   //       email: formData.userCredential.email,
+//   //       // image: formData.image,
+//   //     });
+
+//   //     // Check if the update was successful
+//   //     if (response.status === 200) {
+//   //       console.log("sukses ubah");
+//   //       navigate("/profile");
+//   //     } else {
+//   //       // Handle unsuccessful response (e.g., display an error message)
+//   //       console.error("Update failed:", response.data);
+//   //     }
+//   //   } catch (error) {
+//   //     // Handle Axios or validation error
+//   //     console.error("Error during update:", error);
+//   //   }
+//   // };
+
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+
+//     try {
+//       const response = await axios.put(`${BASE_CUSTOMER}`, formData);
+
+//       if (response.status === 200) {
+//         console.log("Update successful");
+//         navigate("/profile");
+//       } else {
+//         console.error("Update failed:", response.data);
+//       }
+//     } catch (error) {
+//       console.error("Error during update:", error);
+//     }
+//   };
+
+//   // const validateForm = () => {
+//   //   const validationErrors = {
+//   //     lastName: formData.lastName.trim() === "" ? "Full Name is required" : "",
+//   //     firstName:
+//   //       formData.firstName.trim() === "" ? "Full Name is required" : "",
+//   //     phoneNumber: !/^\d+$/.test(formData.phoneNumber)
+//   //       ? "Phone number must contain only numbers"
+//   //       : "",
+//   //     address: formData.address.trim() === "" ? "Address is required" : "",
+//   //     email: !/^\S+@\S+\.\S+$/.test(formData.email)
+//   //       ? "Please enter a valid email address"
+//   //       : "",
+//   //   };
+
+//   //   // Validate username does not contain spaces
+//   //   // if (formData.username.includes(" ")) {
+//   //   //   validationErrors.username = "Username cannot contain spaces";
+//   //   // }
+
+//   //   // Set errors state with validationErrors object
+//   //   setErrors(validationErrors);
+
+//   //   // Check if all fields are valid
+//   //   const isFormValid = Object.values(validationErrors).every(
+//   //     (error) => error === ""
+//   //   );
+
+//   //   return isFormValid;
+//   // };
+
+//   console.log(customerId, "ini customer id");
+
+//   return (
+//     <div className="container-xl px-4 mt-4">
+//       {/* Account page navigation*/}
+//       <h1 className="display-6 fw-bold text-green">Edit profile</h1>
+//       <hr className="mt-0 mb-4" />
+//       <div className="row">
+//         <div className="col-xl-4">
+//           {/* Profile picture card*/}
+//           <div className="card mb-4 mb-xl-0">
+//             <div className="card-header">Profile Picture</div>
+//             <div className="card-body text-center">
+//               {/* Profile picture image*/}
+//               <img
+//                 className="img-account-profile rounded-circle mb-2"
+//                 style={{ alignContent: "center", width: "300px" }}
+//                 src="src/assets/images/Profile.png"
+//                 alt=""
+//               />
+//               {/* Profile picture help block*/}
+//               <div className="small font-italic text-muted mb-2">
+//                 JPG or PNG no larger than 5 MB
+//               </div>
+//               {/* Profile picture upload button*/}
+//               <input
+//                 type="file"
+//                 className="btn btn-primary"
+//                 accept="image/*"
+
+//                 // onChange={UploadImg}
+//                 // ref={imageUploader}
+//                 // onClick={() => imageUploader.current.click()}
+//               />
+//             </div>
+//           </div>
+//         </div>
+//         <div className="col-xl-8">
+//           {/* Account details card*/}
+//           <div className="card mb-4">
+//             <div className="card-header">Account Details</div>
+//             <div className="card-body">
+//               <form>
+//                 {/* Form Group (first name)*/}
+//                 <div className="mb-3">
+//                   <label className="small mb-1" htmlFor="inputFirstName">
+//                     First Name
+//                   </label>
+//                   <input
+//                     className="form-control"
+//                     value={formData.firstName}
+//                     id="inputFirstName"
+//                     type="text"
+//                     placeholder="Enter your first name"
+//                     onChange={handleFirstNameChange}
+//                   />
+//                 </div>
+//                 {/* Form Group (last name)*/}
+//                 <div className="mb-3">
+//                   <label className="small mb-1" htmlFor="inputLastName">
+//                     Last Name
+//                   </label>
+//                   <input
+//                     className="form-control"
+//                     value={formData.lastName}
+//                     id="inputLastName"
+//                     type="text"
+//                     placeholder="Enter your last name"
+//                     onChange={handleLastNameChange}
+//                   />
+//                 </div>
+
+//                 {/* Form Group (Phone)*/}
+//                 <div className="mb-3">
+//                   <label className="small mb-1" htmlFor="inputPhoneNumber">
+//                     Phone Number
+//                   </label>
+//                   <input
+//                     className="form-control"
+//                     value={formData.phoneNumber}
+//                     id="inputPhoneNumber"
+//                     type="text"
+//                     placeholder="Enter your phone number"
+//                     onChange={handlePhoneNumberChange}
+//                   />
+//                 </div>
+
+//                 {/* Form Group (address)*/}
+//                 <div className="mb-3">
+//                   <label className="small mb-1" htmlFor="inputAddress">
+//                     Address
+//                   </label>
+//                   <input
+//                     className="form-control"
+//                     value={formData.address}
+//                     id="inputAddress"
+//                     type="text"
+//                     placeholder="Enter your address ex: Bekasi City"
+//                     onChange={handleAddressChange}
+//                   />
+//                 </div>
+
+//                 {/* Form Group (email)*/}
+//                 <div className="mb-3">
+//                   <label className="small mb-1" htmlFor="inputEmail">
+//                     Email
+//                   </label>
+//                   <input
+//                     className="form-control"
+//                     value={formData.userCredential?.email || ""}
+//                     id="inputEmail"
+//                     type="text"
+//                     placeholder="Enter your email address ex: name@gmail.com"
+//                     onChange={handleEmailChange}
+//                   />
+//                 </div>
+
+//                 {/* Save changes button*/}
+//                 <button
+//                   className="btn btn-primary"
+//                   type="button"
+//                   onClick={handleSubmit}
+//                 >
+//                   Save changes
+//                 </button>
+//               </form>
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }
+
+// export default EditProfile;
+
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectUser } from "../../components/redux/UserSlice";
+import { BASE_CUSTOMER } from "../../constant/Endpoint";
 
 function EditProfile() {
-  const handleSubmit = (e) => {
+  const [formData, setFormData] = useState({
+    id: "",
+    firstName: "",
+    lastName: "",
+    phoneNumber: "",
+    birthDate: "",
+    gender: "",
+    userCredential: {
+      email: "",
+    },
+    password: "",
+    address: "",
+    image: "",
+  });
+
+  const user = useSelector(selectUser);
+  const customerId = user.customerId;
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    axios
+      .get(`${BASE_CUSTOMER}/${customerId}`)
+      .then((response) => {
+        const userData = response.data.data;
+        setFormData(userData);
+      })
+      .catch((error) => {
+        console.error("Error fetching user data:", error);
+      });
+  }, [customerId]);
+
+  const handleFirstNameChange = (e) => {
+    setFormData({ ...formData, firstName: e.target.value });
+  };
+
+  const handleLastNameChange = (e) => {
+    setFormData({ ...formData, lastName: e.target.value });
+  };
+
+  const handlePhoneNumberChange = (e) => {
+    setFormData({ ...formData, phoneNumber: e.target.value });
+  };
+
+  const handleBirthDateChange = (e) => {
+    setFormData({ ...formData, birthDate: e.target.value });
+  };
+
+  const handleGenderChange = (e) => {
+    setFormData({ ...formData, gender: e.target.value });
+  };
+
+  const handleAddressChange = (e) => {
+    setFormData({ ...formData, address: e.target.value });
+  };
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    setFormData((prevData) => ({ ...prevData, image: file }));
+  };
+
+  const handleEmailChange = (e) => {
+    setFormData({
+      ...formData,
+      userCredential: {
+        ...formData.userCredential,
+        email: e.target.value,
+      },
+    });
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    let isValid = true;
-    let validationErrors = {};
 
-    if (formData.username === "" || formData.username === null) {
-      isValid = false;
-      validationErrors.username = "Username must be filled";
-    }
+    const formDataToSend = new FormData();
+    formDataToSend.append("id", customerId);
+    formDataToSend.append("firstName", formData.firstName);
+    formDataToSend.append("lastName", formData.lastName);
+    formDataToSend.append("phoneNumber", formData.phoneNumber);
+    formDataToSend.append("birthDate", formData.birthDate);
+    formDataToSend.append("gender", formData.gender);
+    formDataToSend.append("address", formData.address);
+    formDataToSend.append("email", formData.userCredential.email);
+    formDataToSend.append("image", formData.image);
 
-    if (!formData.email || formData.email === "") {
-      isValid = false;
-      validationErrors.email = "Email address must be filled";
-    } else if (!validateEmail(formData.email)) {
-      isValid = false;
-      validationErrors.email = "Invalid email address";
-    }
+    try {
+      const response = await axios.put(`${BASE_CUSTOMER}`, formDataToSend, {
+        headers: {
+          "Content-Type": "multipart/form-data", // Set Content-Type ke form-data
+        },
+      });
 
-    if (formData.password === "" || formData.password === null) {
-      isValid = false;
-      validationErrors.password = "Password must be filled";
-    } else {
-      const passwordError = validatePassword(formData.password);
-      if (passwordError) {
-        isValid = false;
-        validationErrors.password = passwordError;
+      if (response.status === 200) {
+        console.log("sukses ubah");
+        navigate("/profile");
+      } else {
+        console.error("Update failed:", response.data);
       }
-    }
-
-    if (formData.confirmPassword === "" || formData.confirmPassword === null) {
-      isValid = false;
-      validationErrors.confirmPassword = "Confirm password must be filled";
-    } else if (formData.password !== formData.confirmPassword) {
-      isValid = false;
-      validationErrors.confirmPassword = "Password doesn't match";
-    }
-
-    if (formData.firstName === "" || formData.firstName === null) {
-      isValid = false;
-      validationErrors.firstName = "First Name must be filled";
-    }
-
-    if (formData.lastName === "" || formData.lastName === null) {
-      isValid = false;
-      validationErrors.lastName = "Last Name must be filled";
-    }
-
-    if (formData.phoneNumber === "" || formData.phoneNumber === null) {
-      isValid = false;
-      validationErrors.phoneNumber = "Number phone must be filled";
-    }
-
-    if (!formData.birthDate || formData.birthDate === "") {
-      isValid = false;
-      validationErrors.birthDate = "Birth date must be filled";
-    } else {
-      const birthDate = new Date(formData.birthDate);
-      const currentDate = new Date();
-      let age = currentDate.getFullYear() - birthDate.getFullYear();
-      const monthDiff = currentDate.getMonth() - birthDate.getMonth();
-      if (
-        monthDiff < 0 ||
-        (monthDiff === 0 && currentDate.getDate() < birthDate.getDate())
-      ) {
-        age--;
-      }
-
-      if (age < 18) {
-        isValid = false;
-        validationErrors.birthDate =
-          "You must be at least 18 years old to register";
-      }
-    }
-
-    if (!formData.gender) {
-      isValid = false;
-      validationErrors.gender = "Gender must be selected";
-    }
-
-    if (!formData.address) {
-      isValid = false;
-      validationErrors.address = "Address must be filled";
-    }
-
-    if (isValid) {
-      axios
-        .post(REGISTER_CUSTOMER, {
-          firstName: formData.firstName,
-          lastName: formData.lastName,
-          phoneNumber: formData.phoneNumber,
-          birthDate: moment(formData.birthDate).format("yyyy-MM-DD"),
-          gender: formData.gender,
-          address: formData.address,
-          email: formData.email,
-          password: formData.password,
-        })
-        .then(() => {
-          navigate("/login");
-        })
-        .catch((err) => {
-          isValid = false;
-          validationErrors.username = "Username already exist";
-          setErrors(validationErrors);
-          setValid(isValid);
-        });
-    } else {
-      setErrors(validationErrors);
-      setValid(isValid);
+    } catch (error) {
+      console.error("Error during update:", error);
     }
   };
 
-  const handleShowPassword = () => {
-    let input = document.getElementById("setPassword");
-    let icon = document.getElementById("passwordToggleIcon");
-
-    if (input.type === "password") {
-      input.type = "text";
-      icon.innerHTML = '<i class="bi bi-eye-fill"></i>';
-    } else {
-      input.type = "password";
-      icon.innerHTML = '<i class="bi bi-eye-slash-fill"></i>';
-    }
-  };
   return (
     <div className="container-xl px-4 mt-4">
-      {/* Account page navigation*/}
-
+      <h1 className="display-6 fw-bold text-green">Edit profile</h1>
       <hr className="mt-0 mb-4" />
       <div className="row">
-        <div className="col-xl-4">
-          {/* Profile picture card*/}
-          <div className="card mb-4 mb-xl-0">
-            <div className="card-header">Profile Picture</div>
-            <div className="card-body text-center">
-              {/* Profile picture image*/}
-              <img
-                className="img-account-profile rounded-circle mb-2"
-                src="http://bootdey.com/img/Content/avatar/avatar1.png"
-                alt=""
-              />
-              {/* Profile picture help block*/}
-              <div className="small font-italic text-muted mb-4">
-                JPG or PNG no larger than 5 MB
-              </div>
-              {/* Profile picture upload button*/}
-              <button className="btn btn-primary" type="button">
-                Upload new image
-              </button>
-            </div>
-          </div>
-        </div>
+        {/* ... */}
         <div className="col-xl-8">
-          {/* Account details card*/}
           <div className="card mb-4">
             <div className="card-header">Account Details</div>
             <div className="card-body">
               <form>
-                {/* Form Group (username)*/}
                 <div className="mb-3">
-                  <label className="small mb-1" htmlFor="inputUsername">
-                    Fullname
+                  <label className="small mb-1" htmlFor="inputFirstName">
+                    First Name
                   </label>
                   <input
                     className="form-control"
-                    id="inputUsername"
+                    value={formData.firstName}
+                    id="inputFirstName"
                     type="text"
-                    placeholder="Enter your name"
-                    defaultValue="username"
+                    placeholder="Enter your first name"
+                    onChange={handleFirstNameChange}
                   />
                 </div>
-                {/* Form Group (username)*/}
+
                 <div className="mb-3">
-                  <label className="small mb-1" htmlFor="inputPassword">
-                    Password
+                  <label className="small mb-1" htmlFor="inputLastName">
+                    Last Name
                   </label>
-                  {valid ? (
-                    <></>
-                  ) : (
-                    <span className="text-danger"> {errors.password}</span>
-                  )}
-                  <div className="input-group">
-                    <input
-                      type="password"
-                      id="setPassword"
-                      name="password"
-                      className="form-control"
-                      placeholder="Enter your password"
-                      onChange={(e) =>
-                        setFormData({ ...formData, password: e.target.value })
-                      }
-                    />
-                    <div className="input-group-append">
-                      <span
-                        className="input-group-text ms-2 eye-icon"
-                        onClick={handleShowPassword}
-                        id="passwordToggleIcon"
-                      >
-                        <i className="bi bi-eye-slash-fill"></i>
-                      </span>
-                    </div>
-                  </div>
+                  <input
+                    className="form-control"
+                    value={formData.lastName}
+                    id="inputLastName"
+                    type="text"
+                    placeholder="Enter your last name"
+                    onChange={handleLastNameChange}
+                  />
                 </div>
-                {/* Form Group (Phone)*/}
+
                 <div className="mb-3">
-                  <label className="small mb-1" htmlFor="inputUsername">
+                  <label className="small mb-1" htmlFor="inputPhoneNumber">
                     Phone Number
                   </label>
                   <input
                     className="form-control"
-                    id="inputUsername"
+                    value={formData.phoneNumber}
+                    id="inputPhoneNumber"
                     type="text"
                     placeholder="Enter your phone number"
-                    defaultValue="08123456789"
+                    onChange={handlePhoneNumberChange}
                   />
                 </div>
-                {/* Form Group (Phone)*/}
+
                 <div className="mb-3">
-                  <label className="small mb-1" htmlFor="inputUsername">
+                  <label className="small mb-1" htmlFor="inputBirthDate">
                     Birth Date
                   </label>
-                  {valid ? (
-                    <></>
-                  ) : (
-                    <span className="text-danger"> {errors.birthDate}</span>
-                  )}
-                  <div className="icon">
-                    <DatePicker
-                      className="date-input"
-                      showIcon
-                      icon={
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="1em"
-                          height="1em"
-                          viewBox="0 0 48 48"
-                        >
-                          <mask id="ipSApplication0">
-                            <g
-                              fill="none"
-                              stroke="#fff"
-                              strokeLinejoin="round"
-                              strokeWidth="4"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                d="M40.04 22v20h-32V22"
-                              ></path>
-                              <path
-                                fill="#fff"
-                                d="M5.842 13.777C4.312 17.737 7.263 22 11.51 22c3.314 0 6.019-2.686 6.019-6a6 6 0 0 0 6 6h1.018a6 6 0 0 0 6-6c0 3.314 2.706 6 6.02 6c4.248 0 7.201-4.265 5.67-8.228L39.234 6H8.845l-3.003 7.777Z"
-                              ></path>
-                            </g>
-                          </mask>
-                          <path
-                            fill="currentColor"
-                            d="M0 0h48v48H0z"
-                            mask="url(#ipSApplication0)"
-                          ></path>
-                        </svg>
-                      }
-                      selected={formData.birthDate}
-                      onChange={(date) =>
-                        setFormData({ ...formData, birthDate: date })
-                      }
-                      dateFormat={"yyyy-MM-dd"}
-                      placeholderText="Enter your birth date"
-                    />
-                  </div>
+                  <input
+                    className="form-control"
+                    value={formData.birthDate}
+                    id="inputBirthDate"
+                    type="text"
+                    placeholder="Enter your birth date"
+                    onChange={handleBirthDateChange}
+                  />
                 </div>
-                {/* Form Group (email address)*/}
+
                 <div className="mb-3">
-                  <label className="small mb-1" htmlFor="inputEmailAddress">
+                  <label className="small mb-1" htmlFor="inputGender">
                     Gender
                   </label>
-                  {valid ? (
-                    <></>
-                  ) : (
-                    <span className="text-danger"> {errors.gender}</span>
-                  )}
-                  <div>
-                    <fieldset>
-                      <input
-                        type="radio"
-                        id="male"
-                        value="MALE"
-                        name="gender"
-                        checked={formData.gender === "MALE"}
-                        style={{ marginRight: 5 }}
-                        onChange={(e) =>
-                          setFormData({ ...formData, gender: e.target.value })
-                        }
-                      ></input>
-                      <label htmlFor="male" style={{ marginRight: 5 }}>
-                        Male
-                      </label>
-
-                      <input
-                        type="radio"
-                        id="female"
-                        value="FEMALE"
-                        name="gender"
-                        checked={formData.gender === "FEMALE"}
-                        style={{ marginLeft: 5 }}
-                        onChange={(e) =>
-                          setFormData({ ...formData, gender: e.target.value })
-                        }
-                      ></input>
-                      <label htmlFor="female" style={{ marginLeft: 5 }}>
-                        Female
-                      </label>
-                    </fieldset>
-                  </div>
+                  <input
+                    className="form-control"
+                    value={formData.gender}
+                    id="inputGender"
+                    type="text"
+                    placeholder="Enter your gender"
+                    onChange={handleGenderChange}
+                  />
                 </div>
-                {/* Form Group (username)*/}
+
                 <div className="mb-3">
-                  <label className="small mb-1" htmlFor="inputUsername">
+                  <label className="small mb-1" htmlFor="inputAddress">
                     Address
                   </label>
                   <input
                     className="form-control"
-                    id="inputUsername"
+                    value={formData.address}
+                    id="inputAddress"
                     type="text"
                     placeholder="Enter your address"
-                    defaultValue="address"
+                    onChange={handleAddressChange}
                   />
                 </div>
 
-                {/* Form Group (email)*/}
                 <div className="mb-3">
-                  <label className="small mb-1" htmlFor="inputUsername">
+                  <label className="small mb-1" htmlFor="inputEmail">
                     Email
                   </label>
                   <input
                     className="form-control"
-                    id="inputUsername"
+                    value={formData.userCredential?.email || ""}
+                    id="inputEmail"
                     type="text"
                     placeholder="Enter your email address"
-                    defaultValue="name@example.com"
+                    onChange={handleEmailChange}
                   />
                 </div>
 
-                {/* Save changes button*/}
+                <div className="mb-3">
+                  <label className="small mb-1" htmlFor="inputImage">
+                    Image
+                  </label>
+                  <input
+                    type="file"
+                    className="form-control"
+                    accept="image/*"
+                    id="inputImage"
+                    onChange={handleImageChange}
+                  />
+                </div>
+
                 <button
                   className="btn btn-primary"
                   type="button"
