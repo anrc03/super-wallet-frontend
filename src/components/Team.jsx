@@ -45,10 +45,8 @@ function Team() {
                     <span>Software Developer</span>
                   </div>
                   <div className="social">
-                    <a href=""><i className="bi bi-twitter-x"></i></a>
-                    <a href=""><i className="bi bi-facebook"></i></a>
-                    <a href=""><i className="bi bi-instagram"></i></a>
-                    <a href=""><i className="bi bi-linkedin"></i></a>
+                    <a href="https://www.instagram.com/mikhaelvanwellman?igsh=MXVoOGk1eHp3cDZoNw=="><i className="bi bi-instagram"></i></a>
+                    <a href="https://www.linkedin.com/in/mikhael-wellman-399167159?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"><i className="bi bi-linkedin"></i></a>
                   </div>
                 </div>
               </div>
@@ -61,14 +59,12 @@ function Team() {
                 <img src="./src/assets/images/team/Team-Alwan.png" className="img-fluid" alt="" />
                 <div className="member-info">
                   <div className="member-info-content">
-                    <h4>Muhammad Alawansyah Mardika</h4>
+                    <h4>Muhammad Alwansyah Mardika</h4>
                     <span>Software Developer</span>
                   </div>
                   <div className="social">
-                    <a href=""><i className="bi bi-twitter-x"></i></a>
-                    <a href=""><i className="bi bi-facebook"></i></a>
-                    <a href=""><i className="bi bi-instagram"></i></a>
-                    <a href=""><i className="bi bi-linkedin"></i></a>
+                    <a href="https://www.instagram.com/alwanmrdika"><i className="bi bi-instagram"></i></a>
+                    <a href="https://www.linkedin.com/in/muhammad-alwansyah-mardika?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"><i className="bi bi-linkedin"></i></a>
                   </div>
                 </div>
               </div>
@@ -125,10 +121,7 @@ function Team() {
                     <span>Software Developer</span>
                   </div>
                   <div className="social">
-                    <a href=""><i className="bi bi-twitter-x"></i></a>
-                    <a href=""><i className="bi bi-facebook"></i></a>
-                    <a href=""><i className="bi bi-instagram"></i></a>
-                    <a href=""><i className="bi bi-linkedin"></i></a>
+                    <a href="https://www.instagram.com/dim.shdn.t?igsh=bXM0aWhsMXgxdjFu"><i className="bi bi-instagram"></i></a>
                   </div>
                 </div>
               </div>

@@ -20,7 +20,7 @@ function CurrencyConverter() {
 	return (
 		<>
 			<Helmet>
-                <title>Exchange Rate | Super Wallet</title>
+                <title>Currency Converter | Super Wallet</title>
             </Helmet>
             <Navbar />
             <div className="container-fluid header-about header-about animate__animated animate__slideInDown">

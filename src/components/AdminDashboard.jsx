@@ -7,6 +7,7 @@ import { Button, Modal } from 'react-bootstrap';
 import PhoneInput from 'react-phone-input-2';
 import Swal from 'sweetalert2';
 import LoadSpinner from './LoadSpinner';
+import { Helmet } from 'react-helmet';
 
 const AdminDashboard = () => {
 
@@ -77,6 +78,9 @@ const AdminDashboard = () => {
 
   return (
     <div>
+        <Helmet>
+            <title>Dashboard | Super Wallet</title>
+            </Helmet>
         <p style={{marginTop:20, textAlign: 'center', fontSize:25, fontWeight: 'bold'}}>Welcome, <span style={{color: 'green'}}>{user.email.split("@")[0]}</span></p>
         <p style={{marginBottom: 20, textAlign: 'center', fontSize:17}}>What would you like to do today?</p>
         {

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { getTransactionByPage } from '../constant/Endpoint';
+import { Helmet } from 'react-helmet';
 
 const TransactionHistoryList = () => {
 
@@ -90,6 +91,9 @@ const TransactionHistoryList = () => {
 
   return (
     <div>
+        <Helmet>
+            <title>Transaction History | Super Wallet</title>
+            </Helmet>
         <p style={{ marginBottom: -5, textAlign: 'center', fontWeight: 'bold', fontSize: 40, marginTop: 4 }}>{transactionCount}</p>
         <p style={{ marginBottom: 15, textAlign: 'center', fontSize: 20, color: '#6f9459' }}>Total Transaction</p>
         <div style={{textAlign: 'center'}}>{transactionList.length === 0 ? displayEmptyList : displayTable}</div>

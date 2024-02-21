@@ -29,14 +29,6 @@ export default function Faq() {
                             <h1 className="mb-2 animation slideInDown">Discover Smooth and Secure Currency Transactions with Super Wallet</h1>
                             <p className="animation slideInDown">Your preferred platform for hassle-free transactions and currency exchange</p>
                         </div>
-                        {/* <div className="col-lg-6 animate__animated animate_fadeIn">
-                            <img
-                                className="img-fluid animate__animated animate__pulse animate__infinite"
-                                style={{ animationDuration: "3s" }}
-                                src=""
-                                alt=""
-                            />
-                        </div> */}
                     </div>
                 </div>
             </div>

@@ -342,3 +342,16 @@ h6,
 .bg-currency h1, .bg-currency p, .bg-currency label, .bg-currency input {
   color: #fff !important;
 }
+
+.pincode-input-text {
+  border-radius: 10px;
+  margin-right: 5px !important;
+}
+
+.modal-regi-bank .modal-content {
+  width: 145%;
+}
+
+.modal-regi-bank .modal-dialog {
+  margin-left: 560px;
+}

@@ -5,155 +5,159 @@ import ReactDatePicker from 'react-datepicker';
 import moment from 'moment';
 import Swal from 'sweetalert2';
 import SmallLoadingSpinner from './SmallLoadingSpinner';
+import { Helmet } from 'react-helmet';
 
 const ExchangeRateList = () => {
 
-    const todaysDate = new Date()
-    
-    const [rateList, setRateList] = useState([]);
-    const [baseCurrency, setBaseCurrency] = useState("")
-    const [date, setDate] = useState(todaysDate.toISOString().split('T')[0]);
-    const [toDate, setToDate] = useState(todaysDate.toISOString().split('T')[0]);
-    const [isLoading, setIsLoading] = useState(false)
-    const [totalPage, setTotalPage] = useState(1)
-    const [currentPage, setCurrentPage] = useState(0)
-    
-    const getRateList = async() => {
-        await axios
-            .post(getCurrencyWithTimeSeriesUrl(date, toDate, baseCurrency))
-            .then(res => {
-                console.log(res.data)
-                setTotalPage(res.data.pagingResponse.totalPage)
-                setRateList(res.data.data)
-                setIsLoading(false)
-            })
-            .catch(err => {
-                Swal.fire({
-                    title: "Error",
-                    text: "Data Not Available",
-                    icon: "error",
-                    showConfirmButton: false,
-                    timer: 900
-                })
-                setIsLoading(false)
-            })
+  const todaysDate = new Date()
+
+  const [rateList, setRateList] = useState([]);
+  const [baseCurrency, setBaseCurrency] = useState("")
+  const [date, setDate] = useState(todaysDate.toISOString().split('T')[0]);
+  const [toDate, setToDate] = useState(todaysDate.toISOString().split('T')[0]);
+  const [isLoading, setIsLoading] = useState(false)
+  const [totalPage, setTotalPage] = useState(1)
+  const [currentPage, setCurrentPage] = useState(0)
+
+  const getRateList = async () => {
+    await axios
+      .post(getCurrencyWithTimeSeriesUrl(date, toDate, baseCurrency))
+      .then(res => {
+        console.log(res.data)
+        setTotalPage(res.data.pagingResponse.totalPage)
+        setRateList(res.data.data)
+        setIsLoading(false)
+      })
+      .catch(err => {
+        Swal.fire({
+          title: "Error",
+          text: "Data Not Available",
+          icon: "error",
+          showConfirmButton: false,
+          timer: 900
+        })
+        setIsLoading(false)
+      })
+  }
+
+  const getRateListByPage = async () => {
+    await axios
+      .post(getCurrencyWithTimeSeriesUrl(date, toDate, baseCurrency) + `&page=${currentPage}`)
+      .then(res => {
+        setRateList(res.data.data)
+        setIsLoading(false)
+      })
+      .catch(err => {
+        console.error(err)
+        setIsLoading(false)
+      })
+  }
+
+  useEffect(() => {
+    getRateListByPage(currentPage)
+  }, [currentPage])
+
+  const getTodaysRateList = async () => {
+    if (!baseCurrency) Swal.fire("Please select a base currency")
+    await axios
+      .post(getTodaysCurrencyUrl(baseCurrency))
+      .then(res => {
+        console.log(res.data)
+        setRateList(res.data.data)
+        setIsLoading(false)
+        setTotalPage(0)
+        setCurrentPage(0)
+      })
+      .catch(err => {
+        Swal.fire({
+          title: "Error",
+          text: "Data Not Available",
+          icon: "error",
+          showConfirmButton: false,
+          timer: 900
+        })
+        setIsLoading(false)
+      })
+  }
+
+  // console.log(baseCurrency)
+  // console.log(totalPage)
+
+  const handleClickRefresh = async () => {
+    if (isLoading === false) {
+      setIsLoading(true)
+      await getRateList();
     }
+  }
 
-    const getRateListByPage = async() => {
-      await axios
-          .post(getCurrencyWithTimeSeriesUrl(date, toDate, baseCurrency) + `&page=${currentPage}`)
-          .then(res => {
-              setRateList(res.data.data)
-              setIsLoading(false)
-          })
-          .catch(err => {
-              console.error(err)
-              setIsLoading(false)
-          })
+  const handleClickToday = async () => {
+    if (isLoading === false) {
+      setIsLoading(true)
+      await getTodaysRateList();
     }
+  }
 
-    useEffect(() => {
-      getRateListByPage(currentPage)
-    }, [currentPage])
-
-    const getTodaysRateList = async() => {
-      if(!baseCurrency) Swal.fire("Please select a base currency")
-      await axios
-          .post(getTodaysCurrencyUrl(baseCurrency))
-          .then(res => {
-              console.log(res.data)
-              setRateList(res.data.data)
-              setIsLoading(false)
-              setTotalPage(0)
-              setCurrentPage(0)
-          })
-          .catch(err => {
-              Swal.fire({
-                  title: "Error",
-                  text: "Data Not Available",
-                  icon: "error",
-                  showConfirmButton: false,
-                  timer: 900
-              })
-              setIsLoading(false)
-          })
-    }
-
-    // console.log(baseCurrency)
-    // console.log(totalPage)
-
-    const handleClickRefresh = async() => {
-      if (isLoading === false) {
-        setIsLoading(true)
-        await getRateList();
-      }
-    }
-
-    const handleClickToday = async() => {
-      if (isLoading === false) {
-        setIsLoading(true)
-        await getTodaysRateList();
-      }
-    }
-
-    const displayEmptyList = (
-        <div className="text-center">
-          <div className="d-flex justify-content-center sorry">
-                  <img src="./../src/assets/images/Sorry.png" alt="Sorry Picture" />
-                </div>
-            <p className='sorry-info'>Please select a country and date to view currency history, then click refresh</p>
-        </div>
-    )
-
-    const displayRates = rateList.map((rate) => (
-            <tr key={rate.baseCurrency + rate.targetCurrency}>
-                <td>{rate.date}</td>
-                <td>{rate.baseCurrency}</td>
-                <td>{rate.targetCurrency}</td>
-                <td>{rate.rate}</td>
-            </tr>
-    ));
-
-    const displayTable = (
-        <div className="container">
-            <div className="row">
-                <table className="content-table">
-                    <thead>
-                        <tr>
-                            <th scope='col'>Date</th>
-                            <th scope='col'>Base Currency</th>
-                            <th scope='col'>Target Currency</th>
-                            <th scope='col'>Rate</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {displayRates}
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    )
-
-    const handlePrevious = async () => {
-      if (currentPage != 0) {
-          setCurrentPage(currentPage - 1)
-      }
-    }
-
-    const handleNext = async () => {
-        setCurrentPage(currentPage + 1)
-    }
-    const displayPagination = (
-      <div className="justify-content-center align-items-center d-flex mt-4">
-          <button onClick={handlePrevious} disabled={currentPage === 0}><i className="bi bi-caret-left-fill"></i></button>
-          <div className='m-2' style={{fontSize:15}}>{currentPage + 1}</div>
-          <button onClick={handleNext} disabled={currentPage === totalPage - 1}><i className="bi bi-caret-right-fill"></i></button>
+  const displayEmptyList = (
+    <div className="text-center">
+      <div className="d-flex justify-content-center sorry">
+        <img src="./../src/assets/images/Sorry.png" alt="Sorry Picture" />
       </div>
+      <p className='sorry-info'>Please select a country and date to view currency history, then click refresh</p>
+    </div>
+  )
+
+  const displayRates = rateList.map((rate) => (
+    <tr key={rate.baseCurrency + rate.targetCurrency}>
+      <td>{rate.date}</td>
+      <td>{rate.baseCurrency}</td>
+      <td>{rate.targetCurrency}</td>
+      <td>{rate.rate}</td>
+    </tr>
+  ));
+
+  const displayTable = (
+    <div className="container">
+      <div className="row">
+        <table className="content-table">
+          <thead>
+            <tr>
+              <th scope='col'>Date</th>
+              <th scope='col'>Base Currency</th>
+              <th scope='col'>Target Currency</th>
+              <th scope='col'>Rate</th>
+            </tr>
+          </thead>
+          <tbody>
+            {displayRates}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  )
+
+  const handlePrevious = async () => {
+    if (currentPage != 0) {
+      setCurrentPage(currentPage - 1)
+    }
+  }
+
+  const handleNext = async () => {
+    setCurrentPage(currentPage + 1)
+  }
+  const displayPagination = (
+    <div className="justify-content-center align-items-center d-flex mt-4">
+      <button onClick={handlePrevious} disabled={currentPage === 0}><i className="bi bi-caret-left-fill"></i></button>
+      <div className='m-2' style={{ fontSize: 15 }}>{currentPage + 1}</div>
+      <button onClick={handleNext} disabled={currentPage === totalPage - 1}><i className="bi bi-caret-right-fill"></i></button>
+    </div>
   )
 
   return (
     <>
-      <div className="justify-content-center align-items-center d-flex mb-4 mt-4 exchange">
+      <Helmet>
+        <title>Currency History | Super Wallet</title>
+      </Helmet>
+      <div className="justify-content-center align-items-center d-flex mb-2 mt-4 exchange">
         <select
           name="Currency Rate"
           className='form-select'
@@ -172,9 +176,9 @@ const ExchangeRateList = () => {
           <option value="GBP">GBP</option>
         </select>
       </div>
-        
-      <div className="justify-content-center align-items-center d-flex mb-4 mt-2 exchange">
-        <div>from</div>
+
+      <div className="justify-content-center align-items-center d-flex mb-3 mt-2 exchange">
+        <div className='mx-2'>From</div>
 
         <ReactDatePicker
           className="date-exchange"
@@ -214,7 +218,7 @@ const ExchangeRateList = () => {
           placeholderText="Enter date"
         />
 
-        <div>to</div>
+        <div className='mx-2'>To</div>
 
         <ReactDatePicker
           className="date-exchange"
@@ -254,12 +258,12 @@ const ExchangeRateList = () => {
           placeholderText="Enter date"
         />
       </div>
-      <div className="justify-content-center align-items-center d-flex mb-4"><button className="btn btn-green" onClick={handleClickRefresh}>Get Rate by Time Series</button></div>
-      <div className="justify-content-center align-items-center d-flex mb-4"><button className="btn btn-green" onClick={handleClickToday}>Get Today's Rate Only</button></div>
+      <div className="justify-content-center align-items-center d-flex mb-2"><button className="btn btn-green" onClick={handleClickRefresh}>Get Rate by Time Series</button></div>
+      <div className="justify-content-center align-items-center d-flex mb-2"><button className="btn btn-green" onClick={handleClickToday}>Get Today's Rate Only</button></div>
       <div style={{ textAlign: "center" }}>
-        {isLoading ? <SmallLoadingSpinner/>: rateList.length == 0 ? displayEmptyList : displayTable}
+        {isLoading ? <SmallLoadingSpinner /> : rateList.length == 0 ? displayEmptyList : displayTable}
       </div>
-      <div style={{textAlign: 'center'}}>{totalPage > 1 && displayPagination }</div>
+      <div style={{ textAlign: 'center' }}>{totalPage > 1 && displayPagination}</div>
     </>
   );
 }

@@ -4,6 +4,7 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import { Button, Modal } from 'react-bootstrap';
 import PhoneInput from 'react-phone-input-2';
+import { Helmet } from 'react-helmet';
 
 const AdminList = () => {
 
@@ -214,6 +215,9 @@ const AdminList = () => {
     
     return (
         <>
+        <Helmet>
+            <title>Admin List | Super Wallet</title>
+            </Helmet>
             <p style={{ marginBottom: -5, textAlign: 'center', fontWeight: 'bold', fontSize: 40, marginTop: 4 }}>{adminList.length}</p>
             <p style={{ marginBottom: 15, textAlign: 'center', fontSize: 20, color: '#6f9459' }}>Registered Admin</p>
             <div className='container justify-content-center align-items-center d-flex mb-4 search-input input-group'>
