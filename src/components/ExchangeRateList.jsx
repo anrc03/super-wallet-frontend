@@ -153,7 +153,6 @@ const ExchangeRateList = () => {
 
   return (
     <>
-      {/* <p style={{marginBottom: -5, textAlign: 'center', fontWeight: 'bold', fontSize: 40}}>{baseCurrency}</p> */}
       <div className="justify-content-center align-items-center d-flex mb-4 mt-2 exchange">
         <select
           name="Currency Rate"
@@ -210,7 +209,7 @@ const ExchangeRateList = () => {
             </svg>
           }
           selected={date}
-          onChange={(date) => setDate(moment(date).format("yyyy-MM-DD"))}
+          onChange={(date) => date!= null && setDate(moment(date).format("yyyy-MM-DD"))}
           dateFormat={"yyyy-MM-dd"}
           placeholderText="Enter date"
         />
@@ -250,13 +249,13 @@ const ExchangeRateList = () => {
             </svg>
           }
           selected={toDate}
-          onChange={(date) => setToDate(moment(date).format("yyyy-MM-DD"))}
+          onChange={(date) => date!= null && setToDate(moment(date).format("yyyy-MM-DD"))}
           dateFormat={"yyyy-MM-dd"}
           placeholderText="Enter date"
         />
       </div>
       <div className="justify-content-center align-items-center d-flex mb-4"><button className="btn btn-green" onClick={handleClickRefresh}>Get Rate by Time Series</button></div>
-      <div className="justify-content-center align-items-center d-flex mb-4"><button className="btn btn-green" onClick={handleClickToday}>Get Today's Rate Only</button></div>
+      {/* <div className="justify-content-center align-items-center d-flex mb-4"><button className="btn btn-green" onClick={handleClickToday}>Get Today's Rate Only</button></div> */}
       <div style={{ textAlign: "center" }}>
         {isLoading ? <SmallLoadingSpinner/>: rateList.length == 0 ? displayEmptyList : displayTable}
       </div>

@@ -1,12 +1,13 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { getTransactionByPage } from '../constant/Endpoint';
+import Swal from 'sweetalert2';
 
 const TransactionHistoryList = () => {
 
     const [transactionList, setTransactionList] = useState([]);
-    const [currentPage, setCurrentPage] = useState(0)
     const [transactionCount, setTransactionCount] = useState(0)
+    const [currentPage, setCurrentPage] = useState(0)
     const [totalPage, setTotalPage] = useState(0)
 
     const getTransactionListbyPage = async(page) => {
@@ -19,8 +20,6 @@ const TransactionHistoryList = () => {
             })
             .catch(err => console.error(err.message))
     }
-
-    console.log(totalPage)
 
     useEffect(() => {
         getTransactionListbyPage(currentPage)
@@ -37,8 +36,22 @@ const TransactionHistoryList = () => {
 
     const displayTransactions = transactionList.map((transaction) => (
             <tr key={Math.random()}>
-                <td>{transaction.source.accountNumber}</td>
-                <td>{transaction.destination.accountNumber}</td>
+                <td><div style={{cursor:'pointer'}} onClick={() => {
+                    Swal.fire(
+                        "SOURCE ACCOUNT DETAILS\n\n" +
+                        `Account Number: ${transaction.source.accountNumber}\n` +
+                        `Currency Code: ${transaction.source.currencyCode}\n` +
+                        `${transaction.source.currencyName}`
+                    )   
+                }}>{transaction.source.firstName + " " + transaction.source.lastName}</div></td>
+                <td><div style={{cursor:'pointer'}} onClick={() => {
+                    Swal.fire(
+                        "DESTINATION ACCOUNT DETAILS\n\n" +
+                        `Account Number: ${transaction.destination.accountNumber}\n` +
+                        `Currency Code: ${transaction.destination.currencyCode}\n` +
+                        `${transaction.destination.currencyName}`
+                    )   
+                }}>{transaction.destination.firstName + " " + transaction.destination.lastName}</div></td>
                 <td>{transaction.totalAmount}</td>
                 <td>{transaction.date}</td>
                 <td>{transaction.transactionType}</td>

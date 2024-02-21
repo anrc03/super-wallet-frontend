@@ -9,6 +9,8 @@ export const BASE_CUSTOMER = API_BASE_URL + '/customer';
 export const updateCustomer = (id, firstName, lastName, phoneNumber, birthDate, gender, address) => {
     return BASE_CUSTOMER + `?id=${id}&firstName=${firstName}&lastName=${lastName}&phoneNumber=${phoneNumber}&birthDate=${birthDate}&gender=${gender}&address=${address}`
 }
+export const getAllCustomerByPage = (page, size) => BASE_CUSTOMER + `?page=${page}&size=${size}`
+export const getFilteredCustomerByName = (fullName, page, size) => BASE_CUSTOMER + `?fullName=${fullName}&page=${page}&size=${size}`
 
 //admin
 export const REGISTER_ADMIN = API_BASE_URL + '/auth/admins';

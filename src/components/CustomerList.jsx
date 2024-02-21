@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { BASE_CUSTOMER, CHANGE_PASSWORD, updateCustomer } from '../constant/Endpoint';
+import { BASE_CUSTOMER, CHANGE_PASSWORD, getAllCustomerByPage, getFilteredCustomerByName, updateCustomer } from '../constant/Endpoint';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { Button, Modal } from 'react-bootstrap';
@@ -10,7 +10,16 @@ const CustomerList = () => {
     const [customerList, setCustomerList] = useState([])
     const [searchResult, setSearchResult] = useState(null)
     const [isSearching, setIsSearching] = useState(false)
+    const [searchParam, setSearchParam] = useState(null)
+    const [searchMethod, setSearchMethod] = useState("")
+    const [isSearchingByParam, setIsSearchingByParam] = useState(false)
     const [showForm, setShowForm] = useState(false);
+
+    const [transactionCount, setTransactionCount] = useState(0)
+    const [currentPage, setCurrentPage] = useState(0)
+    const [totalPage, setTotalPage] = useState(0)
+
+    const [size, setSize] = useState(5)
 
     const handleCloseForm = () => setShowForm(false);
     const handleShowForm = () => setShowForm(true);
@@ -29,16 +38,32 @@ const CustomerList = () => {
         images: null,
     })
 
-    const getCustomerList = async() => {
+    const getCustomerList = async(page, size) => {
         await axios
-            .get(BASE_CUSTOMER)
-            .then(res => setCustomerList(res.data.data))
+            .get(getAllCustomerByPage(page, size))
+            .then(res => {
+                setCustomerList(res.data.data)
+                setTransactionCount(res.data.pagingResponse.totalItem)
+                setTotalPage(res.data.pagingResponse.totalPage)
+            })
+            .catch(err => console.error(err.message))
+    }
+
+    const getFiteredCustomerByFullName = async(name, page, size) => {
+        await axios
+            .get(getFilteredCustomerByName(name, page, size))
+            .then(res => {
+                console.log("search", res.data.data)
+                setCustomerList(res.data.data)
+                setTransactionCount(res.data.pagingResponse.totalItem)
+                setTotalPage(res.data.pagingResponse.totalPage)
+            })
             .catch(err => console.error(err.message))
     }
 
     useEffect(() => {
-        getCustomerList()
-    }, [])
+        getCustomerList(currentPage, size)
+    }, [currentPage])
 
     console.log(customerList)
 
@@ -217,19 +242,77 @@ const CustomerList = () => {
         if (input === "") setIsSearching(false)
     }
 
+    const handleSearchByParam = (e) => {
+        setIsSearchingByParam(true)
+        setCurrentPage(0)
+        const input = searchParam.trim()
+        getFiteredCustomerByFullName(input, currentPage, size)
+
+    }
+
+    const handlePrevious = async () => {
+        if (currentPage != 0) {
+            setCurrentPage(currentPage - 1)
+        }
+    }
+
+    const handleNext = async () => {
+        setCurrentPage(currentPage + 1)
+    }
+
+    const displayPagination = (
+        <div className="justify-content-center align-items-center d-flex mt-4">
+            <button onClick={handlePrevious} disabled={currentPage === 0}><i className="bi bi-caret-left-fill"></i></button>
+            <div className='m-2' style={{fontSize:15}}>{currentPage + 1}</div>
+            <button onClick={handleNext} disabled={currentPage === totalPage - 1}><i className="bi bi-caret-right-fill"></i></button>
+        </div>
+    )
+
+    const handleReset = () => {
+        setIsSearchingByParam(false)
+        setCurrentPage(0)
+        getCustomerList(currentPage, size)
+    }
+
+    const handleSearchFullName = (e) => {
+        setSearchParam(e.target.value)
+    } 
+
   return (
         <>
-            <p style={{marginBottom: -5, textAlign: 'center', fontWeight: 'bold', fontSize: 40}}>{customerList.length}</p>
-            <p style={{marginBottom:25, textAlign: 'center'}}>{"Registered Users"}</p>
+            <p style={{marginBottom: -5, textAlign: 'center', fontWeight: 'bold', fontSize: 40}}>{transactionCount}</p>
+            <p style={{marginBottom:25, textAlign: 'center'}}>{isSearchingByParam ? "Result Found" : "Registered Users"}</p>
+            {/* <div className='container justify-content-center align-items-center d-flex mb-4 search-input input-group'> */}
+                {/* <input type='text' placeholder='Search by name in this page' onChange={handleSearch} /> */}
+                {/* <div className="input-group-append">
+                    <span className="input-group-text search-icon">
+                        <i class="bi bi-search"></i>
+                    </span>
+                </div> */}
+            {/* </div> */}
             <div className='container justify-content-center align-items-center d-flex mb-4 search-input input-group'>
-                <input type='text' placeholder='Search by name' onChange={handleSearch} />
-                <div className="input-group-append">
+            <div className="justify-content-center align-items-center d-flex">
+        <select
+          name="Search Method"
+          className='form-select'
+          onChange={(e) => setSearchMethod(e.target.value)}
+        >
+          <option disabled selected>Search By</option>
+          <option value="Full Name">Full Name</option>
+          <option value="This Page">This Page Only</option>
+        </select>
+        </div>
+                <input type='text' placeholder='Search here' onChange={searchMethod === "Full Name" ? handleSearchFullName : handleSearch} />
+                <div className="input-group-append" onClick={handleSearchByParam}>
                     <span className="input-group-text search-icon">
                         <i class="bi bi-search"></i>
                     </span>
                 </div>
+                <div className="justify-content-center align-items-center mx-1"><button className="btn btn-dark" onClick={handleReset}>Reset</button></div>
             </div>
             <div style={{textAlign: 'center'}}>{isSearching ? displayTable : customerList.length == 0 ? displayEmptyList : displayTable}</div>
+            <div style={{textAlign: 'center'}}>{totalPage > 1 && displayPagination}</div>
+
             <Modal
             show={showForm}
             onHide={handleCloseForm}
