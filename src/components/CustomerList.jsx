@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { BASE_CUSTOMER } from '../constant/Endpoint';
+import { BASE_CUSTOMER, updateCustomer } from '../constant/Endpoint';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { Button, Modal } from 'react-bootstrap';
@@ -25,6 +25,8 @@ const CustomerList = () => {
         password: '',
         phoneNumber: '',
         address: '',
+        bankData: null,
+        images: null,
     })
 
     const getCustomerList = async() => {
@@ -37,6 +39,8 @@ const CustomerList = () => {
     useEffect(() => {
         getCustomerList()
     }, [])
+
+    console.log(customerList)
 
     const handleDelete = (id, firstName, lastName) => {
         Swal.fire({
@@ -90,17 +94,8 @@ const CustomerList = () => {
         e.preventDefault()
         if (formData.id && formData.firstName && formData.lastName && formData.birthDate && formData.gender 
                 && formData.email && formData.phoneNumber && formData.address) {
-            axios.put(BASE_CUSTOMER, {
-                id: formData.id,
-                firstName: formData.firstName,
-                lastName: formData.lastName,
-                birthDate: formData.birthDate,
-                gender: formData.gender, 
-                email: formData.email,
-                password: formData.password,
-                phoneNumber: formData.phoneNumber,
-                address: formData.address,
-            }).then(() => {
+            axios.put(updateCustomer(formData.id, formData.firstName, formData.lastName, formData.phoneNumber, formData.birthDate, formData.gender, formData.address)
+            ).then(() => {
                 Swal.fire({
                     icon: "success",
                     title: "Customer succesfully updated!",
@@ -148,6 +143,7 @@ const CustomerList = () => {
                 <td>{customer.userCredential.email}</td>
                 <td>
                     <button type="button" className="btn btn-green m-1" onClick={() => {
+                        setFormData({...formData, bankData: customer.bankData, images: customer.images})
                         handleClickEdit(customer.id, customer.firstName, customer.lastName, customer.birthDate, 
                             customer.gender, customer.phoneNumber, customer.userCredential.email, customer.address)
                     }}>
@@ -171,6 +167,7 @@ const CustomerList = () => {
                 <td>{customer.userCredential.email}</td>
                 <td>
                     <button type="button" className="btn btn-green m-1" onClick={() => {
+                        setFormData({...formData, bankData: customer.bankData, images: customer.images})
                         handleClickEdit(customer.id, customer.firstName, customer.lastName, customer.birthDate, 
                             customer.gender, customer.phoneNumber, customer.userCredential.email, customer.address)
                     }}>

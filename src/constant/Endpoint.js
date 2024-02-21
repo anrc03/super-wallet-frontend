@@ -6,6 +6,9 @@ export const LOGIN = API_BASE_URL + '/auth/login';
 //customer
 export const REGISTER_CUSTOMER = API_BASE_URL + '/auth/register';
 export const BASE_CUSTOMER = API_BASE_URL + '/customer';
+export const updateCustomer = (id, firstName, lastName, phoneNumber, birthDate, gender, address) => {
+    return BASE_CUSTOMER + `?id=${id}&firstName=${firstName}&lastName=${lastName}&phoneNumber=${phoneNumber}&birthDate=${birthDate}&gender=${gender}&address=${address}`
+}
 
 //admin
 export const REGISTER_ADMIN = API_BASE_URL + '/auth/admins';

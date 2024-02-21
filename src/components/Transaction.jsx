@@ -52,7 +52,7 @@ const Transaction = () => {
         await axios.get(BASE_CUSTOMER + "/" + user.customerId)
             .then(res => {
                 setBankData(res.data.data.bankData)
-                setFormData({...formData, dummyBankId: bankData})
+                setFormData({...formData, dummyBankId: bankData.id})
             })
             .catch(err => console.error(err))
     }
@@ -152,10 +152,6 @@ const Transaction = () => {
 
         const handleDeposit = () => {
             if (formData.dummyBankId && formData.accountId && formData.amount > 0) {
-                if (formData.amount > balance) {
-                    Swal.fire("Insufficient balance")
-                    return;
-                }
                 axios.post(BASE_TRANSACTION, {
                     dummyBankId: formData.dummyBankId,
                     accountId: formData.accountId,
@@ -223,9 +219,9 @@ const Transaction = () => {
 
           const displayBankData = () => bankData !== null && (
             <>
-              <p>Card Number: {bankData.cardNumber}</p>
-              <p>Holder Name: {bankData.holderName}</p>
-              <p>Expiry Date: {bankData.expDate}</p>
+              <div className='mt-2'>Card Number: {bankData.cardNumber}</div>
+              <div className='m-0'>Holder Name: {bankData.holderName}</div>
+              <div className='m-0'>Expiry Date: {bankData.expDate}</div>
             </>
           )
 
@@ -558,7 +554,7 @@ const Transaction = () => {
               />
             </div>
             <div className="mb-2">
-              <label>Bank Source: </label>
+              <label style={{textDecoration: 'underline'}}>Bank Source </label>
               {bankData ? displayBankData() : <div>You have not registered a bank data yet</div>}
               {bankData == null && <Button variant='success' onClick={() => setShowRegisterBank(true)}>Register Bank</Button>}
             </div>

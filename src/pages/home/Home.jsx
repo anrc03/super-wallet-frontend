@@ -38,9 +38,9 @@ function Home() {
       <Helmet>
         <title>Super Wallet</title>
       </Helmet>
-      <Navbar />
       {(user === null || role === "ROLE_CUSTOMER") && 
         <div>
+          <Navbar />
           <Header />
           <About />
           <Trans />
