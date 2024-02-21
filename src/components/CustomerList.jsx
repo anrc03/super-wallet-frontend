@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { BASE_CUSTOMER, updateCustomer } from '../constant/Endpoint';
+import { BASE_CUSTOMER, CHANGE_PASSWORD, updateCustomer } from '../constant/Endpoint';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { Button, Modal } from 'react-bootstrap';
@@ -94,8 +94,8 @@ const CustomerList = () => {
         e.preventDefault()
         if (formData.id && formData.firstName && formData.lastName && formData.birthDate && formData.gender 
                 && formData.email && formData.phoneNumber && formData.address) {
-            axios.put(updateCustomer(formData.id, formData.firstName, formData.lastName, formData.phoneNumber, formData.birthDate, formData.gender, formData.address)
-            ).then(() => {
+            axios.put(updateCustomer(formData.id, formData.firstName, formData.lastName, formData.phoneNumber, formData.birthDate, formData.gender, formData.address))
+            .then(() => {
                 Swal.fire({
                     icon: "success",
                     title: "Customer succesfully updated!",
@@ -262,13 +262,8 @@ const CustomerList = () => {
                             </div>
                             <div className='mb-2'>
                                 <label>Email</label>
-                                <input type='email' className='form-control' value={formData.email} placeholder="Enter email"
-                                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}/>
-                            </div>
-                            <div className='mb-2'>
-                                <label>Password</label>
-                                <input type="password" id="setPassword" name="password" className="form-control" placeholder="Enter new password" 
-                                        onChange={(e) => setFormData({ ...formData, password: e.target.value })}/>                                                
+                                <input type='email' className='form-control' style={{backgroundColor:'#D3D3D3', fontWeight:'bold'}} value={formData.email} 
+                                        placeholder="Enter email" readOnly onChange={(e) => setFormData({ ...formData, email: e.target.value })}/>
                             </div>
                             <div className='mb-2'>
                                 <label>Phone Number</label>

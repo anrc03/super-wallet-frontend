@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react'
 import { Button, Modal } from 'react-bootstrap'
 import Navbar from './navbar/Navbar'
 import axios from 'axios'
-import { BASE_ACCOUNT, BASE_CUSTOMER, BASE_DUMMY_BANK, BASE_TRANSACTION, TRANSFER, WITHDRAW } from '../constant/Endpoint'
+import { BASE_ACCOUNT, BASE_CUSTOMER, BASE_DUMMY_BANK, BASE_TRANSACTION, CREATE_PIN, TRANSFER, WITHDRAW } from '../constant/Endpoint'
 import Swal from 'sweetalert2'
 import { useSelector } from 'react-redux'
 import { selectUser } from './redux/UserSlice'
+import PinInput from 'react-pin-input';
 
 const Transaction = () => {
 
@@ -16,9 +17,15 @@ const Transaction = () => {
     const [showTransfer, setShowTransfer] = useState(false)
     const [showOwnTransfer, setShowOwnTransfer] = useState(false)
     const [showRegisterBank, setShowRegisterBank] = useState(false)
+    const [showRegisterPin, setShowRegisterPin] = useState(false)
     const [balance, setBalance] = useState(0)
     const [destinationBalance, setDestinationBalance] = useState(0)
     const [bankData, setBankData] = useState(null)
+    const [yyDate, setYyDate] = useState("")
+    const [mmDate, setMmDate] = useState("")
+
+    const [havePin, setHavePin] = useState(false)
+    const [pin, setPin] = useState(null);
 
     const [accountNumberList, setAccountNumberList] = useState([])
     const [formData, setFormData] = useState({
@@ -36,7 +43,7 @@ const Transaction = () => {
       expDate: '',
     })
 
-    console.log(formData)
+    // console.log(formData)
 
 
     const getAccountList = async() => {
@@ -51,8 +58,9 @@ const Transaction = () => {
     const getBankData = async() => {
         await axios.get(BASE_CUSTOMER + "/" + user.customerId)
             .then(res => {
-                setBankData(res.data.data.bankData)
-                setFormData({...formData, dummyBankId: bankData.id})
+              res.data.data.userCredential.pin && setHavePin(true)
+              setBankData(res.data.data.bankData)
+              setFormData({...formData, dummyBankId: bankData.id})
             })
             .catch(err => console.error(err))
     }
@@ -68,34 +76,44 @@ const Transaction = () => {
         </>
     ))
 
-    const accountIdOption = accountNumberList.map((account) => (
+    const accountIdOptionDeposit = accountNumberList.map((account) => (
         <>
-        <option value={[account.id, account.balance]}>{account.currency.code}</option>
+        <option value={[account.id, account.balance]} disabled={account.currency.code !== "IDR"}>{account.currency.code}</option>
         </>
     ))
 
+    const accountIdOption = accountNumberList.map((account) => (
+      <>
+      <option value={[account.id, account.balance]}>{account.currency.code}</option>
+      </>
+  ))
+
+
 
     const handleWithdrawal = () => {
-        if (formData.accountId && formData.amount > 0) {
-            if (formData.amount > balance) {
+        if (formData.accountId && formData.amount > 0 && pin) {
+            if (parseFloat(formData.amount) > balance) {
                 Swal.fire("Insufficient balance")
                 return;
             }
             axios.post(WITHDRAW, {
                 accountId: formData.accountId,
-                amount: formData.amount
+                amount: formData.amount,
+                pin: pin
             })
                 .then(res => {
-                    console.log(res.data.data)
+                    // console.log(res.data.data)
                     Swal.fire({
                         icon: "success",
-                        title: "Yay! Success! Save your withdrawal code",
+                        title: "Success! Save your withdrawal code or get them via your email in case you forgot ;)",
                         text: "Code: " + res.data.data.withdrawalCode,
                         showConfirmButton: true,
-                        timer: 1500
                     });
                     setFormData({...formData, accountId: '', amount: 0})
+                    setPin("")
+                    setShowWithdraw(false)
                     setBalance(0)
+                    getAccountList()
                 })
                 .catch((err) => {
                     console.error(err)
@@ -111,8 +129,8 @@ const Transaction = () => {
     }
 
     const handleTransfer = () => {
-        if (formData.fromNumber && formData.toNumber && formData.amount > 0) {
-            if (formData.amount > balance) {
+        if (formData.fromNumber && formData.toNumber && formData.amount > 0 && pin) {
+            if (parseFloat(formData.amount) > balance) {
                 Swal.fire("Insufficient balance")
                 return;
             }
@@ -124,18 +142,23 @@ const Transaction = () => {
                 fromNumber: formData.fromNumber,
                 amountTransfer: formData.amount,
                 toNumber: formData.toNumber,
+                pin: pin
             })
                 .then(res => {
-                    console.log(res.data.data)
+                    // console.log(res.data.data)
                     Swal.fire({
                         icon: "success",
                         title: "Transfer Success!",
                         text: res.data.message,
                         showConfirmButton: true,
-                        timer: 1500
                     });
                     setFormData({...formData, fromNumber: '', toNumber: '', amount: 0})
+                    setPin("")
+                    setShowTransfer(false)
+                    setShowOwnTransfer(false)
                     setBalance(0)
+                    setDestinationBalance(0)
+                    getAccountList()
                 })
                 .catch((err) => {
                     console.error(err)
@@ -151,14 +174,14 @@ const Transaction = () => {
         }
 
         const handleDeposit = () => {
-            if (formData.dummyBankId && formData.accountId && formData.amount > 0) {
+            if (formData.dummyBankId && formData.accountId && formData.amount > 0 && pin) {
                 axios.post(BASE_TRANSACTION, {
-                    dummyBankId: formData.dummyBankId,
                     accountId: formData.accountId,
                     amount: formData.amount,
+                    pin: pin
                 })
                     .then(res => {
-                        console.log(res.data.data)
+                        // console.log(res.data.data)
                         Swal.fire({
                             icon: "success",
                             title: "Deposit Success!",
@@ -167,7 +190,10 @@ const Transaction = () => {
                             timer: 1500
                         });
                         setFormData({...formData, dummyBankId: '', accountId: '', amount: 0})
+                        setPin("")
                         setBalance(0)
+                        setShowDeposit(false)
+                        getAccountList()
                     })
                     .catch((err) => {
                         console.error(err)
@@ -183,15 +209,23 @@ const Transaction = () => {
         }
 
         const handleRegisterBank = () => {
-          if (bankForm.cardNumber && bankForm.holderName && bankForm.cvv && bankForm.expDate) {
+          if (bankForm.cardNumber && bankForm.holderName && bankForm.cvv && yyDate && mmDate) {
+            if (yyDate < 24) {
+              Swal.fire("Card exp date invalid")
+              return;
+            } 
+            if (mmDate <= 0 || mmDate > 12) {
+              Swal.fire("Card exp date invalid")
+              return;
+            }  
               axios.post(BASE_DUMMY_BANK, {
                   cardNumber: bankForm.cardNumber,
                   cvv: bankForm.cvv,
                   holderName: bankForm.holderName,
-                  expDate: bankForm.expDate
+                  expDate: yyDate + "/" + mmDate
               })
                     .then(res => {
-                      console.log(res.data.data)
+                      // console.log(res.data.data)
                       Swal.fire({
                           icon: "success",
                           title: "Bank Successfully Registered!",
@@ -200,6 +234,8 @@ const Transaction = () => {
                           timer: 1500
                       });
                       setBankForm({...bankForm, cardNumber:'', cvv:'', holderName:'', expDate:''})
+                      setYyDate("")
+                      setMmDate("")
                       getAccountList()
                       getBankData()
                       setShowRegisterBank(false)
@@ -215,16 +251,46 @@ const Transaction = () => {
                     })
                 }
                 else Swal.fire("Please enter a valid data")
-          }
+        }
 
-          const displayBankData = () => bankData !== null && (
+        const displayBankData = () => bankData !== null && (
             <>
               <div className='mt-2'>Card Number: {bankData.cardNumber}</div>
               <div className='m-0'>Holder Name: {bankData.holderName}</div>
               <div className='m-0'>Expiry Date: {bankData.expDate}</div>
             </>
-          )
+        )
 
+        const handleRegisterPin = () => {
+          if (pin && pin.length === 6) {
+              axios.post(CREATE_PIN, {pin: pin,})
+                    .then(res => {
+                      // console.log(res.data.data)
+                      Swal.fire({
+                          icon: "success",
+                          title: "Pin Successfully Created!",
+                          text: res.data.message,
+                          showConfirmButton: true,
+                          timer: 1500
+                      });
+                      setPin("")
+                      setHavePin(true)
+                      getAccountList()
+                      getBankData()
+                      setShowRegisterPin(false)
+                    })
+                    .catch((err) => {
+                      console.error(err)
+                      Swal.fire({
+                          icon: "error",
+                          title: err.message,
+                          showConfirmButton: false,
+                          timer: 1000
+                      });
+                    })
+                }
+                else Swal.fire("Please enter a valid data")
+          }
 
   return (
     <div>
@@ -328,7 +394,7 @@ const Transaction = () => {
                 onChange={(e) => {
                     setFormData({...formData, accountId: e.target.value.split(",")[0]})
                     setBalance(e.target.value.split(",")[1])
-                    console.log("change", e.target.value)
+                    // console.log("change", e.target.value)
                 }}
             >
                 <option value="">Please select an account</option>
@@ -350,6 +416,23 @@ const Transaction = () => {
                 }
               />
             </div>
+
+            <div className="mb-2">
+              <label style={{marginRight:10}}>PIN</label>
+              {havePin ? 
+                <PinInput
+                  length={6}
+                  type='numeric'
+                  secret
+                  onChange={(value, index) => setPin(value)}
+                />
+                : 
+                <>
+                  <div>You have not set a pin yet</div>
+                  <Button variant='success' onClick={() => setShowRegisterPin(true)}>Create Pin</Button>
+                </>
+              }
+            </div>
           </div>
 
         </Modal.Body>
@@ -361,7 +444,7 @@ const Transaction = () => {
           }>
             Cancel
           </Button>
-          <Button variant="success" onClick={handleWithdrawal}>
+          <Button variant="success" onClick={handleWithdrawal} disabled={!havePin}>
             Get Withdrawal Code
           </Button>
         </Modal.Footer>
@@ -386,7 +469,7 @@ const Transaction = () => {
                 onChange={(e) => {
                     setFormData({...formData, fromNumber: e.target.value.split(",")[0]})
                     setBalance(e.target.value.split(",")[1])
-                    console.log("change", e.target.value)
+                    // console.log("change", e.target.value)
                 }}
             >
                 <option value="">Please select an account</option>
@@ -402,7 +485,7 @@ const Transaction = () => {
                 type="number"
                 name="amount"
                 className="form-control"
-                placeholder="Enter withdraw amount"
+                placeholder="Enter transfer amount"
                 onChange={(e) =>
                   setFormData({ ...formData, amount: e.target.value })
                 }
@@ -420,6 +503,24 @@ const Transaction = () => {
                 }
               />
             </div>
+
+            <div className="mb-2">
+              <label style={{marginRight:10}}>PIN</label>
+              {havePin ? 
+                <PinInput
+                  length={6}
+                  type='numeric'
+                  secret
+                  onChange={(value, index) => setPin(value)}
+                />
+                : 
+                <>
+                  <div>You have not set a pin yet</div>
+                  <Button variant='success' onClick={() => setShowRegisterPin(true)}>Create Pin</Button>
+                </>
+              }
+            </div>
+
           </div>
         </Modal.Body>
         <Modal.Footer>
@@ -430,7 +531,7 @@ const Transaction = () => {
           }>
             Cancel
           </Button>
-          <Button variant="success" onClick={handleTransfer}>
+          <Button variant="success" onClick={handleTransfer} disabled={!havePin}>
             Transfer Now
           </Button>
         </Modal.Footer>
@@ -455,7 +556,7 @@ const Transaction = () => {
                 onChange={(e) => {
                     setFormData({...formData, fromNumber: e.target.value.split(",")[0]})
                     setBalance(e.target.value.split(",")[1])
-                    console.log("change", e.target.value)
+                    // console.log("change", e.target.value)
                 }}
             >
                 <option value="">Please select an account</option>
@@ -471,7 +572,7 @@ const Transaction = () => {
                 type="number"
                 name="amount"
                 className="form-control"
-                placeholder="Enter withdraw amount"
+                placeholder="Enter transfer amount"
                 onChange={(e) =>
                   setFormData({ ...formData, amount: e.target.value })
                 }
@@ -485,7 +586,7 @@ const Transaction = () => {
                 onChange={(e) => {
                     setFormData({...formData, toNumber: e.target.value.split(",")[0]})
                     setDestinationBalance(e.target.value.split(",")[1])
-                    console.log("change", e.target.value)
+                    // console.log("change", e.target.value)
                 }}
             >
                 <option value="">Please select destination account</option>
@@ -494,6 +595,23 @@ const Transaction = () => {
             </div>
             <div className="mb-2">
               <label style={{fontWeight:'bold'}}>Destination Balance: {destinationBalance}</label>
+            </div>
+
+            <div className="mb-2">
+              <label style={{marginRight:10}}>PIN</label>
+              {havePin ? 
+                <PinInput
+                  length={6}
+                  type='numeric'
+                  secret
+                  onChange={(value, index) => setPin(value)}
+                />
+                : 
+                <>
+                  <div>You have not set a pin yet</div>
+                  <Button variant='success' onClick={() => setShowRegisterPin(true)}>Create Pin</Button>
+                </>
+              }
             </div>
           </div>
         </Modal.Body>
@@ -506,7 +624,7 @@ const Transaction = () => {
           }>
             Cancel
           </Button>
-          <Button variant="success" onClick={handleTransfer}>
+          <Button variant="success" onClick={handleTransfer} disabled={!havePin}>
             Transfer Now
           </Button>
         </Modal.Footer>
@@ -531,11 +649,11 @@ const Transaction = () => {
                 onChange={(e) => {
                     setFormData({...formData, accountId: e.target.value.split(",")[0]})
                     setBalance(e.target.value.split(",")[1])
-                    console.log("change", e.target.value)
+                    // console.log("change", e.target.value)
                 }}
             >
                 <option value="">Please select an account</option>
-                {accountIdOption}
+                {accountIdOptionDeposit}
                 </select>
             </div>
             <div className="mb-2">
@@ -554,9 +672,26 @@ const Transaction = () => {
               />
             </div>
             <div className="mb-2">
-              <label style={{textDecoration: 'underline'}}>Bank Source </label>
+              <label>Bank Source </label>
               {bankData ? displayBankData() : <div>You have not registered a bank data yet</div>}
               {bankData == null && <Button variant='success' onClick={() => setShowRegisterBank(true)}>Register Bank</Button>}
+            </div>
+
+            <div className="mb-2">
+              <label style={{marginRight:10}}>PIN</label>
+              {havePin ? 
+                <PinInput
+                  length={6}
+                  type='numeric'
+                  secret
+                  onChange={(value, index) => setPin(value)}
+                />
+                : 
+                <>
+                  <div>You have not set a pin yet</div>
+                  <Button variant='success' onClick={() => setShowRegisterPin(true)}>Create Pin</Button>
+                </>
+              }
             </div>
           </div>
 
@@ -569,7 +704,7 @@ const Transaction = () => {
           }>
             Cancel
           </Button>
-          <Button variant="success" onClick={handleDeposit}>
+          <Button variant="success" onClick={handleDeposit} disabled={!bankData && !havePin}>
             Deposit Now
           </Button>
         </Modal.Footer>
@@ -588,26 +723,18 @@ const Transaction = () => {
           <div>
             <div className="mb-2">
               <label>Card Number</label>
-              <input
-                type="text"
-                name="card number"
-                className="form-control"
-                placeholder="Enter your card number"
-                onChange={(e) =>
-                  setBankForm({ ...bankForm, cardNumber: e.target.value })
-                }
+              <PinInput
+                  length={12}
+                  type='numeric'
+                  onChange={(value, index) => setBankForm({ ...bankForm, cardNumber: value })}
               />
             </div>
             <div className="mb-2">
               <label>CVV</label>
-              <input
-                type="text"
-                name="cvv"
-                className="form-control"
-                placeholder="Enter cvv"
-                onChange={(e) =>
-                  setBankForm({ ...bankForm, cvv: e.target.value })
-                }
+              <PinInput
+                  length={3}
+                  type='numeric'
+                  onChange={(value, index) => setBankForm({ ...bankForm, cvv: value })}
               />
             </div>
             <div className="mb-2">
@@ -625,15 +752,30 @@ const Transaction = () => {
           </div>
             <div className="mb-2">
             <label>Expiry Date</label>
-              <input
-                type="text"
-                name="holder"
+              {/* <input
+                type="date"
+                name="exp"
+                min={"2024-02-23"}
                 className="form-control"
                 placeholder="Enter exp date"
                 onChange={(e) =>
                   setBankForm({ ...bankForm, expDate: e.target.value })
                 }
+              /> */}
+              <div className='d-flex'>
+              <PinInput
+                  length={2}
+                  type='numeric'
+                  onChange={(value, index) => setYyDate(value)}
               />
+              <label style={{fontSize:35}}>/</label>
+              <PinInput
+              length={2}
+              type='numeric'
+              onChange={(value, index) => setMmDate(value)}
+          />
+              </div>
+              
             </div>
         </Modal.Body>
         <Modal.Footer>
@@ -645,6 +787,38 @@ const Transaction = () => {
           </Button>
           <Button variant="success" onClick={handleRegisterBank}>
             Register Bank
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+      <Modal
+        show={showRegisterPin}
+        onHide={() => setShowRegisterPin(false)}
+        backdrop="static"
+        keyboard={false}
+      >
+        <Modal.Header>
+          <Modal.Title>Register PIN</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <div>
+          <PinInput
+              length={6}
+              type='numeric'
+              secret
+              onChange={(value, index) => setPin(value)}
+          />
+          </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => {
+            setPin('')
+            setShowRegisterPin(false)}
+          }>
+            Cancel
+          </Button>
+          <Button variant="success" onClick={handleRegisterPin}>
+            Create Pin
           </Button>
         </Modal.Footer>
       </Modal>

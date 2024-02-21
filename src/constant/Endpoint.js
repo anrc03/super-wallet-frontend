@@ -20,11 +20,17 @@ export const getBaseCurrencyUrl = (baseCurrency, date) => API_BASE_URL + `/curre
 //transaction
 export const BASE_TRANSACTION =  API_BASE_URL +  "/transactions";
 export const getTransactionByPage = (page) => `${BASE_TRANSACTION}?page=${page}`
-export const WITHDRAW = API_BASE_URL + "/withdrawal"
-export const TRANSFER = API_BASE_URL + "/send"
+export const WITHDRAW = BASE_TRANSACTION + "/withdrawal"
+export const TRANSFER = BASE_TRANSACTION + "/send"
 
 //account
 export const BASE_ACCOUNT = API_BASE_URL + "/account"
 
 //dummy-bank
 export const BASE_DUMMY_BANK = API_BASE_URL + "/dummy-bank"
+
+//change password
+export const CHANGE_PASSWORD = API_BASE_URL + "/auth/change-password"
+
+//pin
+export const CREATE_PIN = API_BASE_URL + "/auth/pin"
