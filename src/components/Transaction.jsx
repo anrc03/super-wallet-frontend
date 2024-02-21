@@ -69,6 +69,7 @@ const Transaction = () => {
         if (formData.accountId && formData.amount > 0) {
             if (formData.amount > balance) {
                 Swal.fire("Insufficient balance")
+                return;
             }
             axios.post(WITHDRAW, {
                 accountId: formData.accountId,
@@ -103,6 +104,7 @@ const Transaction = () => {
         if (formData.fromNumber && formData.toNumber && formData.amount > 0) {
             if (formData.amount > balance) {
                 Swal.fire("Insufficient balance")
+                return;
             }
             axios.post(TRANSFER, {
                 fromNumber: formData.fromNumber,
@@ -138,6 +140,7 @@ const Transaction = () => {
             if (formData.dummyBankId && formData.accountId && formData.amount > 0) {
                 if (formData.amount > balance) {
                     Swal.fire("Insufficient balance")
+                    return;
                 }
                 axios.post(BASE_TRANSACTION, {
                     dummyBankId: formData.dummyBankId,
