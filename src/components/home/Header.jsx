@@ -10,9 +10,6 @@ export default function Header() {
             <p className="info-header animate__animated animate__slideInDown">Enhance the Safety and Reliability of Your Money Transactions with Super Wallet</p>
             <a href="" className="btn btn-green py-3 px-4 animate__animated animate__slideInDown">Explore More</a>
           </div>
-          {/* <div className="col-lg-5 animate__animated animate__fadeIn">
-            <img className="img-fluid animate__animated animate__pulse animate__infinite" style={{ animationDuration: "3s" }} src='./src/assets/images/hero-1.png' alt=""/>
-          </div> */}
         </div>
       </div>
     </div>

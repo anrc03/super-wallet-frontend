@@ -33,7 +33,6 @@ function Profile() {
   useEffect(() => {
     console.log("ini id customer : " + customerId);
 
-    // if (userArrayString) {
     try {
       const fetchData = async () => {
         try {
@@ -47,7 +46,6 @@ function Profile() {
       fetchData();
     } catch (error) {
       console.error("Error parsing user array", error.message);
-      // Handle parsing errors
     }
   }, []);
 
@@ -84,6 +82,7 @@ function Profile() {
           justifyContent: "center",
           alignItems: "center",
         }}
+        className="register-background"
       >
         <div className="container py-5">
           <div className="row">

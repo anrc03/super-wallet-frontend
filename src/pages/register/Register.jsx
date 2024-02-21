@@ -39,9 +39,9 @@ function Register() {
   });
 
   const validatePassword = (password) => {
-        if (password.length < 8) {
-            return "Password must at least 8 characters";
-        }
+    if (password.length < 8) {
+      return "Password must at least 8 characters";
+    }
 
     if (!/(?=.*[a-z])/.test(password)) {
       return "Password must contain at least one lowercase letter";
@@ -115,22 +115,22 @@ function Register() {
       validationErrors.lastName = "Last Name must be filled";
     }
 
-        if (formData.phoneNumber === "" || formData.phoneNumber === null) {
-            isValid = false;
-            validationErrors.phoneNumber = "Number phone must be filled";
-        }
+    if (formData.phoneNumber === "" || formData.phoneNumber === null) {
+      isValid = false;
+      validationErrors.phoneNumber = "Number phone must be filled";
+    }
 
-        if (!formData.birthDate || formData.birthDate === '') {
-            isValid = false;
-            validationErrors.birthDate = "Birth date must be filled";
-        } else {
-            const birthDate = new Date(formData.birthDate);
-            const currentDate = new Date();
-            let age = currentDate.getFullYear() - birthDate.getFullYear();
-            const monthDiff = currentDate.getMonth() - birthDate.getMonth();
-            if (monthDiff < 0 || (monthDiff === 0 && currentDate.getDate() < birthDate.getDate())) {
-                age--;
-            }
+    if (!formData.birthDate || formData.birthDate === '') {
+      isValid = false;
+      validationErrors.birthDate = "Birth date must be filled";
+    } else {
+      const birthDate = new Date(formData.birthDate);
+      const currentDate = new Date();
+      let age = currentDate.getFullYear() - birthDate.getFullYear();
+      const monthDiff = currentDate.getMonth() - birthDate.getMonth();
+      if (monthDiff < 0 || (monthDiff === 0 && currentDate.getDate() < birthDate.getDate())) {
+        age--;
+      }
 
       if (age < 18) {
         isValid = false;
@@ -358,26 +358,26 @@ function Register() {
                     </div>
 
 
-                                    </div>
-                                    <div className="mb-2 col-md-12">
-                                        <label className="mb-2">Address<span className="text-danger"> *</span></label>
-                                        {
-                                            valid ? <></> : <span className="text-danger"> {errors.address}</span>
-                                        }
-                                        <input type="text" name="address" className="form-control" placeholder="Enter your address" onChange={(e) => setFormData({ ...formData, address: e.target.value })} />
-                                    </div>
-                                    <span className="mb-2">Already have an account? <Link to="/login" className="register-link">Log in</Link></span>
-                                    <div className="col-md-12">
-                                        <button className="btn float-end register-button" onClick={handleSubmit}>Register</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
+                  </div>
+                  <div className="mb-2 col-md-12">
+                    <label className="mb-2">Address<span className="text-danger"> *</span></label>
+                    {
+                      valid ? <></> : <span className="text-danger"> {errors.address}</span>
+                    }
+                    <input type="text" name="address" className="form-control" placeholder="Enter your address" onChange={(e) => setFormData({ ...formData, address: e.target.value })} />
+                  </div>
+                  <span className="mb-2">Already have an account? <Link to="/login" className="register-link">Log in</Link></span>
+                  <div className="col-md-12">
+                    <button className="btn float-end register-button" onClick={handleSubmit}>Register</button>
+                  </div>
                 </div>
+              </div>
             </div>
+          </form>
         </div>
-    )
+      </div>
+    </div>
+  )
 }
 
 export default Register;

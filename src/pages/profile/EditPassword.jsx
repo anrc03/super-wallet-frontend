@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, unstable_HistoryRouter, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../components/redux/UserSlice";
 import { BASE_CUSTOMER, CHANGE_PASSWORD } from "../../constant/Endpoint";
 import { Helmet } from "react-helmet";
-import { Button } from "react-bootstrap";
 
 function EditPassword() {
   const [formData, setFormData] = useState({
@@ -89,16 +88,19 @@ function EditPassword() {
                   onChange={handlePasswordChange}
                 />
               </div>
-              <button
+              {/* <button
                 className="btn btn-green mt-1"
                 style={{ fontSize: "20px" }}
-                onClick={() => navigate(-1)}
+                onClick={() => {
+                  console.log("Go Back button clicked");
+                  navigate(-1);
+                }}
               >
                 Go Back
-              </button>
+              </button> */}
               <button
                 type="submit"
-                className="btn btn-green ms-2 mt-1"
+                className="btn btn-green"
                 style={{ fontSize: "20px" }}
                 onClick={handleSubmit}
               >

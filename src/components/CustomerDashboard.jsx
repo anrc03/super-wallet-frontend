@@ -1,30 +1,25 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { getTransactionByPage } from '../constant/Endpoint';
-import { Helmet } from 'react-helmet';
-import Swal from 'sweetalert2';
+import { GET_TRANSACTION_CUSTOMER } from '../constant/Endpoint'
+import axios from 'axios'
+import Swal from 'sweetalert2'
+import Navbar from './navbar/Navbar'
 
-const TransactionHistoryList = () => {
+const CustomerDashboard = () => {
 
-    const [transactionList, setTransactionList] = useState([]);
-    const [transactionCount, setTransactionCount] = useState(0)
-    const [currentPage, setCurrentPage] = useState(0)
-    const [totalPage, setTotalPage] = useState(0)
+    const [transactionList, setTransactionList] = useState([])
 
-    const getTransactionListbyPage = async (page) => {
+    const getTransactionList = async () => {
         await axios
-            .get(getTransactionByPage(page))
+            .get(GET_TRANSACTION_CUSTOMER)
             .then(res => {
-                setTransactionCount(res.data.pagingResponse.totalItem)
                 setTransactionList(res.data.data)
-                setTotalPage(res.data.pagingResponse.totalPage)
             })
-            .catch(err => console.error(err.message))
+            .catch(err => console.error(err))
     }
 
     useEffect(() => {
-        getTransactionListbyPage(currentPage)
-    }, [currentPage])
+        getTransactionList()
+    }, [])
 
     const displayEmptyList = (
         <div className="text-center">
@@ -84,35 +79,15 @@ const TransactionHistoryList = () => {
         </div>
     )
 
-    const handlePrevious = async () => {
-        if (currentPage != 0) {
-            setCurrentPage(currentPage - 1)
-        }
-    }
-
-    const handleNext = async () => {
-        setCurrentPage(currentPage + 1)
-    }
-
-    const displayPagination = (
-        <div className="justify-content-center align-items-center d-flex mt-4">
-            <button onClick={handlePrevious} disabled={currentPage === 0}><i className="bi bi-caret-left-fill"></i></button>
-            <div className='m-2' style={{ fontSize: 15 }}>{currentPage + 1}</div>
-            <button onClick={handleNext} disabled={currentPage === totalPage - 1}><i className="bi bi-caret-right-fill"></i></button>
-        </div>
-    )
-
     return (
         <div>
-            <Helmet>
-                <title>Transaction History | Super Wallet</title>
-            </Helmet>
-            <p style={{ marginBottom: -5, textAlign: 'center', fontWeight: 'bold', fontSize: 40, marginTop: 4 }}>{transactionCount}</p>
-            <p style={{ marginBottom: 15, textAlign: 'center', fontSize: 20, color: '#6f9459' }}>Total Transaction</p>
+            <Navbar />
+            <p style={{ marginTop: 25, textAlign: 'center' }}>{"You have"}</p>
+            <p style={{ marginBottom: -5, textAlign: 'center', fontWeight: 'bold', fontSize: 40 }}>{transactionList.length}</p>
+            <p style={{ marginBottom: 25, textAlign: 'center' }}>{"Total Transaction"}</p>
             <div style={{ textAlign: 'center' }}>{transactionList.length === 0 ? displayEmptyList : displayTable}</div>
-            <div style={{ textAlign: 'center' }}>{totalPage > 1 && displayPagination}</div>
         </div>
     )
 }
 
-export default TransactionHistoryList
+export default CustomerDashboard

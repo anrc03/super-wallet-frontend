@@ -61,7 +61,9 @@ export default function Navbar() {
             </>
           }
           {user ? (
-            <><AvatarProfile/></>
+            <>
+              <AvatarProfile/>
+            </>
           ) : (
             <>
               <Link className="nav-item nav-link button-register" to="/register">Register</Link>

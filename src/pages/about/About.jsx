@@ -31,14 +31,6 @@ export default function About() {
                         <div className="col-md-8 text-center">
                             <h1 className="mb-3">Super wallet can help people simplify and secure currency transactions and exchanges</h1>
                         </div>
-                        {/* <div className="col-lg-6 animate__animated animate_fadeIn">
-                            <img
-                                className="img-fluid animate__animated animate__pulse animate__infinite"
-                                style={{ animationDuration: "3s" }}
-                                src=""
-                                alt=""
-                            />
-                        </div> */}
                     </div>
                 </div>
             </div>

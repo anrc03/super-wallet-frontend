@@ -80,9 +80,6 @@ const ExchangeRateList = () => {
       })
   }
 
-  // console.log(baseCurrency)
-  // console.log(totalPage)
-
   const handleClickRefresh = async () => {
     if (isLoading === false) {
       setIsLoading(true)
@@ -213,7 +210,7 @@ const ExchangeRateList = () => {
             </svg>
           }
           selected={date}
-          onChange={(date) => setDate(moment(date).format("yyyy-MM-DD"))}
+          onChange={(date) => date!= null && setDate(moment(date).format("yyyy-MM-DD"))}
           dateFormat={"yyyy-MM-dd"}
           placeholderText="Enter date"
         />
@@ -253,13 +250,13 @@ const ExchangeRateList = () => {
             </svg>
           }
           selected={toDate}
-          onChange={(date) => setToDate(moment(date).format("yyyy-MM-DD"))}
+          onChange={(date) => date!= null && setToDate(moment(date).format("yyyy-MM-DD"))}
           dateFormat={"yyyy-MM-dd"}
           placeholderText="Enter date"
         />
       </div>
-      <div className="justify-content-center align-items-center d-flex mb-2"><button className="btn btn-green" onClick={handleClickRefresh}>Get Rate by Time Series</button></div>
-      <div className="justify-content-center align-items-center d-flex mb-2"><button className="btn btn-green" onClick={handleClickToday}>Get Today's Rate Only</button></div>
+      <div className="justify-content-center align-items-center d-flex mb-4"><button className="btn btn-green" onClick={handleClickRefresh}>Get Rate by Time Series</button></div>
+      {/* <div className="justify-content-center align-items-center d-flex mb-4"><button className="btn btn-green" onClick={handleClickToday}>Get Today's Rate Only</button></div> */}
       <div style={{ textAlign: "center" }}>
         {isLoading ? <SmallLoadingSpinner /> : rateList.length == 0 ? displayEmptyList : displayTable}
       </div>

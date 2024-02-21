@@ -56,31 +56,31 @@ export default function ExchangeCurrency() {
                 </div>
 
                 <div className="animate__animated animate__fadeInUp" style={{ animationDelay: "0.5s" }}>
-                <Container sx={{ maxWidth: "md" }}>
-                    <Grid spacing={2} container sx={{ display: 'flex', justifyContent: 'center' }}>
-                        <InputAmount />
-                        <SelectCountry value={fromCurrency} setValue={setFromCurrency} label="From" />
-                        <SwitchCurrency />
-                        <SelectCountry value={toCurrency} setValue={setToCurrency} label="To" />
-                    </Grid>
+                    <Container sx={{ maxWidth: "md" }}>
+                        <Grid spacing={2} container sx={{ display: 'flex', justifyContent: 'center' }}>
+                            <InputAmount />
+                            <SelectCountry value={fromCurrency} setValue={setFromCurrency} label="From" />
+                            <SwitchCurrency />
+                            <SelectCountry value={toCurrency} setValue={setToCurrency} label="To" />
+                        </Grid>
 
-                    {firstAmount ? (
-                        <Box sx={{ textAlign: "left", marginTop: "1rem", display: 'flex', justifyContent: 'center' }}>
-                            <Typography variant="h5" sx={{ fontWeight: "bold" }}>
-                                {getCurrencySymbol(fromCurrency)}{" "}
-                                {Number(firstAmount).toLocaleString()}{" "}
-                                {getCurrencyWithoutSymbol(fromCurrency)} = {" "}
-                                {getCurrencySymbol(toCurrency)}{" "}
-                                {(resultCurrency * firstAmount).toLocaleString(undefined, {
-                                    minimumFractionDigits: 3,
-                                })}{" "}
-                                {getCurrencyWithoutSymbol(toCurrency)}
-                            </Typography>
-                        </Box>
-                    ) : (
-                        ""
-                    )}
-                </Container>
+                        {firstAmount ? (
+                            <Box sx={{ textAlign: "left", marginTop: "1rem", display: 'flex', justifyContent: 'center' }}>
+                                <Typography variant="h5" sx={{ fontWeight: "bold" }}>
+                                    {getCurrencySymbol(fromCurrency)}{" "}
+                                    {Number(firstAmount).toLocaleString()}{" "}
+                                    {getCurrencyWithoutSymbol(fromCurrency)} = {" "}
+                                    {getCurrencySymbol(toCurrency)}{" "}
+                                    {(resultCurrency * firstAmount).toLocaleString(undefined, {
+                                        minimumFractionDigits: 3,
+                                    })}{" "}
+                                    {getCurrencyWithoutSymbol(toCurrency)}
+                                </Typography>
+                            </Box>
+                        ) : (
+                            ""
+                        )}
+                    </Container>
                 </div>
             </div>
         </div>

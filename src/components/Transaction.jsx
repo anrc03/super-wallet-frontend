@@ -100,7 +100,6 @@ const Transaction = () => {
         pin: pin
       })
         .then(res => {
-          // console.log(res.data.data)
           Swal.fire({
             icon: "success",
             title: "Success! Save your withdrawal code or get them via your email in case you forgot ;)",
@@ -143,7 +142,6 @@ const Transaction = () => {
         pin: pin
       })
         .then(res => {
-          // console.log(res.data.data)
           Swal.fire({
             icon: "success",
             title: "Transfer Success!",
@@ -179,7 +177,6 @@ const Transaction = () => {
         pin: pin
       })
         .then(res => {
-          // console.log(res.data.data)
           Swal.fire({
             icon: "success",
             title: "Deposit Success!",

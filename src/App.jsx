@@ -20,6 +20,7 @@ import Transaction from "./components/Transaction.jsx";
 import Profile from "./pages/profile/Profile.jsx";
 import EditProfile from "./pages/profile/EditProfile.jsx";
 import EditPassword from "./pages/profile/EditPassword.jsx";
+import CustomerDashboard from './components/CustomerDashboard.jsx'
 
 function App() {
   const user = useSelector(selectUser);
@@ -34,11 +35,11 @@ function App() {
 
   const ADMIN_PAGE = (
     <>
-      <Route path='/admin' element={<Sidebar component={AdminDashboard}/>} />
-      <Route path="/admin/admins" element={<Sidebar component={AdminList}/>} />
-      <Route path="/admin/customers" element={<Sidebar component={CustomerList}/>} />
-      <Route path="/admin/currency" element={<Sidebar component={ExchangeRateList}/>} />
-      <Route path="/admin/transaction" element={<Sidebar component={TransactionHistoryList}/>} />
+      <Route path='/admin' element={<Sidebar component={AdminDashboard} />} />
+      <Route path="/admin/admins" element={<Sidebar component={AdminList} />} />
+      <Route path="/admin/customers" element={<Sidebar component={CustomerList} />} />
+      <Route path="/admin/currency" element={<Sidebar component={ExchangeRateList} />} />
+      <Route path="/admin/transaction" element={<Sidebar component={TransactionHistoryList} />} />
     </>
   );
 
@@ -54,13 +55,14 @@ function App() {
       <Route path="/profile" element={<Profile />} />
       <Route path="/profile/edit/:id" element={<EditProfile />} />
       <Route path="/profile/edit-password/:id" element={<EditPassword />} />
+      <Route path="/customer/dashboard" element={<CustomerDashboard />} />
     </>
   );
 
   const GENERAL_ACCESS = (
     <>
-      <Route path='/home' element={<Home/>} />
-      <Route path='/about' element={<About/>} />
+      <Route path='/home' element={<Home />} />
+      <Route path='/about' element={<About />} />
       <Route path='/login' element={<Login />} />
       <Route path='/register' element={<Register />} />
       <Route path="/currency-converter" element={<CurrencyConverter />} />
@@ -71,13 +73,7 @@ function App() {
   return (
     <div>
       <Routes>
-        <Route
-          index
-          element={
-            <div>
-              <Home />
-            </div>
-          }
+        <Route index element={<div><Home /></div>}
         />
         <Route path="*" element={<PageNotFound />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />

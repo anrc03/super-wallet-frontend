@@ -173,33 +173,33 @@ const AdminList = () => {
 
     const displayAdminTable = (
         <div className="container">
-        <div className="row">
-            {isSearchingAdmin && searchAdminResult.length === 0 ? (
-                <>
-                <div className="image-search d-flex justify-content-center">
-                <img style={{ width: '200px' }} src="./../src/assets/images/Search.png" alt="Search Picture" />
-              </div>
-                <p style={{ textAlign: 'center', fontSize: '20px', color: '#6f9459', marginTop: '5px' }}>Sorry, your search "{searchInput}" was not found</p>
-                </>
-            ) : (
-                <table className="content-table">
-                    <thead>
-                        <tr>
-                            <th scope='col'>Id</th>
-                            <th scope='col'>Role</th>
-                            <th scope='col'>Full name</th>
-                            <th scope='col'>Phone number</th>
-                            <th scope='col'>Email</th>
-                            <th scope='col'>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {isSearchingAdmin ? displaySearchAdminResult : displayAdminList}
-                    </tbody>
-                </table>
-            )}
+            <div className="row">
+                {isSearchingAdmin && searchAdminResult.length === 0 ? (
+                    <>
+                        <div className="image-search d-flex justify-content-center">
+                            <img style={{ width: '200px' }} src="./../src/assets/images/Search.png" alt="Search Picture" />
+                        </div>
+                        <p style={{ textAlign: 'center', fontSize: '20px', color: '#6f9459', marginTop: '5px' }}>Sorry, your search "{searchInput}" was not found</p>
+                    </>
+                ) : (
+                    <table className="content-table">
+                        <thead>
+                            <tr>
+                                <th scope='col'>Id</th>
+                                <th scope='col'>Role</th>
+                                <th scope='col'>Full name</th>
+                                <th scope='col'>Phone number</th>
+                                <th scope='col'>Email</th>
+                                <th scope='col'>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {isSearchingAdmin ? displaySearchAdminResult : displayAdminList}
+                        </tbody>
+                    </table>
+                )}
+            </div>
         </div>
-    </div>
     )
 
     const handleAdminSearch = (e) => {
@@ -212,11 +212,11 @@ const AdminList = () => {
         setSearchAdminResult(filteredAdmin);
         if (input === "") setIsSearchingAdmin(false);
     }
-    
+
     return (
         <>
-        <Helmet>
-            <title>Admin List | Super Wallet</title>
+            <Helmet>
+                <title>Admin List | Super Wallet</title>
             </Helmet>
             <p style={{ marginBottom: -5, textAlign: 'center', fontWeight: 'bold', fontSize: 40, marginTop: 4 }}>{adminList.length}</p>
             <p style={{ marginBottom: 15, textAlign: 'center', fontSize: 20, color: '#6f9459' }}>Registered Admin</p>

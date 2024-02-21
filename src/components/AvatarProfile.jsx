@@ -106,7 +106,9 @@ export default function AvatarProfile() {
           </MenuItem>
           <MenuItem onClick={handleCloseUserMenu}>
             <Typography className="avatar" textAlign="center">
-              <i className="bi bi-house-fill"></i> Dashboard
+              <Link to="/customer/dashboard" className='nav-item nav-link'>
+                <i className="bi bi-house-fill"></i> Dashboard
+              </Link>
             </Typography>
           </MenuItem>
           <MenuItem onClick={handleLogout}>

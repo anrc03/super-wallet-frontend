@@ -92,7 +92,7 @@ function EditProfile() {
     try {
       const response = await axios.put(`${BASE_CUSTOMER}`, formDataToSend, {
         headers: {
-          "Content-Type": "multipart/form-data", // Set Content-Type ke form-data
+          "Content-Type": "multipart/form-data", 
         },
       });
 
@@ -110,7 +110,7 @@ function EditProfile() {
   return (
     <div className="register-background">
       <Helmet>
-        <title>Register | Super Wallet</title>
+        <title>Edit Profile | Super Wallet</title>
       </Helmet>
       <div className="container register-container">
         <div className="col-md-6">
@@ -281,7 +281,7 @@ function EditProfile() {
                     />
                   </div>
                   <div className="mb-2 col-md-12">
-                    <label className="small mb-2" htmlFor="inputImage">
+                    <label className="mb-2" htmlFor="inputImage">
                       Image
                     </label>
                     <input
@@ -292,13 +292,21 @@ function EditProfile() {
                       onChange={handleImageChange}
                     />
                   </div>
-                  <button
-                    className="btn btn-primary"
-                    type="button"
-                    onClick={handleSubmit}
-                  >
-                    Save changes
-                  </button>
+                  <div className="mb-2 col-md-12">
+                    <button
+                      className="btn btn-green float-end"
+                      type="button"
+                      onClick={handleSubmit}
+                    >
+                      Save changes
+                    </button>
+                    <button
+                      className="btn btn-green float-end mx-2"
+                      onClick={() => navigate(-1)}
+                    >
+                      Go Back
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -306,141 +314,6 @@ function EditProfile() {
         </div>
       </div>
     </div>
-    // <div className="container-xl px-4 mt-4">
-    //   <h1 className="display-6 fw-bold text-green">Edit profile</h1>
-    //   <hr className="mt-0 mb-4" />
-    //   <div className="row">
-    //     {/* ... */}
-    //     <div className="col-xl-8">
-    //       <div className="card mb-4">
-    //         <div className="card-header">Account Details</div>
-    //         <div className="card-body">
-    //           <form>
-    //             <div className="mb-3">
-    //               <label className="small mb-1" htmlFor="inputFirstName">
-    //                 First Name
-    //               </label>
-    //               <input
-    //                 className="form-control"
-    //                 value={formData.firstName}
-    //                 id="inputFirstName"
-    //                 type="text"
-    //                 placeholder="Enter your first name"
-    //                 onChange={handleFirstNameChange}
-    //               />
-    //             </div>
-
-    //             <div className="mb-3">
-    //               <label className="small mb-1" htmlFor="inputLastName">
-    //                 Last Name
-    //               </label>
-    //               <input
-    //                 className="form-control"
-    //                 value={formData.lastName}
-    //                 id="inputLastName"
-    //                 type="text"
-    //                 placeholder="Enter your last name"
-    //                 onChange={handleLastNameChange}
-    //               />
-    //             </div>
-
-    //             <div className="mb-3">
-    //               <label className="small mb-1" htmlFor="inputPhoneNumber">
-    //                 Phone Number
-    //               </label>
-    //               <input
-    //                 className="form-control"
-    //                 value={formData.phoneNumber}
-    //                 id="inputPhoneNumber"
-    //                 type="text"
-    //                 placeholder="Enter your phone number"
-    //                 onChange={handlePhoneNumberChange}
-    //               />
-    //             </div>
-
-    //             <div className="mb-3">
-    //               <label className="small mb-1" htmlFor="inputBirthDate">
-    //                 Birth Date
-    //               </label>
-    //               <input
-    //                 className="form-control"
-    //                 value={formData.birthDate}
-    //                 id="inputBirthDate"
-    //                 type="text"
-    //                 placeholder="Enter your birth date"
-    //                 onChange={handleBirthDateChange}
-    //               />
-    //             </div>
-
-    //             <div className="mb-3">
-    //               <label className="small mb-1" htmlFor="inputGender">
-    //                 Gender
-    //               </label>
-    //               <input
-    //                 className="form-control"
-    //                 value={formData.gender}
-    //                 id="inputGender"
-    //                 type="text"
-    //                 placeholder="Enter your gender"
-    //                 onChange={handleGenderChange}
-    //               />
-    //             </div>
-
-    //             <div className="mb-3">
-    //               <label className="small mb-1" htmlFor="inputAddress">
-    //                 Address
-    //               </label>
-    //               <input
-    //                 className="form-control"
-    //                 value={formData.address}
-    //                 id="inputAddress"
-    //                 type="text"
-    //                 placeholder="Enter your address"
-    //                 onChange={handleAddressChange}
-    //               />
-    //             </div>
-
-    //             <div className="mb-3">
-    //               <label className="small mb-1" htmlFor="inputEmail">
-    //                 Email
-    //               </label>
-    //               <input
-    //                 className="form-control"
-    //                 value={formData.userCredential?.email || ""}
-    //                 id="inputEmail"
-    //                 type="text"
-    //                 placeholder="Enter your email address"
-    //                 onChange={handleEmailChange}
-    //                 readOnly
-    //               />
-    //             </div>
-
-    //             <div className="mb-3">
-    //               <label className="small mb-1" htmlFor="inputImage">
-    //                 Image
-    //               </label>
-    //               <input
-    //                 type="file"
-    //                 className="form-control"
-    //                 accept="image/*"
-    //                 id="inputImage"
-    //                 onChange={handleImageChange}
-    //               />
-    //             </div>
-
-    // <button
-    //   className="btn btn-primary"
-    //   type="button"
-    //   onClick={handleSubmit}
-    // >
-    //   Save changes
-    // </button>
-    //           </form>
-    //         </div>
-    //       </div>
-    //     </div>
-    //   </div>
-    // </div>
   );
 }
 
