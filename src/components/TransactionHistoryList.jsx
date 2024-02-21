@@ -91,7 +91,7 @@ const TransactionHistoryList = () => {
         <p style={{marginBottom: -5, textAlign: 'center', fontWeight: 'bold', fontSize: 40}}>{transactionCount}</p>
         <p style={{marginBottom:25, textAlign: 'center'}}>{"Total Transaction"}</p>
         <div style={{textAlign: 'center'}}>{transactionList.length === 0 ? displayEmptyList : displayTable}</div>
-        <div style={{textAlign: 'center'}}>{displayPagination }</div>
+        <div style={{textAlign: 'center'}}>{transactionList > 0 && displayPagination }</div>
     </div>
   )
 }

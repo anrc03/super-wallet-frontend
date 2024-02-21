@@ -2,20 +2,22 @@ import React, { useEffect, useState } from 'react'
 import { Button, Modal } from 'react-bootstrap'
 import Navbar from './navbar/Navbar'
 import axios from 'axios'
-import { BASE_ACCOUNT, BASE_CUSTOMER, BASE_TRANSACTION, TRANSFER, WITHDRAW } from '../constant/Endpoint'
+import { BASE_ACCOUNT, BASE_CUSTOMER, BASE_DUMMY_BANK, BASE_TRANSACTION, TRANSFER, WITHDRAW } from '../constant/Endpoint'
 import Swal from 'sweetalert2'
-import { useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { selectUser } from './redux/UserSlice'
 
 const Transaction = () => {
 
-    const user = useDispatch(selectUser)
+    const user = useSelector(selectUser)
 
     const [showWithdraw, setShowWithdraw] = useState(false)
     const [showDeposit, setShowDeposit] = useState(false)
-    const [showTransferOther, setShowTransferOther] = useState(false)
-    const [showTransferOwn, setShowTransferOwn] = useState(false)
+    const [showTransfer, setShowTransfer] = useState(false)
+    const [showOwnTransfer, setShowOwnTransfer] = useState(false)
+    const [showRegisterBank, setShowRegisterBank] = useState(false)
     const [balance, setBalance] = useState(0)
+    const [destinationBalance, setDestinationBalance] = useState(0)
     const [bankData, setBankData] = useState(null)
 
     const [accountNumberList, setAccountNumberList] = useState([])
@@ -25,6 +27,13 @@ const Transaction = () => {
         amount: 0,
         fromNumber: '',
         toNumber: '',
+    })
+
+    const [bankForm, setBankForm] = useState({
+      cardNumber: '',
+      cvv: '',
+      holderName: '',
+      expDate: '',
     })
 
     console.log(formData)
@@ -65,6 +74,7 @@ const Transaction = () => {
         </>
     ))
 
+
     const handleWithdrawal = () => {
         if (formData.accountId && formData.amount > 0) {
             if (formData.amount > balance) {
@@ -100,10 +110,14 @@ const Transaction = () => {
         else Swal.fire("Please enter a valid data")
     }
 
-    const handleTransferToOther = () => {
+    const handleTransfer = () => {
         if (formData.fromNumber && formData.toNumber && formData.amount > 0) {
             if (formData.amount > balance) {
                 Swal.fire("Insufficient balance")
+                return;
+            }
+            if (formData.fromNumber === formData.toNumber) {
+                Swal.fire("Cannot transfer to same wallet")
                 return;
             }
             axios.post(TRANSFER, {
@@ -170,7 +184,50 @@ const Transaction = () => {
                     })
                 }
                 else Swal.fire("Please enter a valid data")
-            }
+        }
+
+        const handleRegisterBank = () => {
+          if (bankForm.cardNumber && bankForm.holderName && bankForm.cvv && bankForm.expDate) {
+              axios.post(BASE_DUMMY_BANK, {
+                  cardNumber: bankForm.cardNumber,
+                  cvv: bankForm.cvv,
+                  holderName: bankForm.holderName,
+                  expDate: bankForm.expDate
+              })
+                    .then(res => {
+                      console.log(res.data.data)
+                      Swal.fire({
+                          icon: "success",
+                          title: "Bank Successfully Registered!",
+                          text: res.data.message,
+                          showConfirmButton: true,
+                          timer: 1500
+                      });
+                      setBankForm({...bankForm, cardNumber:'', cvv:'', holderName:'', expDate:''})
+                      getAccountList()
+                      getBankData()
+                      setShowRegisterBank(false)
+                    })
+                    .catch((err) => {
+                      console.error(err)
+                      Swal.fire({
+                          icon: "error",
+                          title: err.message,
+                          showConfirmButton: false,
+                          timer: 1000
+                      });
+                    })
+                }
+                else Swal.fire("Please enter a valid data")
+          }
+
+          const displayBankData = () => bankData !== null && (
+            <>
+              <p>Card Number: {bankData.cardNumber}</p>
+              <p>Holder Name: {bankData.holderName}</p>
+              <p>Expiry Date: {bankData.expDate}</p>
+            </>
+          )
 
 
   return (
@@ -193,7 +250,7 @@ const Transaction = () => {
           <section className="m-3">
             <h2>Transfer</h2>
             <p>Select a category</p>
-            <Button variant="success m-3" style={{ width: 400 }} onClick={() => setShowTransferOther(true)}>
+            <Button variant="success m-3" style={{ width: 400 }} onClick={(e) => {setShowTransfer(true)}}>
               <h3 style={{ textAlign: "left" }}>Transfer to Other Account</h3>
               <p
                 style={{
@@ -205,8 +262,8 @@ const Transaction = () => {
                 Pay bill or give to loved ones
               </p>
             </Button>
-            {/* <br></br> */}
-            <Button variant="success m-3" style={{ width: 400 }}>
+            <br></br>
+            <Button variant="success m-3" style={{ width: 400 }} onClick={(e) => {setShowOwnTransfer(true)}}>
               <h3 style={{ textAlign: "left" }}>Transfer to Own Account</h3>
               <p
                 style={{
@@ -263,7 +320,7 @@ const Transaction = () => {
         keyboard={false}
       >
         <Modal.Header>
-          <Modal.Title>Withdaw</Modal.Title>
+          <Modal.Title>Withdraw</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div>
@@ -278,15 +335,18 @@ const Transaction = () => {
                     console.log("change", e.target.value)
                 }}
             >
-                <option disabled>Please select an account</option>
+                <option value="">Please select an account</option>
                 {accountIdOption}
                 </select>
+            </div>
+            <div className="mb-2">
+              <label style={{fontWeight:'bold'}}>Wallet Balance: {balance}</label>
             </div>
             <div className="mb-2">
               <label>Amount</label>
               <input
                 type="number"
-                name="address"
+                name="amount"
                 className="form-control"
                 placeholder="Enter withdraw amount"
                 onChange={(e) =>
@@ -295,9 +355,7 @@ const Transaction = () => {
               />
             </div>
           </div>
-            <div className="mb-2">
-              <label style={{fontWeight:'bold'}}>Balance: {balance}</label>
-            </div>
+
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={() => {
@@ -314,8 +372,8 @@ const Transaction = () => {
       </Modal>
 
       <Modal
-        show={showTransferOther}
-        onHide={() => setShowTransferOther(false)}
+        show={showTransfer}
+        onHide={() => setShowTransfer(false)}
         backdrop="static"
         keyboard={false}
       >
@@ -335,15 +393,18 @@ const Transaction = () => {
                     console.log("change", e.target.value)
                 }}
             >
-                <option disabled>Please select an account</option>
+                <option value="">Please select an account</option>
                 {accountNumberOption}
                 </select>
+            </div>
+            <div className="mb-2">
+              <label style={{fontWeight:'bold'}}>Wallet Balance: {balance}</label>
             </div>
             <div className="mb-2">
               <label>Amount</label>
               <input
                 type="number"
-                name="address"
+                name="amount"
                 className="form-control"
                 placeholder="Enter withdraw amount"
                 onChange={(e) =>
@@ -352,10 +413,10 @@ const Transaction = () => {
               />
             </div>
             <div className="mb-2">
-              <label> Destination</label>
+              <label>Destination</label>
               <input
                 type="text"
-                name="address"
+                name="destination"
                 className="form-control"
                 placeholder="Enter destined account number"
                 onChange={(e) =>
@@ -364,19 +425,92 @@ const Transaction = () => {
               />
             </div>
           </div>
-            <div className="mb-2">
-              <label style={{fontWeight:'bold'}}>Balance: {balance}</label>
-            </div>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={() => {
             setBalance(0)
             setFormData({...formData, fromNumber: '', toNumber: '', amount: 0})
-            setShowTransferOther(false)}
+            setShowTransfer(false)}
           }>
             Cancel
           </Button>
-          <Button variant="success" onClick={handleTransferToOther}>
+          <Button variant="success" onClick={handleTransfer}>
+            Transfer Now
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+      <Modal
+        show={showOwnTransfer}
+        onHide={() => setShowOwnTransfer(false)}
+        backdrop="static"
+        keyboard={false}
+      >
+        <Modal.Header>
+          <Modal.Title>Transfer to Your Other Wallet</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <div>
+            <div className="mb-2">
+              <label>Select source account</label>
+              <select
+                name="Source currency"
+                className='form-select'
+                onChange={(e) => {
+                    setFormData({...formData, fromNumber: e.target.value.split(",")[0]})
+                    setBalance(e.target.value.split(",")[1])
+                    console.log("change", e.target.value)
+                }}
+            >
+                <option value="">Please select an account</option>
+                {accountNumberOption}
+                </select>
+            </div>
+            <div className="mb-2">
+              <label style={{fontWeight:'bold'}}>Source Balance: {balance}</label>
+            </div>
+            <div className="mb-2">
+              <label>Amount</label>
+              <input
+                type="number"
+                name="amount"
+                className="form-control"
+                placeholder="Enter withdraw amount"
+                onChange={(e) =>
+                  setFormData({ ...formData, amount: e.target.value })
+                }
+              />
+            </div>
+            <div className="mb-2">
+              <label>Select destination account</label>
+              <select
+                name="Destination currency"
+                className='form-select'
+                onChange={(e) => {
+                    setFormData({...formData, toNumber: e.target.value.split(",")[0]})
+                    setDestinationBalance(e.target.value.split(",")[1])
+                    console.log("change", e.target.value)
+                }}
+            >
+                <option value="">Please select destination account</option>
+                {accountNumberOption}
+                </select>
+            </div>
+            <div className="mb-2">
+              <label style={{fontWeight:'bold'}}>Destination Balance: {destinationBalance}</label>
+            </div>
+          </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => {
+            setBalance(0)
+            setDestinationBalance(0)
+            setFormData({...formData, fromNumber: '', toNumber: '', amount: 0})
+            setShowOwnTransfer(false)}
+          }>
+            Cancel
+          </Button>
+          <Button variant="success" onClick={handleTransfer}>
             Transfer Now
           </Button>
         </Modal.Footer>
@@ -404,15 +538,18 @@ const Transaction = () => {
                     console.log("change", e.target.value)
                 }}
             >
-                <option disabled>Please select an account</option>
+                <option value="">Please select an account</option>
                 {accountIdOption}
                 </select>
+            </div>
+            <div className="mb-2">
+              <label style={{fontWeight:'bold'}}>Wallet Balance: {balance}</label>
             </div>
             <div className="mb-2">
               <label>Amount</label>
               <input
                 type="number"
-                name="address"
+                name="amount"
                 className="form-control"
                 placeholder="Enter deposit amount"
                 onChange={(e) =>
@@ -421,13 +558,12 @@ const Transaction = () => {
               />
             </div>
             <div className="mb-2">
-              <label>Bank Source: {bankData ? bankData : "You have not registered a bank data yet"}</label>
-              {bankData == null && <Button variant='success'>Register Bank</Button>}
+              <label>Bank Source: </label>
+              {bankData ? displayBankData() : <div>You have not registered a bank data yet</div>}
+              {bankData == null && <Button variant='success' onClick={() => setShowRegisterBank(true)}>Register Bank</Button>}
             </div>
           </div>
-            <div className="mb-2">
-              <label style={{fontWeight:'bold'}}>Balance: {balance}</label>
-            </div>
+
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={() => {
@@ -439,6 +575,80 @@ const Transaction = () => {
           </Button>
           <Button variant="success" onClick={handleDeposit}>
             Deposit Now
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+      <Modal
+        show={showRegisterBank}
+        onHide={() => setShowRegisterBank(false)}
+        backdrop="static"
+        keyboard={false}
+      >
+        <Modal.Header>
+          <Modal.Title>Register Bank</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <div>
+            <div className="mb-2">
+              <label>Card Number</label>
+              <input
+                type="text"
+                name="card number"
+                className="form-control"
+                placeholder="Enter your card number"
+                onChange={(e) =>
+                  setBankForm({ ...bankForm, cardNumber: e.target.value })
+                }
+              />
+            </div>
+            <div className="mb-2">
+              <label>CVV</label>
+              <input
+                type="text"
+                name="cvv"
+                className="form-control"
+                placeholder="Enter cvv"
+                onChange={(e) =>
+                  setBankForm({ ...bankForm, cvv: e.target.value })
+                }
+              />
+            </div>
+            <div className="mb-2">
+              <label>Holder Name</label>
+              <input
+                type="text"
+                name="holder"
+                className="form-control"
+                placeholder="Enter holder name"
+                onChange={(e) =>
+                  setBankForm({ ...bankForm, holderName: e.target.value })
+                }
+              />
+            </div>
+          </div>
+            <div className="mb-2">
+            <label>Expiry Date</label>
+              <input
+                type="text"
+                name="holder"
+                className="form-control"
+                placeholder="Enter exp date"
+                onChange={(e) =>
+                  setBankForm({ ...bankForm, expDate: e.target.value })
+                }
+              />
+            </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => {
+            setBankForm({...bankForm, cardNumber: '', holderName: '', cvv: '', expDate: ''})
+            setShowRegisterBank(false)}
+          }>
+            Cancel
+          </Button>
+          <Button variant="success" onClick={handleRegisterBank}>
+            Register Bank
           </Button>
         </Modal.Footer>
       </Modal>
