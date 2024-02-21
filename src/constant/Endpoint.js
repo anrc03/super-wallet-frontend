@@ -15,7 +15,10 @@ export const REGISTER_ADMIN = API_BASE_URL + '/auth/admins';
 export const BASE_ADMIN = API_BASE_URL + '/admins';
 
 //currency
-export const getBaseCurrencyUrl = (baseCurrency, date) => API_BASE_URL + `/currency?baseCurrency=${baseCurrency}&date=${date}`;
+export const BASE_CURRENCY = API_BASE_URL + "/currency"
+export const getBaseCurrencyUrl = (baseCurrency, date) => API_BASE_URL + `?baseCurrency=${baseCurrency}&date=${date}`;
+export const getCurrencyWithTimeSeriesUrl = (fromDate, toDate, baseCurrency) => BASE_CURRENCY + `?fromDate=${fromDate}&toDate=${toDate}&baseCurrency=${baseCurrency}`
+export const getTodaysCurrencyUrl = (baseCurrency) => BASE_CURRENCY + `/today?baseCurrency=${baseCurrency}`;
 
 //transaction
 export const BASE_TRANSACTION =  API_BASE_URL +  "/transactions";
