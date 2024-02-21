@@ -1,6 +1,38 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { DatePicker } from "antd";
+import axios from "axios";
+import { useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { selectUser } from "../../components/redux/UserSlice";
 
 function EditProfile() {
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    phoneNumber: "",
+    birthDate: "",
+    gender: "",
+    email: "",
+    password: "",
+    address: "",
+    image: "",
+  });
+
+  const user = useDispatch(selectUser);
+
+  console.log("ini id : " + user.customerId);
+
+  const [valid, setValid] = useState("");
+
+  const [errors, setErrors] = useState("");
+
+  useEffect(() => {
+    axios.get(`GET_ALL_CUSTOMER/${customerId}`).then((response) => {
+      const userData = response.data.data;
+      setFormData(userData);
+    });
+  });
+
   const handleSubmit = (e) => {
     e.preventDefault();
     let isValid = true;
@@ -127,7 +159,7 @@ function EditProfile() {
   return (
     <div className="container-xl px-4 mt-4">
       {/* Account page navigation*/}
-
+      <h1 className="display-6 fw-bold text-green">Edit profile</h1>
       <hr className="mt-0 mb-4" />
       <div className="row">
         <div className="col-xl-4">
@@ -138,11 +170,12 @@ function EditProfile() {
               {/* Profile picture image*/}
               <img
                 className="img-account-profile rounded-circle mb-2"
-                src="http://bootdey.com/img/Content/avatar/avatar1.png"
+                style={{ alignContent: "center", width: "300px" }}
+                src="src/assets/images/Profile.png"
                 alt=""
               />
               {/* Profile picture help block*/}
-              <div className="small font-italic text-muted mb-4">
+              <div className="small font-italic text-muted mb-2">
                 JPG or PNG no larger than 5 MB
               </div>
               {/* Profile picture upload button*/}
@@ -158,20 +191,31 @@ function EditProfile() {
             <div className="card-header">Account Details</div>
             <div className="card-body">
               <form>
-                {/* Form Group (username)*/}
+                {/* Form Group (first name)*/}
                 <div className="mb-3">
                   <label className="small mb-1" htmlFor="inputUsername">
-                    Fullname
+                    First Name
                   </label>
                   <input
                     className="form-control"
                     id="inputUsername"
                     type="text"
-                    placeholder="Enter your name"
-                    defaultValue="username"
+                    placeholder="Enter your first name"
                   />
                 </div>
-                {/* Form Group (username)*/}
+                {/* Form Group (last name)*/}
+                <div className="mb-3">
+                  <label className="small mb-1" htmlFor="inputUsername">
+                    Last Name
+                  </label>
+                  <input
+                    className="form-control"
+                    id="inputUsername"
+                    type="text"
+                    placeholder="Enter your last name"
+                  />
+                </div>
+                {/* Form Group (password)*/}
                 <div className="mb-3">
                   <label className="small mb-1" htmlFor="inputPassword">
                     Password
@@ -213,11 +257,10 @@ function EditProfile() {
                     id="inputUsername"
                     type="text"
                     placeholder="Enter your phone number"
-                    defaultValue="08123456789"
                   />
                 </div>
                 {/* Form Group (Phone)*/}
-                <div className="mb-3">
+                {/* <div className="mb-3">
                   <label className="small mb-1" htmlFor="inputUsername">
                     Birth Date
                   </label>
@@ -269,9 +312,9 @@ function EditProfile() {
                       placeholderText="Enter your birth date"
                     />
                   </div>
-                </div>
+                </div> */}
                 {/* Form Group (email address)*/}
-                <div className="mb-3">
+                {/* <div className="mb-3">
                   <label className="small mb-1" htmlFor="inputEmailAddress">
                     Gender
                   </label>
@@ -313,7 +356,7 @@ function EditProfile() {
                       </label>
                     </fieldset>
                   </div>
-                </div>
+                </div> */}
                 {/* Form Group (username)*/}
                 <div className="mb-3">
                   <label className="small mb-1" htmlFor="inputUsername">
@@ -323,8 +366,7 @@ function EditProfile() {
                     className="form-control"
                     id="inputUsername"
                     type="text"
-                    placeholder="Enter your address"
-                    defaultValue="address"
+                    placeholder="Enter your address ex : Bekasi City"
                   />
                 </div>
 
@@ -337,8 +379,7 @@ function EditProfile() {
                     className="form-control"
                     id="inputUsername"
                     type="text"
-                    placeholder="Enter your email address"
-                    defaultValue="name@example.com"
+                    placeholder="Enter your email address ex : name@gmail.com"
                   />
                 </div>
 

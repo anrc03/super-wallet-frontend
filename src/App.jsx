@@ -47,11 +47,27 @@ function App() {
         path="/admin/transaction"
         element={<Sidebar component={TransactionHistoryList} />}
       />
+      <Route path="/admin" element={<Sidebar component={AdminDashboard} />} />
+      <Route path="/admin/admins" element={<Sidebar component={AdminList} />} />
+      <Route
+        path="/admin/customers"
+        element={<Sidebar component={CustomerList} />}
+      />
+      <Route
+        path="/admin/currency"
+        element={<Sidebar component={ExchangeRateList} />}
+      />
+      <Route
+        path="/admin/transaction"
+        element={<Sidebar component={TransactionHistoryList} />}
+      />
     </>
   );
 
   const CUSTOMER_PAGE = (
     <>
+      <Route path="/home" element={<Home />} />
+      <Route path="/about" element={<About />} />
       <Route path="/home" element={<Home />} />
       <Route path="/about" element={<About />} />
       <Route path="/currency-converter" element={<CurrencyConverter />} />
@@ -72,6 +88,7 @@ function App() {
       <Route path="/faq" element={<Faq />} />
     </>
   );
+  
 
   return (
     <div>
@@ -98,6 +115,7 @@ function App() {
       </Routes>
     </div>
   );
+  
 }
 
 export default App;
