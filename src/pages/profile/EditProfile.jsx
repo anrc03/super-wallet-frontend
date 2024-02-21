@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { DatePicker } from "antd";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { selectUser } from "../../components/redux/UserSlice";
 
 function EditProfile() {
   const [formData, setFormData] = useState({
@@ -16,9 +18,9 @@ function EditProfile() {
     image: "",
   });
 
-  const { customerId } = useParams();
+  const user = useDispatch(selectUser);
 
-  console.log("ini id : " + customerId);
+  console.log("ini id : " + user.customerId);
 
   const [valid, setValid] = useState("");
 

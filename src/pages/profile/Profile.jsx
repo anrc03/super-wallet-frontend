@@ -3,8 +3,12 @@ import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { BASE_CUSTOMER } from "../../constant/Endpoint";
 import { jwtDecode } from "jwt-decode";
+import { useDispatch } from "react-redux";
+import { selectUser } from "../../components/redux/UserSlice";
 
 function Profile() {
+  const user = useDispatch(selectUser);
+
   const navigate = useNavigate();
   const [profile, setProfile] = useState({
     firstName: "",
@@ -56,11 +60,10 @@ function Profile() {
     }
   }, []);
 
-  const { customerId } = useParams();
-  console.log("ini customer id param : " + customerId);
+  console.log("ini customer id param : " + user.customerId);
 
   const ToEditProfile = () => {
-    navigate("/editProfile", { customerId: "jjj" });
+    navigate("/editProfile");
   };
 
   console.log("INI DARA PROFILE", profile);
