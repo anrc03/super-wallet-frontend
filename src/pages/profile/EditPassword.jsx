@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../components/redux/UserSlice";
 import { BASE_CUSTOMER, CHANGE_PASSWORD } from "../../constant/Endpoint";
+import { Helmet } from "react-helmet";
+import { Button } from "react-bootstrap";
 
 function EditPassword() {
   const [formData, setFormData] = useState({
@@ -41,10 +43,6 @@ function EditPassword() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // const formDataToSend = new FormData();
-    // formDataToSend.append("password", formData.userCredential.password);
-
     try {
       const response = await axios.post(`${CHANGE_PASSWORD}`, {
         password: formData.userCredential.password,
@@ -62,39 +60,52 @@ function EditPassword() {
   };
 
   return (
-    <div className="container-xl px-4 mt-4">
-      <h1 className="display-6 fw-bold text-green">Edit Password</h1>
-      <hr className="mt-0 mb-4" />
-      <div className="row">
-        {/* ... */}
-        <div className="col-xl-8">
-          <div className="card mb-4">
-            <div className="card-header">Account Details</div>
-            <div className="card-body">
-              <form>
-                <div className="mb-3">
-                  <label className="small mb-1" htmlFor="inputPassword">
-                    New Password
-                  </label>
-                  <input
-                    className="form-control"
-                    id="inputPassword"
-                    type="text"
-                    placeholder="Enter your new Passowrd"
-                    onChange={handlePasswordChange}
-                  />
-                </div>
-
-                <button
-                  className="btn btn-primary"
-                  type="button"
-                  onClick={handleSubmit}
+    <div className="forgot-pass-backround">
+      <Helmet>
+        <title>Change Password | Super Wallet</title>
+      </Helmet>
+      <div className="container forgot-pass-container">
+        <div className="col-md-5">
+          <form className="border forgot-pass-form">
+            <div className="px-5">
+              <div className="forgot-password">
+                <h4
+                  className="mb-2"
+                  style={{ color: "#3a5a40", fontSize: 28, fontWeight: "600" }}
                 >
-                  Save changes
-                </button>
-              </form>
+                  Change your password
+                </h4>
+                <p className="mb-2">
+                  Enter your new password below. You can use this password to
+                  log in later.
+                </p>
+                <label className="mb-2" style={{ color: "#3a5a40" }}>
+                  New Password
+                </label>
+                <input
+                  className="form-control mb-2"
+                  type="password"
+                  placeholder="Enter your new Password"
+                  onChange={handlePasswordChange}
+                />
+              </div>
+              <button
+                className="btn btn-green mt-1"
+                style={{ fontSize: "20px" }}
+                onClick={() => navigate(-1)}
+              >
+                Go Back
+              </button>
+              <button
+                type="submit"
+                className="btn btn-green ms-2 mt-1"
+                style={{ fontSize: "20px" }}
+                onClick={handleSubmit}
+              >
+                Change Password
+              </button>
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </div>

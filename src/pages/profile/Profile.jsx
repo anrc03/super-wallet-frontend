@@ -64,147 +64,146 @@ function Profile() {
   useEffect(() => {
     setTimeout(() => {
       setIsLoading(false);
-    }, 500)
-  }, [])
+    }, 500);
+  }, []);
 
-  if (isLoading) return <LoadSpinner />
+  if (isLoading) return <LoadSpinner />;
 
   return (
     <>
       <Navbar />
-        <Helmet>
-          <title>Profile | Super Wallet</title>
-        </Helmet>
-    <section
-      style={{
-        backgroundColor: "#eee",
-        display: "flex",
-        width: "100%",
-        height: "100vh",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <div className="container py-5">
-        <div className="row">
-          <div className="col-lg-4">
-            <div className="card mb-4">
-              <div className="card-body text-center">
-                <img
-                  src={profile.images || "src/assets/images/Profile.png"}
-                  alt="avatar"
-                  className="rounded-circle img-fluid mt-1"
-                  style={{
-                    width: "200px",
-                    height: "200px",
-                    backgroundColor: "bisque",
-                  }}
-                />{" "}
-                <div>
-                  <div className="d-flex justify-content-center">
-                    <hr
-                      className="mt-4 mb-2"
-                      style={{
-                        width: "300px",
-                        border: "2px solid black",
-                        borderRadius: "10px",
-                      }}
-                    />
-                  </div>
-                  <h5 className="my-2">
-                    {profile.firstName} {profile.lastName}
-                  </h5>
+      <Helmet>
+        <title>Profile | Super Wallet</title>
+      </Helmet>
+      <section
+        style={{
+          backgroundColor: "#b6d7a8",
+          display: "flex",
+          width: "100%",
+          height: "91.2vh",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <div className="container py-5">
+          <div className="row">
+            <div className="col-lg-4">
+              <div className="card mb-4">
+                <div className="card-body text-center">
+                  <img
+                    src={profile.images || "src/assets/images/Profile.png"}
+                    alt="avatar"
+                    className="rounded-circle img-fluid mt-1"
+                    style={{
+                      width: "200px",
+                      height: "200px",
+                    }}
+                  />{" "}
+                  <div>
+                    <div className="d-flex justify-content-center">
+                      <hr
+                        className="mt-4 mb-2"
+                        style={{
+                          width: "300px",
+                          border: "2px solid #a2cc72",
+                          borderRadius: "10px",
+                        }}
+                      />
+                    </div>
+                    <h5 className="my-2">
+                      {profile.firstName} {profile.lastName}
+                    </h5>
 
-                  <p className="text-muted mb-2">{profile.address}</p>
-                  <div className="d-flex justify-content-center mb-2">
-                    <button
-                      type="button"
-                      className="btn btn-primary"
-                      onClick={() => ToEditProfile()}
-                    >
-                      Edit Profile
-                    </button>
-                  </div>
-                  <div className="d-flex justify-content-center mb-2">
-                    <button
-                      type="button"
-                      className="btn btn-primary"
-                      onClick={() => ToEditPassword()}
-                    >
-                      Edit Password
-                    </button>
+                    <p className="text-muted mb-2">{profile.address}</p>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          <div className="col-lg-8">
-            <div className="card mb-4">
-              <div className="card-body">
-                <div className="row">
-                  <div className="col-sm-3">
-                    <p className="mb-0">Full Name</p>
+            <div className="col-lg-7">
+              <div className="card mb-3">
+                <div className="card-body">
+                  <div className="row">
+                    <div className="col-sm-3">
+                      <p className="mb-0">Full Name</p>
+                    </div>
+                    <div className="col-sm-9">
+                      <p className="text-muted mb-0">
+                        {profile.firstName} {profile.lastName}
+                      </p>
+                    </div>
                   </div>
-                  <div className="col-sm-9">
-                    <p className="text-muted mb-0">
-                      {profile.firstName} {profile.lastName}
-                    </p>
+                  <hr />
+                  <div className="row">
+                    <div className="col-sm-3">
+                      <p className="mb-0">Phone</p>
+                    </div>
+                    <div className="col-sm-9">
+                      <p className="text-muted mb-0">{profile.phoneNumber}</p>
+                    </div>
+                  </div>
+                  <hr />
+                  <div className="row">
+                    <div className="col-sm-3">
+                      <p className="mb-0">Birth Day</p>
+                    </div>
+                    <div className="col-sm-9">
+                      <p className="text-muted mb-0">{profile.birthDate}</p>
+                    </div>
+                  </div>
+                  <hr />
+                  <div className="row">
+                    <div className="col-sm-3">
+                      <p className="mb-0">Gender</p>
+                    </div>
+                    <div className="col-sm-9">
+                      <p className="text-muted mb-0">{profile.gender}</p>
+                    </div>
+                  </div>
+                  <hr />
+                  <div className="row">
+                    <div className="col-sm-3">
+                      <p className="mb-0">Address</p>
+                    </div>
+                    <div className="col-sm-9">
+                      <p className="text-muted mb-0">{profile.address}</p>
+                    </div>
+                  </div>
+                  <hr />
+                  <div className="row">
+                    <div className="col-sm-3">
+                      <p className="mb-0">Email</p>
+                    </div>
+                    <div className="col-sm-9">
+                      <p className="text-muted mb-0">
+                        {profile.userCredential.email}
+                      </p>
+                    </div>
                   </div>
                 </div>
-                <hr />
-                <div className="row">
-                  <div className="col-sm-3">
-                    <p className="mb-0">Phone</p>
-                  </div>
-                  <div className="col-sm-9">
-                    <p className="text-muted mb-0">{profile.phoneNumber}</p>
-                  </div>
-                </div>
-                <hr />
-                <div className="row">
-                  <div className="col-sm-3">
-                    <p className="mb-0">Birth Day</p>
-                  </div>
-                  <div className="col-sm-9">
-                    <p className="text-muted mb-0">{profile.birthDate}</p>
-                  </div>
-                </div>
-                <hr />
-                <div className="row">
-                  <div className="col-sm-3">
-                    <p className="mb-0">Gender</p>
-                  </div>
-                  <div className="col-sm-9">
-                    <p className="text-muted mb-0">{profile.gender}</p>
-                  </div>
-                </div>
-                <hr />
-                <div className="row">
-                  <div className="col-sm-3">
-                    <p className="mb-0">Address</p>
-                  </div>
-                  <div className="col-sm-9">
-                    <p className="text-muted mb-0">{profile.address}</p>
-                  </div>
-                </div>
-                <hr />
-                <div className="row">
-                  <div className="col-sm-3">
-                    <p className="mb-0">Email</p>
-                  </div>
-                  <div className="col-sm-9">
-                    <p className="text-muted mb-0">
-                      {profile.userCredential.email}
-                    </p>
-                  </div>
-                </div>
+              </div>
+              <div className="d-flex justify-content-end">
+                <button
+                  type="button"
+                  className="btn btn-green"
+                  onClick={() => ToEditProfile()}
+                  style={{ fontSize: "20px" }}
+                >
+                  Edit Profile
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-green ms-2"
+                  onClick={() => ToEditPassword()}
+                  style={{ fontSize: "20px" }}
+                >
+                  Edit Password
+                </button>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
     </>
   );
 }
