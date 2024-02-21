@@ -92,7 +92,7 @@ function EditProfile() {
     try {
       const response = await axios.put(`${BASE_CUSTOMER}`, formDataToSend, {
         headers: {
-          "Content-Type": "multipart/form-data", 
+          "Content-Type": "multipart/form-data",
         },
       });
 
@@ -121,7 +121,7 @@ function EditProfile() {
                   className="mb-2"
                   style={{ color: "#3a5a40", fontSize: 30, fontWeight: "600" }}
                 >
-                  Create account
+                  Edit Profile
                 </h4>
                 <div className="row" style={{ color: "#3a5a40" }}>
                   <div className="mb-2 col-md-12">
@@ -300,12 +300,12 @@ function EditProfile() {
                     >
                       Save changes
                     </button>
-                    <button
+                    {/* <button
                       className="btn btn-green float-end mx-2"
                       onClick={() => navigate(-1)}
                     >
                       Go Back
-                    </button>
+                    </button> */}
                   </div>
                 </div>
               </div>
