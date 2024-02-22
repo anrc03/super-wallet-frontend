@@ -1,0 +1,25 @@
+.hero-header {
+  background: linear-gradient(rgba(20, 20, 31, 0.7), rgba(20, 20, 31, 0.7)),
+    url("./src/assets/images/World.jpg");
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+}
+
+.title-header {
+  font-size: 50px;
+  font-weight: 300 !important;
+  color: #fff;
+}
+
+.title-header span {
+  font-size: 60px;
+  font-weight: 600 !important;
+}
+
+.info-header {
+  color: #fff !important;
+}
