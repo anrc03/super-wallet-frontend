@@ -13,13 +13,13 @@ import {
   VITE_CURRENCY_API_URL,
   VITE_REST_COUNTRIES_API_URL,
 } from "./constant/CurrencyConverter.js";
+import { LOGIN, REGISTER_CUSTOMER, RESET_PASSWORD } from "./constant/Endpoint.js";
 
 axios.interceptors.request.use((config) => {
   const WHITE_LIST_URL = [
-    "http://108.137.90.52:8080/api/auth/login/admins",
-    "http://108.137.90.52:8080/api/auth/login",
-    "http://108.137.90.52:8080/api/auth/register",
-    "http://108.137.90.52:8080/api/reset-password",
+    LOGIN,
+    REGISTER_CUSTOMER,
+    RESET_PASSWORD,
     VITE_CURRENCY_API_URL,
     VITE_REST_COUNTRIES_API_URL,
   ];

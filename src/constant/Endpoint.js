@@ -58,3 +58,6 @@ export const CHANGE_PASSWORD = API_BASE_URL + "/auth/change-password";
 
 //pin
 export const CREATE_PIN = API_BASE_URL + "/auth/pin";
+
+//reset password
+export const RESET_PASSWORD = API_BASE_URL + "/reset-password"
